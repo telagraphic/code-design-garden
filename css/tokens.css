@@ -1,0 +1,48 @@
+:root {
+  /* Colors */
+  --color-bg: #f9f9f9;
+  --color-text: #000000;
+  --color-muted: #888888;
+  --color-border: #ebebeb;
+  --color-border-strong: #000000;
+
+  /* Typography families */
+  --font-sans: "Basier Circle", system-ui, sans-serif;
+  --font-serif: "PP Editorial New", system-ui, serif;
+
+  /* Font sizes */
+  --size-nav: 13px;
+  --size-section-index: 13px;
+  --size-hero: 276px;
+  --size-hero-line: 120px;
+  --size-hero-line-tools: 128px;
+  --size-item-title: 26px;
+  --size-item-desc: 14px;
+
+  /* Line heights */
+  --line-nav: 16px;
+  --line-item-title: 30px;
+  --line-item-desc: 22px;
+
+  /* Letter spacing */
+  --tracking-logo: 0.08em;
+  --tracking-nav: 0.02em;
+  --tracking-section-index: 0.06em;
+  --tracking-hero: -0.03em;
+
+  /* Spacing */
+  --space-page-x: 80px;
+  --space-section-top: 56px;
+  --space-section-bottom: 64px;
+  --space-section-index-bottom: 40px;
+  --space-list-item-y: 20px;
+  --space-item-desc-top: 4px;
+  --gap-nav-links: 48px;
+
+  /* Layout */
+  --height-nav: 72px;
+  --height-section: 900px;
+  --max-width: 1440px;
+  --width-main: 880px;
+  --width-aside: 560px;
+}
