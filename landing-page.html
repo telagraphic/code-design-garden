@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>React — code-design-guide</title>
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-nav site-nav--landing">
+        <a href="index.html" class="site-nav__logo">code-design-guide</a>
+        <nav class="site-nav__links" aria-label="Primary">
+          <a href="landing-page.html" class="site-nav__link site-nav__link--active"
+            >Code</a
+          >
+          <a href="index.html#design" class="site-nav__link site-nav__link--muted"
+            >Design</a
+          >
+          <a href="index.html#ai" class="site-nav__link site-nav__link--muted"
+            >AI</a
+          >
+          <a href="index.html#tools" class="site-nav__link site-nav__link--muted"
+            >Tools</a
+          >
+        </nav>
+      </header>
+
+      <div class="landing-body">
+        <aside class="sidebar" aria-label="Topics">
+          <div class="sidebar__group">
+            <p class="sidebar__label">Code</p>
+            <nav class="sidebar__nav">
+              <a
+                href="landing-page.html"
+                class="sidebar__link sidebar__link--active"
+                aria-current="page"
+                >React</a
+              >
+              <a href="/code/gsap" class="sidebar__link">GSAP</a>
+              <a href="/code/javascript" class="sidebar__link">Javascript</a>
+              <a href="/code/css" class="sidebar__link">CSS</a>
+              <a href="/code/ai" class="sidebar__link">AI</a>
+            </nav>
+          </div>
+
+          <div class="sidebar__group">
+            <p class="sidebar__label sidebar__label--faint">Design</p>
+            <nav class="sidebar__nav">
+              <a href="/design/grids" class="sidebar__link sidebar__link--faint"
+                >Grids</a
+              >
+              <a href="/design/color" class="sidebar__link sidebar__link--faint"
+                >Color</a
+              >
+              <a
+                href="/design/typography"
+                class="sidebar__link sidebar__link--faint"
+                >Typography</a
+              >
+              <a
+                href="/design/design-engineering"
+                class="sidebar__link sidebar__link--faint"
+                >Design Engineering</a
+              >
+              <a
+                href="/design/interfaces"
+                class="sidebar__link sidebar__link--faint"
+                >Interfaces</a
+              >
+            </nav>
+          </div>
+
+          <div class="sidebar__group">
+            <p class="sidebar__label sidebar__label--faint">AI</p>
+            <nav class="sidebar__nav">
+              <a href="/ai/prompting" class="sidebar__link sidebar__link--faint"
+                >Prompting</a
+              >
+              <a
+                href="/ai/fine-tuning"
+                class="sidebar__link sidebar__link--faint"
+                >Fine Tuning</a
+              >
+              <a href="/ai/agents" class="sidebar__link sidebar__link--faint"
+                >Agents</a
+              >
+            </nav>
+          </div>
+
+          <div class="sidebar__group">
+            <p class="sidebar__label sidebar__label--faint">Tools</p>
+            <nav class="sidebar__nav">
+              <a href="/tools/paper" class="sidebar__link sidebar__link--faint"
+                >Paper</a
+              >
+              <a
+                href="/tools/claude-code"
+                class="sidebar__link sidebar__link--faint"
+                >Claude Code</a
+              >
+              <a href="/tools/cursor" class="sidebar__link sidebar__link--faint"
+                >Cursor</a
+              >
+            </nav>
+          </div>
+        </aside>
+
+        <main class="landing-main">
+          <header class="landing-hero">
+            <h1 class="landing-hero__title">React</h1>
+          </header>
+
+          <div class="landing-content">
+            <section class="article-group" aria-labelledby="concepts-1">
+              <h2 id="concepts-1" class="article-group__label">Concepts</h2>
+              <ul class="article-list">
+                <li class="article-list__item">
+                  <a class="article-list__link" href="/code/react/what-is-jsx">
+                    <h3 class="article-list__title">What is JSX?</h3>
+                    <p class="article-list__desc">
+                      The syntax extension that lets you write HTML in
+                      JavaScript.
+                    </p>
+                  </a>
+                </li>
+                <li class="article-list__item">
+                  <a
+                    class="article-list__link"
+                    href="/code/react/conditional-rendering"
+                  >
+                    <h3 class="article-list__title">Conditional Rendering</h3>
+                    <p class="article-list__desc">
+                      Render different UI based on state and conditions.
+                    </p>
+                  </a>
+                </li>
+                <li class="article-list__item">
+                  <a
+                    class="article-list__link"
+                    href="/code/react/from-component-to-dom"
+                  >
+                    <h3 class="article-list__title">From Component to DOM</h3>
+                    <p class="article-list__desc">
+                      How React transforms components into real DOM nodes.
+                    </p>
+                  </a>
+                </li>
+                <li class="article-list__item">
+                  <a
+                    class="article-list__link"
+                    href="/code/react/component-conventions"
+                  >
+                    <h3 class="article-list__title">Component Conventions</h3>
+                    <p class="article-list__desc">
+                      Naming, structure, and file organisation patterns.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </section>
+
+            <section class="article-group" aria-labelledby="concepts-2">
+              <h2 id="concepts-2" class="article-group__label">Concepts</h2>
+              <ul class="article-list">
+                <li class="article-list__item">
+                  <a class="article-list__link" href="/code/react/what-is-jsx">
+                    <h3 class="article-list__title">What is JSX?</h3>
+                    <p class="article-list__desc">
+                      The syntax extension that lets you write HTML in
+                      JavaScript.
+                    </p>
+                  </a>
+                </li>
+                <li class="article-list__item">
+                  <a
+                    class="article-list__link"
+                    href="/code/react/conditional-rendering"
+                  >
+                    <h3 class="article-list__title">Conditional Rendering</h3>
+                    <p class="article-list__desc">
+                      Render different UI based on state and conditions.
+                    </p>
+                  </a>
+                </li>
+                <li class="article-list__item">
+                  <a
+                    class="article-list__link"
+                    href="/code/react/from-component-to-dom"
+                  >
+                    <h3 class="article-list__title">From Component to DOM</h3>
+                    <p class="article-list__desc">
+                      How React transforms components into real DOM nodes.
+                    </p>
+                  </a>
+                </li>
+                <li class="article-list__item">
+                  <a
+                    class="article-list__link"
+                    href="/code/react/component-conventions"
+                  >
+                    <h3 class="article-list__title">Component Conventions</h3>
+                    <p class="article-list__desc">
+                      Naming, structure, and file organisation patterns.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

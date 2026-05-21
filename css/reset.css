@@ -16,8 +16,8 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-size: var(--size-nav);
-  line-height: var(--line-nav);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
   color: var(--color-text);
   background-color: var(--color-bg);
   font-synthesis: none;

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>useRef — code-design-guide</title>
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-nav site-nav--landing">
+        <a href="index.html" class="site-nav__logo">code-design-guide</a>
+        <nav class="site-nav__links" aria-label="Primary">
+          <a href="landing-page.html" class="site-nav__link site-nav__link--active"
+            >Code</a
+          >
+          <a href="index.html#design" class="site-nav__link site-nav__link--muted"
+            >Design</a
+          >
+          <a href="index.html#ai" class="site-nav__link site-nav__link--muted"
+            >AI</a
+          >
+          <a href="index.html#tools" class="site-nav__link site-nav__link--muted"
+            >Tools</a
+          >
+        </nav>
+      </header>
+
+      <div class="landing-body">
+        <aside class="sidebar sidebar--content" aria-label="Page navigation">
+          <a href="landing-page.html" class="sidebar__back">← React</a>
+
+          <p class="sidebar__label">On this page</p>
+          <nav class="sidebar__nav" aria-label="On this page">
+            <a
+              href="#introduction"
+              class="sidebar__link sidebar__link--active"
+              aria-current="location"
+              >Introduction</a
+            >
+            <a href="#basic-usage" class="sidebar__link">Basic Usage</a>
+            <a href="#dom-manipulation" class="sidebar__link"
+              >DOM Manipulation</a
+            >
+            <a href="#storing-mutable-values" class="sidebar__link"
+              >Storing Mutable Values</a
+            >
+            <a href="#common-patterns" class="sidebar__link">Common Patterns</a>
+            <a href="#anti-patterns" class="sidebar__link">Anti-patterns</a>
+          </nav>
+
+          <div class="sidebar__divider" role="presentation"></div>
+
+          <p class="sidebar__label sidebar__label--faint">React</p>
+          <nav class="sidebar__nav" aria-label="React topics">
+            <a href="/code/react/concepts" class="sidebar__link sidebar__link--faint"
+              >Concepts</a
+            >
+            <a
+              href="content-page.html"
+              class="sidebar__link sidebar__link--active"
+              aria-current="page"
+              >Hooks</a
+            >
+            <a href="/code/react/challenges" class="sidebar__link sidebar__link--faint"
+              >Challenges</a
+            >
+            <a
+              href="/code/react/components"
+              class="sidebar__link sidebar__link--faint"
+              >Components</a
+            >
+            <a href="/code/react/modern-js" class="sidebar__link sidebar__link--faint"
+              >Modern JS</a
+            >
+            <a href="/code/react/rendering" class="sidebar__link sidebar__link--faint"
+              >Rendering</a
+            >
+          </nav>
+        </aside>
+
+        <main class="content-main">
+          <header id="introduction" class="article-header">
+            <h1 class="article-header__title">useRef</h1>
+            <p class="article-header__lede">
+              A hook that returns a mutable ref object whose .current property is
+              initialized to the passed argument. The ref object persists for the
+              full lifetime of the component — changes to it do not trigger a
+              re-render.
+            </p>
+          </header>
+
+          <article class="article-prose">
+            <section id="basic-usage" class="prose-section">
+              <h2 class="prose-section__heading">Basic Usage</h2>
+              <p class="prose-section__text">
+                Call useRef at the top level of your component to declare a ref.
+                You can then assign it to a DOM node or store any mutable value you
+                want to persist across renders without causing them.
+              </p>
+              <div class="code-block">
+                <pre class="code-block__code"><code>import { useRef } from 'react'
+
+function TextInput() {
+  const inputRef = useRef(null)
+
+  function handleFocus() {
+    inputRef.current.focus()
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input ref={inputRef} /&gt;
+      &lt;button onClick={handleFocus}&gt;Focus&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+              </div>
+            </section>
+
+            <section id="use-ref-vs-use-state" class="prose-section">
+              <h2 class="prose-section__heading prose-section__heading--wide-tracking">
+                useRef vs useState
+              </h2>
+              <p class="prose-section__text">
+                Both store values between renders, but they behave very
+                differently. Use this table to decide which hook fits your
+                situation.
+              </p>
+              <div class="comparison-table" role="table">
+                <div class="comparison-table__row comparison-table__row--head" role="row">
+                  <div class="comparison-table__cell comparison-table__cell--head" role="columnheader">Property</div>
+                  <div class="comparison-table__cell comparison-table__cell--head" role="columnheader">useRef</div>
+                  <div class="comparison-table__cell comparison-table__cell--head" role="columnheader">useState</div>
+                </div>
+                <div class="comparison-table__row" role="row">
+                  <div class="comparison-table__cell" role="cell">Triggers re-render</div>
+                  <div class="comparison-table__cell comparison-table__cell--mono comparison-table__cell--mono-muted" role="cell">No</div>
+                  <div class="comparison-table__cell comparison-table__cell--mono comparison-table__cell--mono-strong" role="cell">Yes</div>
+                </div>
+                <div class="comparison-table__row" role="row">
+                  <div class="comparison-table__cell" role="cell">Mutable directly</div>
+                  <div class="comparison-table__cell comparison-table__cell--mono comparison-table__cell--mono-strong" role="cell">Yes</div>
+                  <div class="comparison-table__cell comparison-table__cell--mono comparison-table__cell--mono-muted" role="cell">No (use setter)</div>
+                </div>
+                <div class="comparison-table__row" role="row">
+                  <div class="comparison-table__cell" role="cell">Persists across renders</div>
+                  <div class="comparison-table__cell comparison-table__cell--mono comparison-table__cell--mono-strong" role="cell">Yes</div>
+                  <div class="comparison-table__cell comparison-table__cell--mono comparison-table__cell--mono-strong" role="cell">Yes</div>
+                </div>
+                <div class="comparison-table__row" role="row">
+                  <div class="comparison-table__cell" role="cell">Best for</div>
+                  <div class="comparison-table__cell" role="cell">DOM refs, timers, prev values</div>
+                  <div class="comparison-table__cell" role="cell">UI-driven state</div>
+                </div>
+              </div>
+            </section>
+
+            <section id="common-patterns" class="prose-section">
+              <h2 class="prose-section__heading prose-section__heading--wide-tracking">
+                Common Patterns
+              </h2>
+              <p class="prose-section__text">
+                These are the most frequent real-world uses for useRef. Each avoids
+                unnecessary re-renders by keeping the value outside of React's state
+                system.
+              </p>
+              <ul class="checklist">
+                <li class="checklist__item">
+                  <span class="checklist__box checklist__box--checked" aria-hidden="true">
+                    <svg class="checklist__box-icon" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 4L3.5 6.5L9 1" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="checklist__content">
+                    <p class="checklist__title">DOM element access</p>
+                    <p class="checklist__desc">
+                      Attach to a JSX element with the ref prop to read or manipulate it directly.
+                    </p>
+                  </div>
+                </li>
+                <li class="checklist__item">
+                  <span class="checklist__box checklist__box--checked" aria-hidden="true">
+                    <svg class="checklist__box-icon" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 4L3.5 6.5L9 1" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="checklist__content">
+                    <p class="checklist__title">Storing timer IDs</p>
+                    <p class="checklist__desc">
+                      Hold a setTimeout or setInterval ID to cancel it on cleanup without re-rendering.
+                    </p>
+                  </div>
+                </li>
+                <li class="checklist__item">
+                  <span class="checklist__box" aria-hidden="true"></span>
+                  <div class="checklist__content">
+                    <p class="checklist__title">Tracking previous values</p>
+                    <p class="checklist__desc">
+                      Snapshot the previous render's value inside a useEffect for diffing.
+                    </p>
+                  </div>
+                </li>
+                <li class="checklist__item">
+                  <span class="checklist__box" aria-hidden="true"></span>
+                  <div class="checklist__content">
+                    <p class="checklist__title">Persisting across renders without state</p>
+                    <p class="checklist__desc">
+                      Any value that needs to live between renders but shouldn't trigger UI updates.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section id="further-reading" class="prose-section">
+              <h2 class="prose-section__heading prose-section__heading--wide-tracking">
+                Further Reading
+              </h2>
+              <ul class="reading-list">
+                <li class="reading-list__item">
+                  <span class="reading-list__arrow" aria-hidden="true">→</span>
+                  <a href="/code/react/use-effect" class="reading-list__link"
+                    >useEffect — side effects, subscriptions, and cleanup</a
+                  >
+                </li>
+                <li class="reading-list__item">
+                  <span class="reading-list__arrow" aria-hidden="true">→</span>
+                  <a href="/code/react/use-state" class="reading-list__link"
+                    >useState — local component state management</a
+                  >
+                </li>
+                <li class="reading-list__item">
+                  <span class="reading-list__arrow" aria-hidden="true">→</span>
+                  <a href="/code/react/reconciliation" class="reading-list__link"
+                    >Re-render &amp; reconciliation — when React re-renders</a
+                  >
+                </li>
+              </ul>
+            </section>
+          </article>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
