@@ -39,6 +39,6 @@ Primitives in `tokens.css` are reusable across pages. Compose them in layout/com
 
 Homepage mapping (1440px targets): nav/index → `--font-size-micro`; list desc → `--font-size-sm`; list title → `--font-size-md`; hero → `--font-size-display`; gutters → `--space-20`; nav height → `--size-nav-height`.
 
-## Astro handoff
+## Astro wiki
 
-When moving to Astro, copy the `css/` token and component files into `src/styles/` and split `index.html` into `Nav.astro`, `TopicSection.astro`, and content collections.
+Planning and architecture for the Astro migration are documented in [`REQUIREMENTS.md`](REQUIREMENTS.md). Implement on a dedicated branch (not `main` until ready). That doc covers routes, content model, contextual sidebars, vertical slice order, and Cmd+K search via [`@cmd-kit/astro`](https://www.npmjs.com/package/@cmd-kit/astro).
