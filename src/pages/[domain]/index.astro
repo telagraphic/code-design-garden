@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import DomainSidebar from "@/components/DomainSidebar.astro";
+import { domains as homeDomains } from "@/config/home";
+import {
+  getAllDocs,
+  getSectionsInDomain,
+  getSectionTitle,
+  titleCase,
+} from "@/lib/docs";
+
+export async function getStaticPaths() {
+  const docs = await getAllDocs();
+  const fromDocs = new Set(docs.map((d) => d.data.domain));
+  const all = new Set([
+    ...fromDocs,
+    ...homeDomains.map((d) => d.slug),
+  ]);
+  return [...all].map((domain) => ({ params: { domain } }));
+}
+
+const domain = Astro.params.domain!;
+const allDocs = await getAllDocs();
+const sections = getSectionsInDomain(allDocs, domain);
+---
+
+<BaseLayout title={titleCase(domain)} activeDomain={domain}>
+  <div class="landing-body">
+    <DomainSidebar {domain} sections={sections} docs={allDocs} />
+    <main class="landing-main">
+      <header class="landing-hero">
+        <h1 class="landing-hero__title">{titleCase(domain)}</h1>
+      </header>
+      <div class="landing-content">
+        <section class="article-group">
+          <h2 class="article-group__label">Sections</h2>
+          <ul class="article-list">
+            {
+              sections.map((s) => (
+                <li class="article-list__item">
+                  <a class="article-list__link" href={`/${domain}/${s}`}>
+                    <h3 class="article-list__title">
+                      {getSectionTitle(allDocs, domain, s)}
+                    </h3>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
+    </main>
+  </div>
+</BaseLayout>

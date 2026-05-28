@@ -1,0 +1,248 @@
+/* Cmd+K palette — match .topic-list / .article-group patterns */
+
+.cmdkit-astro-overlay {
+  backdrop-filter: none;
+  background: rgba(249, 249, 249, 0.92);
+}
+
+.cmdkit-astro-dialog {
+  font-family: var(--font-sans);
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  display: flex !important;
+  flex-direction: column !important;
+  height: min(32rem, calc(100vh - 4rem)) !important;
+  max-height: min(32rem, calc(100vh - 4rem)) !important;
+  overflow: hidden !important;
+}
+
+.cmdkit-astro-header,
+.cmdkit-astro-input {
+  flex-shrink: 0;
+}
+
+.cmdkit-astro-caption,
+.cmdkit-astro-breadcrumbs {
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+}
+
+/* Beats @cmd-kit/astro global styles (loads after this file) */
+.cmdkit-astro-dialog .cmdkit-astro-title,
+.cmdkit-astro-dialog [data-slot="titleText"] {
+  font-family: var(--font-serif) !important;
+  font-size: 2.24rem !important;
+  font-weight: 400 !important;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.2;
+  color: var(--color-text) !important;
+}
+
+.cmdkit-astro-empty {
+  margin: 0;
+  padding: var(--space-5) 0;
+  border: none !important;
+  border-radius: 0;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 1.24rem;
+  font-weight: 600;
+  letter-spacing: -0.006em;
+  line-height: 1.2;
+  color: var(--color-text) !important;
+}
+
+.cmdkit-astro-input {
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-content-body) !important;
+  color: var(--color-text) !important;
+  background: var(--color-surface-muted) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  border-radius: 0.25rem !important;
+  padding: var(--space-5) var(--space-4);
+}
+
+.cmdkit-astro-input::placeholder {
+  color: var(--color-muted) !important;
+}
+
+.cmdkit-astro-input:focus,
+.cmdkit-astro-input:focus-visible,
+.cmdkit-astro-input:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.cmdkit-astro-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  gap: var(--space-8);
+}
+
+.cmdkit-astro-section {
+  gap: var(--space-4);
+}
+
+/* Same as .article-group__label */
+.cmdkit-astro-section-title {
+  margin: 0;
+  padding-inline: var(--space-4);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-label);
+  letter-spacing: var(--tracking-label-section);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.cmdkit-astro-section-title:empty {
+  display: none;
+}
+
+.cmdkit-astro-section,
+.cmdkit-astro-section-items,
+.cmdkit-astro-list {
+  align-items: stretch;
+  text-align: left;
+}
+
+/* Same as .topic-list — !important beats @cmd-kit/astro is:global gap: 0.32rem */
+.cmdkit-astro-section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+}
+
+/* Divider on the row that owns the hover background (avoids gap vs border-top on sibling) */
+.cmdkit-astro-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-strong) !important;
+}
+
+.cmdkit-astro-item {
+  position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-2) var(--space-4) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  cursor: pointer;
+  text-align: left !important;
+  transition:
+    color 0.25s ease-out,
+    background-color 0.25s ease-out;
+}
+
+.cmdkit-astro-item:hover:not([disabled]),
+.cmdkit-astro-item[data-active="true"] {
+  background: var(--color-surface-muted) !important;
+  box-shadow: none !important;
+}
+
+.cmdkit-astro-item:focus-visible {
+  outline: none;
+}
+
+.cmdkit-astro-item[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cmdkit-astro-leading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.cmdkit-astro-leading > span:not(.cmdkit-astro-icon) {
+  width: 100%;
+  text-align: left;
+}
+
+.cmdkit-astro-icon,
+.cmdkit-astro-shortcut {
+  display: none !important;
+}
+
+/* Same as .topic-list__title */
+.cmdkit-astro-item-title {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  color: var(--color-text) !important;
+  transform: none !important;
+  transform-origin: left center !important;
+  transition: color 0.25s ease-out;
+}
+
+/* Same as .topic-list__desc */
+.cmdkit-astro-subtitle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: var(--space-1);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-muted);
+  transition: color 0.25s ease-out;
+}
+
+.cmdkit-astro-item:hover:not([disabled]) .cmdkit-astro-subtitle,
+.cmdkit-astro-item[data-active="true"] .cmdkit-astro-subtitle {
+  color: var(--color-text);
+}
+
+.cmdkit-astro-close {
+  border: 1px solid var(--color-border-subtle) !important;
+  color: var(--color-text) !important;
+  background: transparent !important;
+}
+
+.cmdkit-astro-close:hover {
+  background: var(--color-sidebar-active-bg) !important;
+  border-color: var(--color-border-strong) !important;
+  transform: none !important;
+}
+
+/* Neutralize package cyan / scale / border effects */
+.cmdkit-astro-dialog[data-mode="light"] .cmdkit-astro-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-strong) !important;
+}
+
+.cmdkit-astro-dialog[data-mode="light"] .cmdkit-astro-item:hover:not([disabled]),
+.cmdkit-astro-dialog[data-mode="light"] .cmdkit-astro-item[data-active="true"] {
+  background: var(--color-surface-muted) !important;
+}
+
+.cmdkit-astro-dialog[data-mode="light"] .cmdkit-astro-item-title,
+.cmdkit-astro-dialog[data-mode="light"] .cmdkit-astro-item:hover .cmdkit-astro-item-title,
+.cmdkit-astro-dialog[data-mode="light"] .cmdkit-astro-item[data-active="true"] .cmdkit-astro-item-title {
+  color: var(--color-text) !important;
+  transform: none !important;
+}
+
+.cmdkit-astro-dialog[data-reduced-motion="true"] .cmdkit-astro-item,
+.cmdkit-astro-dialog[data-reduced-motion="true"] .cmdkit-astro-item-title {
+  transition: color 0.25s ease-out;
+}

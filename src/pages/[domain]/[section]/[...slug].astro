@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleSidebar from "@/components/ArticleSidebar.astro";
+import { getCollection, render } from "astro:content";
+import { getDocsBySection, getSlug } from "@/lib/docs";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs");
+  return docs.map((entry) => {
+    const slug = getSlug(entry);
+    return {
+      params: {
+        domain: entry.data.domain,
+        section: entry.data.section,
+        slug,
+      },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const sectionDocs = await getDocsBySection(
+  entry.data.domain,
+  entry.data.section,
+);
+---
+
+<BaseLayout
+  title={entry.data.title}
+  activeDomain={entry.data.domain}
+>
+  <div class="landing-body">
+    <ArticleSidebar
+      entry={entry}
+      sectionDocs={sectionDocs}
+      headings={headings}
+    />
+    <main class="content-main">
+      <header id="introduction" class="article-header">
+        <h1 class="article-header__title">{entry.data.title}</h1>
+        {
+          entry.data.description && (
+            <p class="article-header__lede">{entry.data.description}</p>
+          )
+        }
+      </header>
+      <article class="article-prose">
+        <Content />
+      </article>
+    </main>
+  </div>
+</BaseLayout>

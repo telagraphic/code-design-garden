@@ -148,7 +148,7 @@ Sidebars change by page type. Reuse classes from [`css/components.css`](css/comp
 ### File location
 
 ```text
-src/content/docs/{domain}/{section}/{slug}.md
+src/content/{domain}/{section}/{slug}.md
 ```
 
 The URL slug is the filename without `.md` (e.g. `use-ref.md` → `/code/react/use-ref`).
@@ -186,7 +186,7 @@ No central `wiki.ts` label tree. Optional per-section `emptyChapters` config can
 - GFM tables for comparisons (e.g. useRef vs useState).
 - Raw HTML allowed for checklists and complex blocks matching [`content-page.html`](content-page.html).
 
-Existing Code chapter Markdown can be pasted into `src/content/docs/` once the collection and article template exist.
+Existing Code chapter Markdown can be pasted into `src/content/code/` once the collection and article template exist.
 
 ---
 

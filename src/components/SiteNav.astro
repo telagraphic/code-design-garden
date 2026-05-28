@@ -1,0 +1,38 @@
+---
+interface Props {
+  activeDomain?: string | null;
+}
+
+const { activeDomain = null } = Astro.props;
+const domains = [
+  { slug: "code", label: "Code" },
+  { slug: "design", label: "Design" },
+  { slug: "ai", label: "AI" },
+  { slug: "tools", label: "Tools" },
+  { slug: "references", label: "References" },
+];
+const isLanding = activeDomain !== null;
+---
+
+<header class:list={["site-nav", isLanding && "site-nav--landing"]}>
+  <a href="/" class="site-nav__logo">code-design-guide</a>
+  <nav class="site-nav__links" aria-label="Primary">
+    {
+      domains.map((d) => (
+        <a
+          href={`/${d.slug}`}
+          class:list={[
+            "site-nav__link",
+            activeDomain === d.slug
+              ? "site-nav__link--active"
+              : isLanding
+                ? "site-nav__link--muted"
+                : "",
+          ]}
+        >
+          {d.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

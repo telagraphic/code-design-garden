@@ -1,0 +1,103 @@
+---
+import type { DocEntry } from "@/lib/docs";
+import {
+  getChapterGroups,
+  getPagePath,
+  getSlug,
+  getSectionTitle,
+  chapterLabel,
+} from "@/lib/docs";
+
+interface Props {
+  entry: DocEntry;
+  sectionDocs: DocEntry[];
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { entry, sectionDocs, headings } = Astro.props;
+const { domain, section, chapter } = entry.data;
+const chapterGroups = getChapterGroups(sectionDocs, domain, section);
+const currentChapter = chapterGroups.find((g) => g.slug === chapter);
+const otherChapters = chapterGroups.filter((g) => g.slug !== chapter);
+const currentSlug = getSlug(entry);
+const h2Headings = headings.filter((h) => h.depth === 2);
+const hasPageNav = h2Headings.length > 0;
+---
+
+<aside class="sidebar sidebar--content" aria-label="Page navigation">
+  <a href={`/${domain}/${section}`} class="sidebar__back">
+    ← {getSectionTitle(sectionDocs, domain, section)}
+  </a>
+
+  {
+    hasPageNav && (
+      <>
+        <p class="sidebar__label">On this page</p>
+        <nav class="sidebar__nav" aria-label="On this page">
+          {
+            h2Headings.map((h) => (
+              <a href={`#${h.slug}`} class="sidebar__link">
+                {h.text}
+              </a>
+            ))
+          }
+        </nav>
+        <div class="sidebar__divider" role="presentation" />
+      </>
+    )
+  }
+
+  {
+    currentChapter && currentChapter.pages.length > 0 && (
+      <>
+        <p class="sidebar__label">{currentChapter.label}</p>
+        <nav class="sidebar__nav" aria-label={currentChapter.label}>
+          {
+            currentChapter.pages.map((page) => (
+              <a
+                href={getPagePath(page)}
+                class:list={[
+                  "sidebar__link",
+                  getSlug(page) === currentSlug && "sidebar__link--active",
+                ]}
+                aria-current={getSlug(page) === currentSlug ? "page" : undefined}
+              >
+                {page.data.title}
+              </a>
+            ))
+          }
+        </nav>
+        <div class="sidebar__divider" role="presentation" />
+      </>
+    )
+  }
+
+  {
+    otherChapters.length > 0 && (
+      <>
+        <p class="sidebar__label sidebar__label--faint">
+          {getSectionTitle(sectionDocs, domain, section)}
+        </p>
+        <nav
+          class="sidebar__nav"
+          aria-label={getSectionTitle(sectionDocs, domain, section)}
+        >
+          {
+            otherChapters.map((ch) => (
+              <a
+                href={
+                  ch.pages[0]
+                    ? getPagePath(ch.pages[0])
+                    : `/${domain}/${section}#${ch.slug}`
+                }
+                class="sidebar__link sidebar__link--faint"
+              >
+                {ch.label}
+              </a>
+            ))
+          }
+        </nav>
+      </>
+    )
+  }
+</aside>

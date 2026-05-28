@@ -1,0 +1,16 @@
+{
+  "name": "code-design-guide",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@cmd-kit/astro": "^0.1.4",
+    "astro": "^5.7.0",
+    "rehype-slug": "^6.0.0"
+  },
+  "packageManager": "pnpm@10.1.0"
+}

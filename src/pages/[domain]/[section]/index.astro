@@ -1,0 +1,84 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionSidebar from "@/components/SectionSidebar.astro";
+import {
+  getAllDocs,
+  getDocsBySection,
+  getSectionsInDomain,
+  getChapterGroups,
+  getPagePath,
+  getSectionTitle,
+  titleCase,
+} from "@/lib/docs";
+
+export async function getStaticPaths() {
+  const docs = await getAllDocs();
+  const keys = new Set(
+    docs.map((d) => `${d.data.domain}/${d.data.section}`),
+  );
+  return [...keys].map((key) => {
+    const [domain, section] = key.split("/");
+    return { params: { domain, section } };
+  });
+}
+
+const domain = Astro.params.domain!;
+const section = Astro.params.section!;
+const allDocs = await getAllDocs();
+const sectionDocs = await getDocsBySection(domain, section);
+const sections = getSectionsInDomain(allDocs, domain);
+const chapterGroups = getChapterGroups(sectionDocs, domain, section);
+---
+
+<BaseLayout title={getSectionTitle(allDocs, domain, section)} activeDomain={domain}>
+  <div class="landing-body">
+    <SectionSidebar
+      {domain}
+      currentSection={section}
+      sections={sections}
+      docs={allDocs}
+    />
+    <main class="landing-main">
+      <header class="landing-hero">
+        <h1 class="landing-hero__title">
+          {getSectionTitle(allDocs, domain, section)}
+        </h1>
+      </header>
+      <div class="landing-content">
+        {
+          chapterGroups.map((group) => (
+            <section
+              id={group.slug}
+              class="article-group"
+              aria-labelledby={`chapter-${group.slug}`}
+            >
+              <h2 id={`chapter-${group.slug}`} class="article-group__label">
+                {group.label}
+              </h2>
+              {
+                group.pages.length > 0 ? (
+                  <ul class="article-list">
+                    {group.pages.map((page) => (
+                      <li class="article-list__item">
+                        <a class="article-list__link" href={getPagePath(page)}>
+                          <h3 class="article-list__title">{page.data.title}</h3>
+                          {page.data.description && (
+                            <p class="article-list__desc">
+                              {page.data.description}
+                            </p>
+                          )}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="prose-section__text">Coming soon.</p>
+                )
+              }
+            </section>
+          ))
+        }
+      </div>
+    </main>
+  </div>
+</BaseLayout>

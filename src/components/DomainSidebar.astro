@@ -1,0 +1,28 @@
+---
+import type { DocEntry } from "@/lib/docs";
+import { getSectionTitle } from "@/lib/docs";
+import { domains } from "@/config/home";
+
+interface Props {
+  domain: string;
+  sections: string[];
+  docs: DocEntry[];
+}
+
+const { domain, sections, docs } = Astro.props;
+const domainLabel =
+  domains.find((d) => d.slug === domain)?.label ?? domain;
+---
+
+<aside class="sidebar" aria-label="Sections">
+  <p class="sidebar__label">{domainLabel}</p>
+  <nav class="sidebar__nav">
+    {
+      sections.map((s) => (
+        <a href={`/${domain}/${s}`} class="sidebar__link">
+          {getSectionTitle(docs, domain, s)}
+        </a>
+      ))
+    }
+  </nav>
+</aside>

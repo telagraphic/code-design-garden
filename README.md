@@ -41,4 +41,24 @@ Homepage mapping (1440px targets): nav/index → `--font-size-micro`; list desc 
 
 ## Astro wiki
 
-Planning and architecture for the Astro migration are documented in [`REQUIREMENTS.md`](REQUIREMENTS.md). Implement on a dedicated branch (not `main` until ready). That doc covers routes, content model, contextual sidebars, vertical slice order, and Cmd+K search via [`@cmd-kit/astro`](https://www.npmjs.com/package/@cmd-kit/astro).
+Architecture and decisions: [`REQUIREMENTS.md`](REQUIREMENTS.md).
+
+### Develop
+
+```bash
+pnpm install
+pnpm dev
+```
+
+### Build
+
+```bash
+pnpm build
+pnpm preview
+```
+
+Content lives in `src/content/{domain}/{section}/{slug}.md`. Each section should include `1-overview.md` at the section root with `sectionTitle` (display name, e.g. `CSS`) and `description` for the homepage card (nested `…/1-overview.md` works as a fallback, e.g. `react/01-react/1-overview.md`). Styles are in `src/styles/` (ported from `css/`). Fonts are in `public/fonts/`.
+
+**Cmd+K** search uses [`@cmd-kit/astro`](https://www.npmjs.com/package/@cmd-kit/astro) — paste additional chapter Markdown into `src/content/{domain}/`.
+
+Static HTML prototypes (`index.html`, `landing-page.html`, `content-page.html`) remain at repo root for reference until Astro parity is complete.

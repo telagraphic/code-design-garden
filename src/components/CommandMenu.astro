@@ -1,0 +1,76 @@
+---
+import CommandPalette from "@cmd-kit/astro/component";
+import type { DocEntry } from "@/lib/docs";
+import { buildSearchSections } from "@/lib/search";
+
+interface Props {
+  docs: DocEntry[];
+}
+
+const { docs } = Astro.props;
+const sections = buildSearchSections(docs, Astro.url.pathname);
+---
+
+<CommandPalette
+  sections={sections}
+  title="Search"
+  shortcut="mod+k"
+  theme={{
+    light: {
+      accentColor: "#000000",
+      backgroundColor: "#f9f9f9",
+      textColor: "#000000",
+      mutedColor: "#888888",
+      borderColor: "#e0e0e0",
+      overlayColor: "rgba(249, 249, 249, 0.92)",
+      radius: "0.375rem",
+      shadow: "0 12px 40px rgba(0, 0, 0, 0.08)",
+    },
+    dark: {
+      accentColor: "#f9f9f9",
+      backgroundColor: "#000000",
+      textColor: "#f9f9f9",
+      mutedColor: "#888888",
+      borderColor: "#333333",
+      overlayColor: "rgba(0, 0, 0, 0.85)",
+      radius: "0.375rem",
+      shadow: "0 12px 40px rgba(0, 0, 0, 0.4)",
+    },
+  }}
+/>
+
+<script>
+  function initCmdkitListScroll() {
+    for (const root of document.querySelectorAll(
+      ".cmdkit-astro-root:not([data-cmdkit-scroll-init])",
+    )) {
+      const list = root.querySelector('[data-slot="list"]');
+      if (!(list instanceof HTMLElement)) continue;
+
+      root.dataset.cmdkitScrollInit = "true";
+
+      const scrollActiveItem = () => {
+        const active = list.querySelector(
+          '.cmdkit-astro-item[data-active="true"]',
+        );
+        if (active instanceof HTMLElement) {
+          active.scrollIntoView({ block: "nearest" });
+        }
+      };
+
+      const observer = new MutationObserver(() => {
+        requestAnimationFrame(scrollActiveItem);
+      });
+
+      observer.observe(list, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: ["data-active"],
+      });
+    }
+  }
+
+  initCmdkitListScroll();
+  document.addEventListener("astro:page-load", initCmdkitListScroll);
+</script>

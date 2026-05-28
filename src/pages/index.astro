@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { domains } from "@/config/home";
+import { getAllDocs, getHomepageSectionLinks } from "@/lib/docs";
+
+const allDocs = await getAllDocs();
+---
+
+<BaseLayout title="code-design-guide">
+  <main>
+    {
+      domains.map((domain) => {
+        const links = getHomepageSectionLinks(allDocs, domain.slug);
+        return (
+          <section id={domain.slug} class="topic-section">
+            <div class="topic-section__main">
+              <p class="topic-section__index">{domain.index}</p>
+              <h2 class="topic-section__hero">{domain.label}</h2>
+              {
+                links.length > 0 ? (
+                  <ul class="topic-list">
+                    {links.map((link) => (
+                      <li class="topic-list__item">
+                        <a class="topic-list__link" href={link.href}>
+                          <h3 class="topic-list__title">{link.title}</h3>
+                          <p class="topic-list__desc">{link.desc}</p>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null
+              }
+            </div>
+            <aside class="topic-section__aside" aria-hidden="true" />
+          </section>
+        );
+      })
+    }
+  </main>
+</BaseLayout>
