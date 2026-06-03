@@ -13,6 +13,13 @@ chapterLabel: "Overview"
 
 Principles and patterns for purposeful motion in interfaces.
 
+
+
+## Useful Links
+
+- [CSS Springs](https://www.kvin.me/css-springs)
+- [Easing Functions](https://www.easing.dev/)
+
 ## Topics
 
 - Timing and easing

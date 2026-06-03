@@ -4,12 +4,18 @@ section: design-patterns
 chapter: patterns
 title: "Module Pattern"
 order: 1
+<<<<<<< Updated upstream
 description: "Encapsulate related code behind a public API while hiding private state."
 chapterLabel: "Patterns"
+=======
+chapterLabel: "Patterns"
+description: "Encapsulate private state and expose a small public API."
+>>>>>>> Stashed changes
 ---
 
 # Module Pattern
 
+<<<<<<< Updated upstream
 > A closure or file boundary that keeps private variables and helpers hidden while exposing only the operations callers need.
 
 ## Overview
@@ -356,3 +362,78 @@ Test your understanding:
 1. Why does `createAccount()` return methods instead of exporting `balance` directly — what bug class does that prevent?
 2. When would you choose a factory Module (new instance per call) over a single ES module with module-level state?
 3. Your Module exposes `subscribe` but never calls `unsubscribe` in docs — what breaks in a long-lived SPA?
+=======
+> Group related logic in a closure (or module scope) so only an intentional API is visible to the rest of the app.
+
+## Intent
+
+The Module pattern keeps implementation details private while exposing methods or values callers need. In JavaScript this usually means an IIFE, a factory function, or ES modules where only named exports are public.
+
+## When to use it
+
+Use this pattern when:
+
+- Several functions share mutable state (counters, caches, connection handles).
+- You want to prevent other code from reaching into internal variables.
+- You are building a small library or feature slice with a stable public surface.
+
+Common smells that signal it would help:
+
+- Global variables coordinating one feature.
+- Objects with many properties that outside code reads and writes directly.
+
+## When NOT to use it
+
+Avoid it when:
+
+- The logic is a few pure functions with no shared state — plain functions are simpler.
+- You need tree-shaking across many tiny exports — prefer ES modules with explicit exports.
+- Testability suffers because everything hides behind one closure — extract testable units instead.
+
+## How it works
+
+A module owns private bindings. Callers interact only through returned or exported functions. In classic JS, a factory runs once, closes over state, and returns `{ get, set, reset }`. With ES modules, file scope is private by default; `export` marks the public API.
+
+## Code example
+
+```javascript
+function createCounter(initial = 0) {
+  let count = initial;
+
+  return {
+    increment() {
+      count += 1;
+      return count;
+    },
+    decrement() {
+      count -= 1;
+      return count;
+    },
+    value() {
+      return count;
+    },
+  };
+}
+
+const counter = createCounter(10);
+counter.increment(); // 11
+// count is not accessible from outside
+```
+
+## Trade-offs
+
+**Pros**
+
+- Clear boundary between public API and implementation.
+- Shared state stays in one place without polluting global scope.
+
+**Cons**
+
+- Harder to inspect or mock hidden state in tests.
+- Can become a “mini framework” if the API grows without discipline.
+
+## Related patterns
+
+- **Revealing Module** — Same idea, but the object literal lists public methods explicitly.
+- **Singleton** — Often implemented as a module that initializes once; different intent (single instance vs. encapsulation).
+>>>>>>> Stashed changes
