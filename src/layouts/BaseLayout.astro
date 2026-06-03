@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import LenisSmoothScroll from "@/components/LenisSmoothScroll.astro";
 import SiteNav from "@/components/SiteNav.astro";
 import CommandMenu from "@/components/CommandMenu.astro";
 import { getAllDocs } from "@/lib/docs";
@@ -27,5 +28,6 @@ const docs = Astro.props.docs ?? (await getAllDocs());
       <slot />
     </div>
     <CommandMenu docs={docs} />
+    <LenisSmoothScroll />
   </body>
 </html>

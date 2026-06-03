@@ -63,13 +63,13 @@
 }
 
 .prose p {
-  /* margin: 0; */
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: var(--font-size-content-body);
   line-height: var(--line-height-content-body);
   letter-spacing: var(--tracking-tighter);
   color: var(--color-text-secondary);
+  text-wrap: pretty;
 }
 
 .prose p + .code-snippet {
@@ -91,7 +91,7 @@
 .prose pre.astro-code {
   padding: var(--space-4) var(--space-6);
   /* padding-top: var(--space-10); */
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   overflow-x: auto;
   background-color: var(--color-surface-raised) !important;
   color: var(--color-text) !important;
@@ -127,6 +127,10 @@
   overflow: hidden;
   font-size: var(--font-size-content-body);
   margin: var(--space-8) 0;
+}
+
+.prose table tbody tr td {
+  font-size: 1rem;
 }
 
 .prose thead {

@@ -3,10 +3,13 @@
 ---
 
 <script>
+  import { getLenis, LENIS_SCROLL_EVENT } from "@/lib/lenis-bridge";
+
   const HEADING_SELECTOR =
     "#introduction, .prose h2[id], .prose h3[id], .prose h4[id]";
 
   let scrollCleanup: (() => void) | null = null;
+  let lenisScrollCleanup: (() => void) | null = null;
 
   function getActivationOffset(): number {
     const nav = document.querySelector(".site-nav");
@@ -44,11 +47,28 @@
     return activeId;
   }
 
+  function scrollToTocTarget(link: HTMLAnchorElement) {
+    const href = link.getAttribute("href");
+    if (!href?.startsWith("#")) return false;
+
+    const target = document.querySelector<HTMLElement>(href);
+    if (!target) return false;
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -getActivationOffset() });
+      return true;
+    }
+
+    return false;
+  }
+
   function initSidebarScrollSpy(root: ParentNode = document) {
     const nav = root.querySelector(".sidebar__nav--toc");
     if (!nav) return;
 
     scrollCleanup?.();
+    lenisScrollCleanup?.();
     nav.removeAttribute("data-scroll-spy-init");
 
     const links = [
@@ -79,17 +99,33 @@
     };
 
     window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener(LENIS_SCROLL_EVENT, onScrollOrResize, {
+      passive: true,
+    });
     window.addEventListener("resize", onScrollOrResize, { passive: true });
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.on("scroll", onScrollOrResize);
+      lenisScrollCleanup = () => lenis.off("scroll", onScrollOrResize);
+    }
 
     scrollCleanup = () => {
       window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener(LENIS_SCROLL_EVENT, onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
+      lenisScrollCleanup?.();
+      lenisScrollCleanup = null;
     };
 
     for (const link of links) {
-      link.addEventListener("click", () => {
+      link.addEventListener("click", (event) => {
         const id = link.dataset.tocId;
         if (id) setActiveTocLink(links, id);
+
+        if (scrollToTocTarget(link)) {
+          event.preventDefault();
+        }
       });
     }
 
@@ -102,4 +138,5 @@
 
   setup();
   document.addEventListener("astro:page-load", () => setup());
+  document.addEventListener("lenis:ready", () => setup());
 </script>

@@ -26,7 +26,11 @@ const tocHeadings = headings.filter(
 );
 ---
 
-<aside class="sidebar sidebar--content" aria-label="Page navigation">
+<aside
+  class="sidebar sidebar--content"
+  aria-label="Page navigation"
+  data-lenis-prevent
+>
   <a href={`/${domain}/${section}`} class="sidebar__back">
     ← {getSectionTitle(sectionDocs, domain, section)}
   </a>

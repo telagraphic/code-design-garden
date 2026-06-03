@@ -1,0 +1,136 @@
+---
+/** Smooth scroll via Lenis — init on load, tear down on Astro navigations. */
+import "lenis/dist/lenis.css";
+---
+
+<script>
+  import Lenis, { type LenisOptions } from "lenis";
+  import {
+    LENIS_SCROLL_EVENT,
+    setLenis,
+  } from "@/lib/lenis-bridge";
+
+  /**
+   * Pick a preset to try. Wheel/trackpad feel is mostly `lerp`; `duration` + `easing`
+   * apply to programmatic scroll (anchors, TOC, scrollTo) when lerp is set.
+   *
+   * - default   — Lenis stock feel
+   * - silky     — soft wheel, gentle anchor deceleration
+   * - floaty    — slowest wheel, long anchor glide
+   * - responsive — slightly snappier wheel and anchors
+   * - crisp     — shortest anchor travel, still smooth wheel
+   */
+  const ACTIVE_PRESET: keyof typeof LENIS_PRESETS = "silky";
+
+  const easings = {
+    /** Lenis default — fast finish, soft landing */
+    outExpo: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+    outCubic: (t: number) => 1 - (1 - t) ** 3,
+    outQuart: (t: number) => 1 - (1 - t) ** 4,
+    outQuint: (t: number) => 1 - (1 - t) ** 5,
+    outCirc: (t: number) => Math.sqrt(1 - (t - 1) ** 2),
+    inOutCubic: (t: number) =>
+      t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2,
+  } as const;
+
+  const SHARED_OPTIONS = {
+    autoRaf: true,
+    anchors: true,
+    stopInertiaOnNavigate: true,
+    allowNestedScroll: true,
+  } satisfies Partial<LenisOptions>;
+
+  const LENIS_PRESETS = {
+    default: {
+      label: "Default (Lenis stock)",
+      options: {} satisfies Partial<LenisOptions>,
+    },
+    silky: {
+      label: "Silky — soft wheel, ease-out quart anchors",
+      options: {
+        lerp: 0.075,
+        syncTouchLerp: 0.065,
+        duration: 1.35,
+        easing: easings.outQuart,
+      } satisfies Partial<LenisOptions>,
+    },
+    floaty: {
+      label: "Floaty — slow wheel, long ease-out expo anchors",
+      options: {
+        lerp: 0.06,
+        syncTouchLerp: 0.055,
+        duration: 1.55,
+        easing: easings.outExpo,
+      } satisfies Partial<LenisOptions>,
+    },
+    responsive: {
+      label: "Responsive — a bit snappier overall",
+      options: {
+        lerp: 0.11,
+        syncTouchLerp: 0.08,
+        duration: 1.05,
+        easing: easings.outCubic,
+      } satisfies Partial<LenisOptions>,
+    },
+    crisp: {
+      label: "Crisp — quicker anchors, still eased",
+      options: {
+        lerp: 0.09,
+        syncTouchLerp: 0.07,
+        duration: 0.85,
+        easing: easings.outQuint,
+      } satisfies Partial<LenisOptions>,
+    },
+    balanced: {
+      label: "Balanced — in-out cubic anchors, medium lerp",
+      options: {
+        lerp: 0.085,
+        syncTouchLerp: 0.072,
+        duration: 1.2,
+        easing: easings.inOutCubic,
+      } satisfies Partial<LenisOptions>,
+    },
+  } as const;
+
+  let lenis: Lenis | null = null;
+
+  function shouldUseSmoothScroll(): boolean {
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function getLenisOptions(): LenisOptions {
+    const preset = LENIS_PRESETS[ACTIVE_PRESET];
+    return {
+      ...SHARED_OPTIONS,
+      ...preset.options,
+    };
+  }
+
+  function startLenis() {
+    stopLenis();
+    if (!shouldUseSmoothScroll()) return;
+
+    const preset = LENIS_PRESETS[ACTIVE_PRESET];
+    if (import.meta.env.DEV) {
+      console.info(`[Lenis] preset: ${ACTIVE_PRESET} — ${preset.label}`);
+    }
+
+    lenis = new Lenis(getLenisOptions());
+
+    setLenis(lenis);
+    lenis.on("scroll", () => {
+      window.dispatchEvent(new Event(LENIS_SCROLL_EVENT));
+    });
+    document.dispatchEvent(new Event("lenis:ready"));
+  }
+
+  function stopLenis() {
+    lenis?.destroy();
+    lenis = null;
+    setLenis(null);
+  }
+
+  startLenis();
+  document.addEventListener("astro:before-swap", stopLenis);
+  document.addEventListener("astro:page-load", startLenis);
+</script>

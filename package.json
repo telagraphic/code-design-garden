@@ -12,6 +12,7 @@
   "dependencies": {
     "@cmd-kit/astro": "^0.1.4",
     "astro": "^5.7.0",
+    "lenis": "^1.3.23",
     "rehype-slug": "^6.0.0",
     "unist-util-visit": "^5.1.0"
   },

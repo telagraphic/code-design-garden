@@ -20,11 +20,14 @@
   --color-border-subtle: oklch(0.907 0 0);
   --color-border-strong: oklch(0 0 0);
   --color-sidebar-faint: oklch(0.798 0 0);
-  --color-sidebar-active-bg: oklch(0.94 0 0);
+  --color-sidebar-hover-bg: oklch(0.955 0 0);
+  --color-sidebar-active-bg: oklch(0.92 0 0);
   --color-text-secondary: oklch(0.387 0 0);
   --color-text-tertiary: oklch(0.45 0 0);
   --color-surface-raised: oklch(1 0 0);
   --color-surface-muted: oklch(0.955 0 0);
+  --color-success: oklch(0.68 0.06 145);
+  --color-success-text: oklch(0.42 0.08 145);
 
 
   /* ── Font families ────────────────────────────────────────────────────── */

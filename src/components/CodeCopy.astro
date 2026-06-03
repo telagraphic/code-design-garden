@@ -7,7 +7,7 @@
     COPIED_TOOLTIP,
     COPY_TOOLTIP,
     createCopyButton,
-    createCopyIconSvg,
+    ensureIconStack,
   } from "@/lib/code-snippet.mjs";
 
   const RESET_MS = 2000;
@@ -50,10 +50,11 @@
     }
 
     if (btn.querySelector(".code-snippet__label")) {
-      btn.replaceChildren(createCopyIconSvg());
       btn.setAttribute("aria-label", COPY_TOOLTIP);
       btn.dataset.tooltip = COPY_TOOLTIP;
     }
+
+    ensureIconStack(btn);
   }
 
   function wrapBarePre(pre: HTMLPreElement) {

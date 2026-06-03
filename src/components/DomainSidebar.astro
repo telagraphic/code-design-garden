@@ -14,7 +14,7 @@ const domainLabel =
   domains.find((d) => d.slug === domain)?.label ?? domain;
 ---
 
-<aside class="sidebar" aria-label="Sections">
+<aside class="sidebar" aria-label="Sections" data-lenis-prevent>
   <p class="sidebar__label">{domainLabel}</p>
   <nav class="sidebar__nav">
     {
