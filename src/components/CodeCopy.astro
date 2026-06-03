@@ -1,0 +1,118 @@
+---
+/** Copy buttons for Shiki code blocks (`.code-snippet` from rehype, or wrapped client-side). */
+---
+
+<script>
+  import {
+    COPIED_TOOLTIP,
+    COPY_TOOLTIP,
+    createCopyButton,
+    createCopyIconSvg,
+  } from "@/lib/code-snippet.mjs";
+
+  const RESET_MS = 2000;
+
+  function copyText(text: string): Promise<void> {
+    if (navigator.clipboard?.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    return Promise.resolve();
+  }
+
+  /** Flatten framed markup or upgrade text-label buttons. */
+  function normalizeSnippet(snippet: Element) {
+    const pre = snippet.querySelector("pre.astro-code");
+    if (!(pre instanceof HTMLPreElement)) return;
+
+    let btn = snippet.querySelector<HTMLButtonElement>(".code-snippet__copy");
+
+    if (snippet.querySelector(".code-snippet__panel, .code-snippet__header")) {
+      pre.remove();
+      btn?.remove();
+      snippet.replaceChildren();
+      btn = createCopyButton();
+      snippet.append(btn, pre);
+      return;
+    }
+
+    if (!btn) {
+      snippet.insertBefore(createCopyButton(), pre);
+      return;
+    }
+
+    if (btn.querySelector(".code-snippet__label")) {
+      btn.replaceChildren(createCopyIconSvg());
+      btn.setAttribute("aria-label", COPY_TOOLTIP);
+      btn.dataset.tooltip = COPY_TOOLTIP;
+    }
+  }
+
+  function wrapBarePre(pre: HTMLPreElement) {
+    const wrap = document.createElement("div");
+    wrap.className = "code-snippet";
+    const btn = createCopyButton();
+    pre.parentNode?.insertBefore(wrap, pre);
+    wrap.append(btn, pre);
+  }
+
+  function ensureCodeSnippets(root: ParentNode = document) {
+    root.querySelectorAll(".code-snippet").forEach((snippet) => {
+      normalizeSnippet(snippet);
+    });
+
+    root.querySelectorAll(".prose pre.astro-code").forEach((pre) => {
+      if (!(pre instanceof HTMLPreElement)) return;
+      if (pre.closest(".code-snippet")) return;
+      wrapBarePre(pre);
+    });
+  }
+
+  function initCodeCopy(root: ParentNode = document) {
+    root.querySelectorAll(".code-snippet").forEach((snippet) => {
+      const btn = snippet.querySelector<HTMLButtonElement>(".code-snippet__copy");
+      const code = snippet.querySelector("pre code");
+      if (!btn || !code || btn.dataset.copyBound === "true") return;
+
+      btn.dataset.copyBound = "true";
+      btn.addEventListener("click", async () => {
+        const text = code.textContent ?? "";
+        if (!text) return;
+
+        try {
+          await copyText(text);
+          btn.setAttribute("aria-label", COPIED_TOOLTIP);
+          btn.dataset.tooltip = COPIED_TOOLTIP;
+          btn.classList.add("code-snippet__copy--copied");
+
+          window.setTimeout(() => {
+            btn.setAttribute("aria-label", COPY_TOOLTIP);
+            btn.dataset.tooltip = COPY_TOOLTIP;
+            btn.classList.remove("code-snippet__copy--copied");
+          }, RESET_MS);
+        } catch {
+          btn.dataset.tooltip = "Copy failed";
+          window.setTimeout(() => {
+            btn.dataset.tooltip = COPY_TOOLTIP;
+          }, RESET_MS);
+        }
+      });
+    });
+  }
+
+  function setup(root: ParentNode = document) {
+    ensureCodeSnippets(root);
+    initCodeCopy(root);
+  }
+
+  setup();
+  document.addEventListener("astro:page-load", () => setup());
+</script>

@@ -1,7 +1,7 @@
 .page {
   max-width: var(--layout-max);
   margin: 0 auto;
-  overflow: clip;
+  overflow-x: clip;
 }
 
 .site-nav {

@@ -24,7 +24,7 @@ const allDocs = await getAllDocs();
 const sections = getSectionsInDomain(allDocs, domain);
 ---
 
-<BaseLayout title={titleCase(domain)} activeDomain={domain}>
+<BaseLayout title={titleCase(domain)}>
   <div class="landing-body">
     <DomainSidebar {domain} sections={sections} docs={allDocs} />
     <main class="landing-main">

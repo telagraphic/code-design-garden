@@ -30,7 +30,7 @@ const sections = getSectionsInDomain(allDocs, domain);
 const chapterGroups = getChapterGroups(sectionDocs, domain, section);
 ---
 
-<BaseLayout title={getSectionTitle(allDocs, domain, section)} activeDomain={domain}>
+<BaseLayout title={getSectionTitle(allDocs, domain, section)}>
   <div class="landing-body">
     <SectionSidebar
       {domain}
@@ -72,7 +72,7 @@ const chapterGroups = getChapterGroups(sectionDocs, domain, section);
                     ))}
                   </ul>
                 ) : (
-                  <p class="prose-section__text">Coming soon.</p>
+                  <p class="landing-content__muted">Coming soon.</p>
                 )
               }
             </section>

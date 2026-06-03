@@ -2,7 +2,7 @@
 
 .prose {
   -webkit-font-smoothing: antialiased;
-  /* text-wrap: balance; */
+  text-wrap: balance;
 }
 
 .prose > * + * {
@@ -127,10 +127,6 @@
   overflow: hidden;
   font-size: var(--font-size-content-body);
   margin: var(--space-8) 0;
-}
-
-.prose table tbody tr td {
-  font-size: 1rem;
 }
 
 .prose thead {

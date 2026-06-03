@@ -58,7 +58,7 @@ The example above **mutates during render** only to show the object identity; fo
 
 ## `useRef` vs `useState` (quick comparison)
 
-| Question | `useState` | `useRef` |
+| Question | useState | useRef |
 |----------|------------|----------|
 | Should the user see new UI when this value changes? | **Yes** → state | **No** → ref |
 | Track “how many times we did X” without redrawing? | Overkill | **`useRef`** |
@@ -350,7 +350,6 @@ function Measured({ onReady }) {
 }
 ```
 
----
 
 ## Pitfalls (short)
 
@@ -360,7 +359,6 @@ function Measured({ onReady }) {
 | Reading `ref.current` during render for **layout** | On first paint the node may still be `null` or not yet measured; prefer **effects** / **layout effects** / events. |
 | Creating `useRef(new Expensive())` for lazy init | The initializer runs **every** render unless you use the **lazy form**: `useRef()` then assign in `useEffect`, or `useRef(null)` and `if (!ref.current) ref.current = …` in render (pattern used carefully for one-time instances). |
 
----
 
 ## Where to go next
 

@@ -5,7 +5,6 @@ import {
   getPagePath,
   getSlug,
   getSectionTitle,
-  chapterLabel,
 } from "@/lib/docs";
 
 interface Props {
@@ -15,13 +14,16 @@ interface Props {
 }
 
 const { entry, sectionDocs, headings } = Astro.props;
-const { domain, section, chapter } = entry.data;
+const { domain, section, chapter, title } = entry.data;
 const chapterGroups = getChapterGroups(sectionDocs, domain, section);
 const currentChapter = chapterGroups.find((g) => g.slug === chapter);
 const otherChapters = chapterGroups.filter((g) => g.slug !== chapter);
 const currentSlug = getSlug(entry);
-const h2Headings = headings.filter((h) => h.depth === 2);
-const hasPageNav = h2Headings.length > 0;
+
+const markdownH1Slug = headings.find((h) => h.depth === 1)?.slug;
+const tocHeadings = headings.filter(
+  (h) => h.depth >= 2 && h.depth <= 4 && h.slug !== markdownH1Slug,
+);
 ---
 
 <aside class="sidebar sidebar--content" aria-label="Page navigation">
@@ -29,23 +31,33 @@ const hasPageNav = h2Headings.length > 0;
     ← {getSectionTitle(sectionDocs, domain, section)}
   </a>
 
-  {
-    hasPageNav && (
-      <>
-        <p class="sidebar__label">On this page</p>
-        <nav class="sidebar__nav" aria-label="On this page">
-          {
-            h2Headings.map((h) => (
-              <a href={`#${h.slug}`} class="sidebar__link">
-                {h.text}
-              </a>
-            ))
-          }
-        </nav>
-        <div class="sidebar__divider" role="presentation" />
-      </>
-    )
-  }
+  <>
+    <p class="sidebar__label">On this page</p>
+    <nav class="sidebar__nav sidebar__nav--toc" aria-label="On this page">
+      <a
+        href="#introduction"
+        class="sidebar__link sidebar__link--depth-1"
+        data-toc-id="introduction"
+      >
+        {title}
+      </a>
+      {
+        tocHeadings.map((h) => (
+          <a
+            href={`#${h.slug}`}
+            class:list={[
+              "sidebar__link",
+              `sidebar__link--depth-${h.depth}`,
+            ]}
+            data-toc-id={h.slug}
+          >
+            {h.text}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="sidebar__divider" role="presentation" />
+  </>
 
   {
     currentChapter && currentChapter.pages.length > 0 && (

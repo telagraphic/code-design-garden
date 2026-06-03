@@ -1,6 +1,6 @@
 :root {
   /* ── Colors ───────────────────────────────────────────────────────────── */
-  --color-bg: #f9f9f9;
+  /* --color-bg: #f9f9f9;
   --color-text: #000000;
   --color-muted: #888888;
   --color-border: #ebebeb;
@@ -11,7 +11,21 @@
   --color-text-secondary: #444444;
   --color-text-tertiary: #555555;
   --color-surface-raised: #ffffff;
-  --color-surface-muted: #f0f0f0;
+  --color-surface-muted: #f0f0f0; */
+
+  --color-bg: oklch(0.982 0 0);
+  --color-text: oklch(0 0 0);
+  --color-muted: oklch(0.627 0 0);
+  --color-border: oklch(0.94 0 0);
+  --color-border-subtle: oklch(0.907 0 0);
+  --color-border-strong: oklch(0 0 0);
+  --color-sidebar-faint: oklch(0.798 0 0);
+  --color-sidebar-active-bg: oklch(0.94 0 0);
+  --color-text-secondary: oklch(0.387 0 0);
+  --color-text-tertiary: oklch(0.45 0 0);
+  --color-surface-raised: oklch(1 0 0);
+  --color-surface-muted: oklch(0.955 0 0);
+
 
   /* ── Font families ────────────────────────────────────────────────────── */
   --font-sans: "Basier Circle", system-ui, sans-serif;
@@ -72,13 +86,13 @@
   --line-height-content-hero: 0.9;
   --font-size-content-h2: clamp(1.5rem, 1.25rem + 1vw, 2rem);
   --line-height-content-h2: 1.15625;
-  --font-size-content-body: 0.9375rem;
+  --font-size-content-body: 1.25rem;
   --line-height-content-body: 1.625;
   --font-size-content-lede: 1rem;
   --line-height-content-lede: 1.625;
   --font-size-table-header: 0.6875rem;
   --line-height-table-header: 1.2727;
-  --font-size-code: var(--font-size-micro);
+  --font-size-code: 1rem;
   --line-height-code: 1.3846;
   --max-width-lede: 40rem;
   --max-width-prose: 50rem;

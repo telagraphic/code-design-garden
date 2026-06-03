@@ -2,22 +2,16 @@
 import "@/styles/global.css";
 import SiteNav from "@/components/SiteNav.astro";
 import CommandMenu from "@/components/CommandMenu.astro";
-import { getAllDocs, getActiveNavDomain } from "@/lib/docs";
+import { getAllDocs } from "@/lib/docs";
 import type { DocEntry } from "@/lib/docs";
 
 interface Props {
   title: string;
-  activeDomain?: string | null;
   docs?: DocEntry[];
 }
 
-const { title, activeDomain: activeDomainProp } = Astro.props;
+const { title } = Astro.props;
 const docs = Astro.props.docs ?? (await getAllDocs());
-const activeDomain =
-  activeDomainProp ?? getActiveNavDomain(Astro.url.pathname);
-const isLanding =
-  Astro.url.pathname !== "/" &&
-  Astro.url.pathname.split("/").filter(Boolean).length >= 1;
 ---
 
 <!doctype html>
@@ -29,7 +23,7 @@ const isLanding =
   </head>
   <body>
     <div class="page">
-      <SiteNav activeDomain={isLanding ? activeDomain : null} />
+      <SiteNav />
       <slot />
     </div>
     <CommandMenu docs={docs} />

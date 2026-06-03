@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArticleSidebar from "@/components/ArticleSidebar.astro";
+import CodeCopy from "@/components/CodeCopy.astro";
+import SidebarScrollSpy from "@/components/SidebarScrollSpy.astro";
 import { getCollection, render } from "astro:content";
 import { getDocsBySection, getSlug } from "@/lib/docs";
 
@@ -27,10 +29,7 @@ const sectionDocs = await getDocsBySection(
 );
 ---
 
-<BaseLayout
-  title={entry.data.title}
-  activeDomain={entry.data.domain}
->
+<BaseLayout title={entry.data.title}>
   <div class="landing-body">
     <ArticleSidebar
       entry={entry}
@@ -46,9 +45,13 @@ const sectionDocs = await getDocsBySection(
           )
         }
       </header>
-      <article class="article-prose">
-        <Content />
+      <article class="article">
+        <div class="prose">
+          <Content />
+        </div>
       </article>
     </main>
   </div>
+  <CodeCopy />
+  <SidebarScrollSpy />
 </BaseLayout>

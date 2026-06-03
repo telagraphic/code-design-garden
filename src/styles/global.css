@@ -1,7 +1,11 @@
+/* Cascade layers: reset → layout → components → prose → blocks → utilities */
+@layer reset, layout, components, prose, blocks, utilities;
+
 @import "./tokens.css";
 @import "./fonts.css";
-@import "./reset.css";
-@import "./layout.css";
-@import "./components.css";
-@import "./prose.css";
-@import "./command-menu.css";
+@import "./reset.css" layer(reset);
+@import "./layout.css" layer(layout);
+@import "./components.css" layer(components);
+@import "./prose.css" layer(prose);
+@import "./blocks.css" layer(blocks);
+@import "./command-menu.css" layer(utilities);

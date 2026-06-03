@@ -1,8 +1,8 @@
 /* Cmd+K palette — match .topic-list / .article-group patterns */
 
 .cmdkit-astro-overlay {
-  backdrop-filter: none;
-  background: rgba(249, 249, 249, 0.92);
+  backdrop-filter: none !important;
+  /* background: rgba(249, 249, 249, 0.92); */
 }
 
 .cmdkit-astro-dialog {
@@ -22,7 +22,10 @@
   flex-shrink: 0;
 }
 
-.cmdkit-astro-caption,
+.cmdkit-astro-caption {
+  display: none !important;
+}
+
 .cmdkit-astro-breadcrumbs {
   font-family: var(--font-sans);
   color: var(--color-text-secondary);
@@ -129,10 +132,14 @@
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
-  justify-content: flex-start !important;
+  justify-content: center !important;
   gap: 0 !important;
   width: 100%;
   box-sizing: border-box;
+  min-height: calc(
+    var(--space-2) * 2 + var(--font-size-md) * var(--line-height-md) +
+      var(--space-1) + var(--font-size-sm) * var(--line-height-sm)
+  );
   padding: var(--space-2) var(--space-4) !important;
   border: 0 !important;
   border-radius: 0 !important;

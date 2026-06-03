@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/prose.css" />
+    <link rel="stylesheet" href="css/blocks.css" />
   </head>
   <body>
     <div class="page">
@@ -94,10 +96,10 @@
             </p>
           </header>
 
-          <article class="article-prose">
-            <section id="basic-usage" class="prose-section">
-              <h2 class="prose-section__heading">Basic Usage</h2>
-              <p class="prose-section__text">
+          <article class="article">
+            <div class="prose">
+              <h2 id="basic-usage">Basic Usage</h2>
+              <p>
                 Call useRef at the top level of your component to declare a ref.
                 You can then assign it to a DOM node or store any mutable value you
                 want to persist across renders without causing them.
@@ -120,13 +122,11 @@ function TextInput() {
   )
 }</code></pre>
               </div>
-            </section>
 
-            <section id="use-ref-vs-use-state" class="prose-section">
-              <h2 class="prose-section__heading prose-section__heading--wide-tracking">
+              <h2 id="use-ref-vs-use-state" class="prose--wide-tracking">
                 useRef vs useState
               </h2>
-              <p class="prose-section__text">
+              <p>
                 Both store values between renders, but they behave very
                 differently. Use this table to decide which hook fits your
                 situation.
@@ -158,13 +158,11 @@ function TextInput() {
                   <div class="comparison-table__cell" role="cell">UI-driven state</div>
                 </div>
               </div>
-            </section>
 
-            <section id="common-patterns" class="prose-section">
-              <h2 class="prose-section__heading prose-section__heading--wide-tracking">
+              <h2 id="common-patterns" class="prose--wide-tracking">
                 Common Patterns
               </h2>
-              <p class="prose-section__text">
+              <p>
                 These are the most frequent real-world uses for useRef. Each avoids
                 unnecessary re-renders by keeping the value outside of React's state
                 system.
@@ -215,10 +213,8 @@ function TextInput() {
                   </div>
                 </li>
               </ul>
-            </section>
 
-            <section id="further-reading" class="prose-section">
-              <h2 class="prose-section__heading prose-section__heading--wide-tracking">
+              <h2 id="further-reading" class="prose--wide-tracking">
                 Further Reading
               </h2>
               <ul class="reading-list">
@@ -241,7 +237,7 @@ function TextInput() {
                   >
                 </li>
               </ul>
-            </section>
+            </div>
           </article>
         </main>
       </div>
