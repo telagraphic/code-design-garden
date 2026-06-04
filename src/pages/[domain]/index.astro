@@ -24,15 +24,15 @@ const allDocs = await getAllDocs();
 const sections = getSectionsInDomain(allDocs, domain);
 ---
 
-<BaseLayout title={titleCase(domain)}>
+<BaseLayout title={titleCase(domain)} barbaNamespace={domain}>
   <div class="landing-body">
     <DomainSidebar {domain} sections={sections} docs={allDocs} />
-    <main class="landing-main">
+    <section class="layout-content landing-main">
       <header class="landing-hero">
         <h1 class="landing-hero__title">{titleCase(domain)}</h1>
       </header>
       <div class="landing-content">
-        <section class="article-group">
+        <div class="article-group">
           <h2 class="article-group__label">Sections</h2>
           <ul class="article-list">
             {
@@ -47,8 +47,8 @@ const sections = getSectionsInDomain(allDocs, domain);
               ))
             }
           </ul>
-        </section>
+        </div>
       </div>
-    </main>
+    </section>
   </div>
 </BaseLayout>

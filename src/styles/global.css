@@ -9,3 +9,4 @@
 @import "./prose.css" layer(prose);
 @import "./blocks.css" layer(blocks);
 @import "./command-menu.css" layer(utilities);
+@import "./transitions.css" layer(utilities);

@@ -8,7 +8,6 @@ import {
   getChapterGroups,
   getPagePath,
   getSectionTitle,
-  titleCase,
 } from "@/lib/docs";
 
 export async function getStaticPaths() {
@@ -30,7 +29,10 @@ const sections = getSectionsInDomain(allDocs, domain);
 const chapterGroups = getChapterGroups(sectionDocs, domain, section);
 ---
 
-<BaseLayout title={getSectionTitle(allDocs, domain, section)}>
+<BaseLayout
+  title={getSectionTitle(allDocs, domain, section)}
+  barbaNamespace={domain}
+>
   <div class="landing-body">
     <SectionSidebar
       {domain}
@@ -38,7 +40,7 @@ const chapterGroups = getChapterGroups(sectionDocs, domain, section);
       sections={sections}
       docs={allDocs}
     />
-    <main class="landing-main">
+    <section class="layout-content landing-main">
       <header class="landing-hero">
         <h1 class="landing-hero__title">
           {getSectionTitle(allDocs, domain, section)}
@@ -79,6 +81,6 @@ const chapterGroups = getChapterGroups(sectionDocs, domain, section);
           ))
         }
       </div>
-    </main>
+    </section>
   </div>
 </BaseLayout>

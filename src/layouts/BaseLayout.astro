@@ -1,18 +1,23 @@
 ---
 import "@/styles/global.css";
-import LenisSmoothScroll from "@/components/LenisSmoothScroll.astro";
 import SiteNav from "@/components/SiteNav.astro";
 import CommandMenu from "@/components/CommandMenu.astro";
+import BarbaTransitions from "@/components/BarbaTransitions.astro";
 import { getAllDocs } from "@/lib/docs";
+import { getNamespace } from "@/lib/barba/getNamespace";
 import type { DocEntry } from "@/lib/docs";
 
 interface Props {
   title: string;
   docs?: DocEntry[];
+  barbaNamespace?: string;
+  pageTheme?: "light" | "dark";
 }
 
-const { title } = Astro.props;
+const { title, pageTheme = "light" } = Astro.props;
 const docs = Astro.props.docs ?? (await getAllDocs());
+const barbaNamespace =
+  Astro.props.barbaNamespace ?? getNamespace(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -22,12 +27,25 @@ const docs = Astro.props.docs ?? (await getAllDocs());
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — code-design-guide</title>
   </head>
-  <body>
-    <div class="page">
-      <SiteNav />
-      <slot />
+  <body data-barba="wrapper">
+    <div data-transition-wrap class="transition" aria-hidden="true">
+      <div data-transition-panel class="transition__panel">
+        <div data-transition-shutter class="transition__shutter"></div>
+      </div>
     </div>
+
+    <SiteNav />
+
+    <main
+      data-barba="container"
+      data-barba-namespace={barbaNamespace}
+      data-page-theme={pageTheme}
+      class="barba-container"
+    >
+      <slot />
+    </main>
+
     <CommandMenu docs={docs} />
-    <LenisSmoothScroll />
+    <BarbaTransitions />
   </body>
 </html>

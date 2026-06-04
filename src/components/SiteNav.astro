@@ -1,9 +1,6 @@
 ---
-const isLanding =
-  Astro.url.pathname !== "/" &&
-  Astro.url.pathname.split("/").filter(Boolean).length >= 1;
 ---
 
-<header class:list={["site-nav", isLanding && "site-nav--landing"]}>
+<header class="site-nav">
   <a href="/" class="site-nav__logo">code-design-guide</a>
 </header>

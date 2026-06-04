@@ -40,6 +40,8 @@ const sections = buildSearchSections(docs, Astro.url.pathname);
 />
 
 <script>
+  import { PAGE_ENTER_EVENT } from "@/lib/page-lifecycle";
+
   function initCmdkitListScroll() {
     for (const root of document.querySelectorAll(
       ".cmdkit-astro-root:not([data-cmdkit-scroll-init])",
@@ -72,5 +74,5 @@ const sections = buildSearchSections(docs, Astro.url.pathname);
   }
 
   initCmdkitListScroll();
-  document.addEventListener("astro:page-load", initCmdkitListScroll);
+  document.addEventListener(PAGE_ENTER_EVENT, initCmdkitListScroll);
 </script>

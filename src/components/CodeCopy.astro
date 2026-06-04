@@ -9,6 +9,7 @@
     createCopyButton,
     ensureIconStack,
   } from "@/lib/code-snippet.mjs";
+  import { PAGE_ENTER_EVENT } from "@/lib/page-lifecycle";
 
   const RESET_MS = 2000;
 
@@ -114,6 +115,12 @@
     initCodeCopy(root);
   }
 
+  function onPageEnter(event: Event) {
+    const root =
+      (event as CustomEvent<{ root: ParentNode }>).detail?.root ?? document;
+    setup(root);
+  }
+
   setup();
-  document.addEventListener("astro:page-load", () => setup());
+  document.addEventListener(PAGE_ENTER_EVENT, onPageEnter);
 </script>

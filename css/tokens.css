@@ -28,6 +28,7 @@
   --color-surface-muted: oklch(0.955 0 0);
   --color-success: oklch(0.68 0.06 145);
   --color-success-text: oklch(0.42 0.08 145);
+  --color-transition-shutter: oklch(0.78 0.02 100);
 
 
   /* ── Font families ────────────────────────────────────────────────────── */
