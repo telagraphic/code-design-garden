@@ -3,12 +3,12 @@ import {
   runPageEnterAnimation,
   runPageLeaveAnimation,
   runPageOnceAnimation,
-} from "./shutter/animations";
+} from "./sliding-columns/animations";
 import { initOnceFunctions } from "./shutter/lenis";
 
-/** Shutter page transition — /design routes (see transitionRules). */
-export const shutterTransition = {
-  name: "shutter",
+/** Sliding-columns page transition — /ai routes (see transitionRules). */
+export const slidingColumnsTransition = {
+  name: "slidingColumns",
   sync: true,
 
   async once(data: BarbaTransitionData) {

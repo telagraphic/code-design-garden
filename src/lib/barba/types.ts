@@ -1,4 +1,20 @@
+/** Barba schema page URL (see @barba/core ISchemaPage). */
+export type BarbaPageUrl = {
+  href: string;
+  path: string;
+  hash?: string;
+  query?: Record<string, string>;
+  port?: number | null;
+};
+
+export type BarbaPage = {
+  container: HTMLElement;
+  url: BarbaPageUrl | string;
+  html: string;
+  namespace?: string;
+};
+
 export type BarbaTransitionData = {
-  current: { container: HTMLElement; url: string; html: string };
-  next: { container: HTMLElement; url: string; html: string };
+  current: BarbaPage;
+  next: BarbaPage;
 };

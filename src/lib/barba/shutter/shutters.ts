@@ -1,5 +1,11 @@
 import { shutterAmountConfig } from "./config";
 
+function getShutterTemplate(): HTMLElement | null {
+  const tpl = document.querySelector("[data-transition-shutter-template]");
+  if (!(tpl instanceof HTMLTemplateElement)) return null;
+  return tpl.content.querySelector("[data-transition-shutter]");
+}
+
 export function generateShutters(): void {
   const panel = document.querySelector("[data-transition-panel]");
   if (!panel) return;
@@ -23,7 +29,7 @@ export function generateShutters(): void {
 
   if (shutters.length === shutterAmount) return;
 
-  const template = shutters[0];
+  const template = getShutterTemplate();
   if (!template) return;
 
   const frag = document.createDocumentFragment();

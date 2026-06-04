@@ -1,0 +1,7 @@
+/* Barba transition color tokens (scoped to overlay styles) */
+
+:root {
+  --color-transition-shutter: oklch(0.955 0 0);
+  --color-transition-pixel: oklch(0.52 0.22 295);
+  --color-transition-sliding-column: var(--color-muted);
+}

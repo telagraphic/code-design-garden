@@ -29,9 +29,18 @@ const barbaNamespace =
   </head>
   <body data-barba="wrapper">
     <div data-transition-wrap class="transition" aria-hidden="true">
-      <div data-transition-panel class="transition__panel">
+      <template data-transition-shutter-template>
         <div data-transition-shutter class="transition__shutter"></div>
-      </div>
+      </template>
+      <template data-transition-pixel-template>
+        <div data-transition-col class="transition__col">
+          <div data-transition-pixel class="transition__pixel"></div>
+        </div>
+      </template>
+      <template data-transition-sliding-column-template>
+        <div data-transition-column class="transition__column"></div>
+      </template>
+      <div data-transition-panel class="transition__panel"></div>
     </div>
 
     <SiteNav />

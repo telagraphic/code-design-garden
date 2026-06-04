@@ -41,7 +41,8 @@ export function applyThemeFrom(container: HTMLElement | null | undefined): void 
 export function resetPage(container: HTMLElement): void {
   window.scrollTo(0, 0);
   gsap.set(container, {
-    clearProps: "position,top,left,right,width,transform,y,yPercent",
+    clearProps:
+      "position,top,left,right,width,transform,y,yPercent,zIndex,clipPath,webkitClipPath,autoAlpha,maxHeight,willChange",
   });
 
   const lenis = getLenisInstance() ?? getLenis();

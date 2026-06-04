@@ -1,0 +1,38 @@
+/* Shared Barba overlay + page state */
+
+.transition {
+  z-index: 100;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: clip;
+}
+
+.transition__panel {
+  opacity: 0;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+html.is-transitioning {
+  pointer-events: none;
+}
+
+html.is-transitioning .transition {
+  z-index: 200;
+}
+
+html.barba-init [data-barba="container"] {
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transition {
+    display: none;
+  }
+}

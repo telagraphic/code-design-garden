@@ -11,8 +11,26 @@ import {
   initBeforeEnterFunctions,
   updateDocumentTitle,
 } from "./shutter/hooks";
+import { noneTransition } from "./noneTransition";
+import { pixelTransition } from "./pixelTransition";
 import { setReducedMotion } from "./shutter/state";
 import { shutterTransition } from "./shutterTransition";
+import { slidingColumnsTransition } from "./slidingColumnsTransition";
+import {
+  resolveTransition,
+  type TransitionKind,
+} from "./transitionRules";
+import type { BarbaTransitionData } from "./types";
+
+function transitionWithCustom<T extends Record<string, unknown>>(
+  transition: T,
+  kind: TransitionKind,
+) {
+  return {
+    ...transition,
+    custom: (data: BarbaTransitionData) => resolveTransition(data) === kind,
+  };
+}
 
 function initReducedMotionListener(): void {
   const rmMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -62,13 +80,18 @@ export function initBarba(): void {
 
   barba.hooks.beforeEnter((data) => {
     const navHeight = getSiteNavHeight();
-    gsap.set(data.next.container, {
+    const nextEl = data.next.container as HTMLElement;
+    gsap.set(nextEl, {
       position: "fixed",
       top: navHeight,
       left: 0,
       right: 0,
       width: "100%",
     });
+
+    if (resolveTransition(data) === "slidingColumns") {
+      gsap.set(nextEl, { autoAlpha: 0 });
+    }
 
     getLenis()?.stop();
     initBeforeEnterFunctions(data.next.container);
@@ -108,7 +131,12 @@ export function initBarba(): void {
     timeout: 7000,
     preventRunning: true,
     prevent: ({ el }) => shouldPreventBarba(el ?? undefined),
-    transitions: [shutterTransition],
+    transitions: [
+      transitionWithCustom(pixelTransition, "pixel"),
+      transitionWithCustom(shutterTransition, "shutter"),
+      transitionWithCustom(slidingColumnsTransition, "slidingColumns"),
+      transitionWithCustom(noneTransition, "none"),
+    ],
   });
 
   document.body.dataset.barbaInit = "true";

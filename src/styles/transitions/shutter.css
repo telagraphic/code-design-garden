@@ -1,0 +1,7 @@
+/* Shutter transition (/design) */
+
+.transition__shutter {
+  background-color: var(--color-transition-shutter);
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,15 @@
+/* Pixel transition (/code) */
+
+.transition__col {
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  display: flex;
+}
+
+.transition__pixel {
+  aspect-ratio: 1;
+  background-color: var(--color-text);
+  width: 100%;
+}
