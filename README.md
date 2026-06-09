@@ -74,6 +74,12 @@ pnpm install
 pnpm dev
 ```
 
+**Docker (local):** bind-mounted dev server with hot reload — see [DOCKER_README.md](DOCKER_README.md).
+
+```bash
+docker compose up --build
+```
+
 ### Build
 
 ```bash
