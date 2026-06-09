@@ -1,0 +1,64 @@
+---
+import type { AnimationEntry } from "@/lib/animations";
+import {
+  getAnimationPath,
+  getPreviewFit,
+  getPreviewPosterUrl,
+  getPreviewVideoUrl,
+  hasPreviewPoster,
+} from "@/lib/animations";
+
+interface Props {
+  entry: AnimationEntry;
+}
+
+const { entry } = Astro.props;
+const href = getAnimationPath(entry);
+const videoUrl = getPreviewVideoUrl(entry);
+const posterUrl = getPreviewPosterUrl(entry);
+const hasPoster = hasPreviewPoster(entry);
+const previewFit = getPreviewFit(entry);
+---
+
+<a
+  href={href}
+  class="animation-card"
+  data-animation-card
+  data-title={entry.data.title}
+  data-keywords={[...(entry.data.keywords ?? []), entry.data.title].join(" ")}
+  data-categories={entry.data.categories.join(",")}
+  data-triggers={entry.data.triggers.join(",")}
+>
+  <div class="animation-card__preview">
+    <div
+      class:list={[
+        "animation-card__media",
+        previewFit === "cover" && "animation-card__media--cover",
+      ]}
+    >
+      {
+        hasPoster && (
+          <img
+            class="animation-card__poster"
+            src={posterUrl}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        )
+      }
+      <video
+        class="animation-card__video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        data-src={videoUrl}
+        poster={hasPoster ? posterUrl : undefined}
+        aria-hidden="true"
+      />
+    </div>
+  </div>
+  <h2 class="animation-card__title">{entry.data.title}</h2>
+</a>

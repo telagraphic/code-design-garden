@@ -2,6 +2,7 @@ import barba from "@barba/core";
 import gsap from "gsap";
 import { getLenis } from "@/lib/lenis-bridge";
 import { dispatchPageLeave } from "@/lib/page-lifecycle";
+import { destroyAnimationGallery } from "@/lib/animation-gallery";
 import { destroySidebarScrollSpy } from "@/lib/sidebar-scroll-spy";
 import {
   applyThemeFrom,
@@ -74,6 +75,7 @@ export function initBarba(): void {
   barba.hooks.before((data) => {
     document.documentElement.classList.add("is-transitioning");
     destroySidebarScrollSpy();
+    destroyAnimationGallery();
     dispatchPageLeave();
     return data;
   });

@@ -1,0 +1,76 @@
+---
+import type { AnimationEntry } from "@/lib/animations";
+import { getAnimationPath } from "@/lib/animations";
+
+interface Props {
+  entry: AnimationEntry;
+  siblings: AnimationEntry[];
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { entry, siblings, headings } = Astro.props;
+const galleryHref = "/design/animations/library";
+const currentPath = getAnimationPath(entry);
+
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
+const otherAnimations = siblings.filter(
+  (s) => getAnimationPath(s) !== currentPath,
+);
+---
+
+<aside
+  class="sidebar sidebar--content"
+  aria-label="Animation navigation"
+  data-lenis-prevent
+>
+  <a href={galleryHref} class="sidebar__back">← Collection</a>
+
+  {
+    tocHeadings.length > 0 && (
+      <>
+        <p class="sidebar__label">On this page</p>
+        <nav class="sidebar__nav sidebar__nav--toc" aria-label="On this page">
+          <a
+            href="#introduction"
+            class="sidebar__link sidebar__link--depth-1"
+            data-toc-id="introduction"
+          >
+            {entry.data.title}
+          </a>
+          {
+            tocHeadings.map((h) => (
+              <a
+                href={`#${h.slug}`}
+                class:list={[
+                  "sidebar__link",
+                  `sidebar__link--depth-${h.depth}`,
+                ]}
+                data-toc-id={h.slug}
+              >
+                {h.text}
+              </a>
+            ))
+          }
+        </nav>
+        <div class="sidebar__divider" role="presentation" />
+      </>
+    )
+  }
+
+  {
+    otherAnimations.length > 0 && (
+      <>
+        <p class="sidebar__label sidebar__label--faint">In collection</p>
+        <nav class="sidebar__nav" aria-label="In collection">
+          {
+            otherAnimations.map((item) => (
+              <a href={getAnimationPath(item)} class="sidebar__link sidebar__link--faint">
+                {item.data.title}
+              </a>
+            ))
+          }
+        </nav>
+      </>
+    )
+  }
+</aside>

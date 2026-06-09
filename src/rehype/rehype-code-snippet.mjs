@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-import { COPY_TOOLTIP, hastIconStack } from "../lib/code-snippet.mjs";
+import { hastCopyButton } from "../lib/code-snippet.mjs";
 
 /** @param {import('hast').Properties | undefined} properties */
 function getClassList(properties) {
@@ -30,20 +30,7 @@ export function rehypeCodeSnippet() {
         type: "element",
         tagName: "div",
         properties: { class: "code-snippet" },
-        children: [
-          {
-            type: "element",
-            tagName: "button",
-            properties: {
-              type: "button",
-              class: "code-snippet__copy",
-              ariaLabel: COPY_TOOLTIP,
-              dataTooltip: COPY_TOOLTIP,
-            },
-            children: [hastIconStack()],
-          },
-          node,
-        ],
+        children: [hastCopyButton(), node],
       };
     });
   };

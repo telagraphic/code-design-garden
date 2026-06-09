@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { getLenis, LENIS_SCROLL_EVENT } from "@/lib/lenis-bridge";
 import { dispatchPageEnter } from "@/lib/page-lifecycle";
+import { initAnimationGallery } from "@/lib/animation-gallery";
 import { initSidebarScrollSpy } from "@/lib/sidebar-scroll-spy";
 import { getLenisInstance, setNextPage } from "./state";
 
@@ -90,5 +91,6 @@ export function initBeforeEnterFunctions(next: HTMLElement): void {
 export function initAfterEnterFunctions(next: HTMLElement): void {
   setNextPage(next);
   initSidebarScrollSpy(next);
+  initAnimationGallery(next);
   dispatchPageEnter(next);
 }

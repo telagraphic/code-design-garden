@@ -1,35 +1,16 @@
 ---
-/** Copy buttons for Shiki code blocks (`.code-snippet` from rehype, or wrapped client-side). */
+/** Binds copy behavior to code blocks (`.code-snippet` from rehype, or wrapped client-side). */
 ---
 
 <script>
   import {
-    COPIED_TOOLTIP,
-    COPY_TOOLTIP,
+    bindCopyButton,
     createCopyButton,
-    ensureIconStack,
-  } from "@/lib/code-snippet.mjs";
-  import { PAGE_ENTER_EVENT } from "@/lib/page-lifecycle";
+    upgradeCopyButton,
+  } from "@/lib/code-copy";
+  import { destroyCodeTabs, initCodeTabs } from "@/lib/code-tabs";
+  import { PAGE_ENTER_EVENT, PAGE_LEAVE_EVENT } from "@/lib/page-lifecycle";
 
-  const RESET_MS = 2000;
-
-  function copyText(text: string): Promise<void> {
-    if (navigator.clipboard?.writeText) {
-      return navigator.clipboard.writeText(text);
-    }
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.setAttribute("readonly", "");
-    textarea.style.position = "fixed";
-    textarea.style.left = "-9999px";
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-    return Promise.resolve();
-  }
-
-  /** Flatten framed markup or upgrade text-label buttons. */
   function normalizeSnippet(snippet: Element) {
     const pre = snippet.querySelector("pre.astro-code");
     if (!(pre instanceof HTMLPreElement)) return;
@@ -50,12 +31,7 @@
       return;
     }
 
-    if (btn.querySelector(".code-snippet__label")) {
-      btn.setAttribute("aria-label", COPY_TOOLTIP);
-      btn.dataset.tooltip = COPY_TOOLTIP;
-    }
-
-    ensureIconStack(btn);
+    upgradeCopyButton(btn);
   }
 
   function wrapBarePre(pre: HTMLPreElement) {
@@ -68,45 +44,27 @@
 
   function ensureCodeSnippets(root: ParentNode = document) {
     root.querySelectorAll(".code-snippet").forEach((snippet) => {
+      if (snippet.closest("[data-code-tabs]")) return;
       normalizeSnippet(snippet);
     });
 
     root.querySelectorAll(".prose pre.astro-code").forEach((pre) => {
       if (!(pre instanceof HTMLPreElement)) return;
-      if (pre.closest(".code-snippet")) return;
+      if (pre.closest(".code-snippet, [data-code-tabs]")) return;
       wrapBarePre(pre);
     });
   }
 
   function initCodeCopy(root: ParentNode = document) {
+    initCodeTabs(root);
+
     root.querySelectorAll(".code-snippet").forEach((snippet) => {
+      if (snippet.closest("[data-code-tabs]")) return;
       const btn = snippet.querySelector<HTMLButtonElement>(".code-snippet__copy");
       const code = snippet.querySelector("pre code");
-      if (!btn || !code || btn.dataset.copyBound === "true") return;
+      if (!btn || !code) return;
 
-      btn.dataset.copyBound = "true";
-      btn.addEventListener("click", async () => {
-        const text = code.textContent ?? "";
-        if (!text) return;
-
-        try {
-          await copyText(text);
-          btn.setAttribute("aria-label", COPIED_TOOLTIP);
-          btn.dataset.tooltip = COPIED_TOOLTIP;
-          btn.classList.add("code-snippet__copy--copied");
-
-          window.setTimeout(() => {
-            btn.setAttribute("aria-label", COPY_TOOLTIP);
-            btn.dataset.tooltip = COPY_TOOLTIP;
-            btn.classList.remove("code-snippet__copy--copied");
-          }, RESET_MS);
-        } catch {
-          btn.dataset.tooltip = "Copy failed";
-          window.setTimeout(() => {
-            btn.dataset.tooltip = COPY_TOOLTIP;
-          }, RESET_MS);
-        }
-      });
+      bindCopyButton(btn, () => code.textContent ?? "");
     });
   }
 
@@ -121,6 +79,11 @@
     setup(root);
   }
 
+  function onPageLeave() {
+    destroyCodeTabs(document);
+  }
+
   setup();
   document.addEventListener(PAGE_ENTER_EVENT, onPageEnter);
+  document.addEventListener(PAGE_LEAVE_EVENT, onPageLeave);
 </script>

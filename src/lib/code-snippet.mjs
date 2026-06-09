@@ -3,16 +3,18 @@
 export const COPY_TOOLTIP = "Copy to clipboard";
 export const COPIED_TOOLTIP = "Copied!";
 
-const COPY_ICON_PATHS = [
-  { d: "M6 7L1 12L6 17", strokeMiterlimit: "10" },
-  { d: "M18 17L23 12L18 7", strokeMiterlimit: "10" },
-  { d: "M8.5 20L15.5 4", strokeMiterlimit: "10" },
+/** Overlapping rounded squares (duplicate / copy). */
+export const COPY_ICON_PATHS = [
+  {
+    d: "M8 16H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2m-6 12h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z",
+  },
 ];
 
-const CHECK_ICON_PATH = {
-  d: "M5 12L9.5 16.5L19 7",
-  strokeMiterlimit: "10",
+export const CHECK_ICON_PATH = {
+  d: "M5 12l4.5 4.5L19 7",
 };
+
+export const ICON_STROKE_WIDTH = "2";
 
 const COPY_ICON_SVG_ATTRS = {
   xmlns: "http://www.w3.org/2000/svg",
@@ -31,7 +33,7 @@ function iconSvgAttrs(className) {
   };
 }
 
-/** @param {{ d: string; strokeMiterlimit: string }} spec */
+/** @param {{ d: string }} spec */
 function hastPath(spec) {
   return {
     type: "element",
@@ -39,7 +41,10 @@ function hastPath(spec) {
     properties: {
       d: spec.d,
       stroke: "currentColor",
-      strokeMiterlimit: spec.strokeMiterlimit,
+      strokeWidth: ICON_STROKE_WIDTH,
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      fill: "none",
     },
     children: [],
   };
@@ -64,6 +69,29 @@ export function hastCheckIcon() {
     tagName: "svg",
     properties: iconSvgAttrs("code-snippet__icon code-snippet__icon--check"),
     children: [hastPath(CHECK_ICON_PATH)],
+  };
+}
+
+/**
+ * Full copy button (HAST) — mirrors CodeCopyButton.astro.
+ * @param {{ extraClass?: string, extraProperties?: Record<string, string> }} [options]
+ */
+export function hastCopyButton(options = {}) {
+  const { extraClass = "", extraProperties = {} } = options;
+  const classes = ["code-snippet__copy", extraClass].filter(Boolean).join(" ");
+
+  /** @type {HastElement} */
+  return {
+    type: "element",
+    tagName: "button",
+    properties: {
+      type: "button",
+      class: classes,
+      ariaLabel: COPY_TOOLTIP,
+      dataTooltip: COPY_TOOLTIP,
+      ...extraProperties,
+    },
+    children: [hastIconStack()],
   };
 }
 
@@ -93,7 +121,10 @@ function createIconSvg(className, paths) {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", spec.d);
     path.setAttribute("stroke", "currentColor");
-    path.setAttribute("stroke-miterlimit", spec.strokeMiterlimit);
+    path.setAttribute("stroke-width", ICON_STROKE_WIDTH);
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    path.setAttribute("fill", "none");
     svg.append(path);
   }
 
@@ -135,9 +166,7 @@ export function createCopyButton() {
   return btn;
 }
 
-/** Upgrade a legacy single-icon button to the animated stack. */
+/** @deprecated Use upgradeCopyButton from @/lib/code-copy.ts */
 export function ensureIconStack(btn) {
-  if (btn.querySelector(".code-snippet__icon-stack")) return;
-
   btn.replaceChildren(createIconStack());
 }

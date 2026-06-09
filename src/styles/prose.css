@@ -34,6 +34,20 @@
   font-size: var(--font-size-step--2);
 }
 
+.prose h4 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--font-size-content-h4);
+  line-height: var(--line-height-content-h4);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  padding-bottom: 0;
+}
+
+.prose h4 + p {
+  padding-top: 0;
+}
+
 .prose > h1:first-child {
   display: none;
 }
@@ -103,6 +117,18 @@
 
 .prose .code-snippet {
   margin: 0;
+}
+
+.prose .code-tabs {
+  margin: var(--space-8) 0;
+  padding: 0;
+}
+
+.prose .code-tabs pre.astro-code {
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0;
+  background-color: var(--color-surface-raised) !important;
+  box-shadow: none;
 }
 
 .prose pre.astro-code code {

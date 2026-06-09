@@ -7,7 +7,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint:css": "node scripts/lint-css.mjs",
-    "sync:css": "node scripts/sync-css-prototypes.mjs"
+    "sync:css": "node scripts/sync-css-prototypes.mjs",
+    "migrate:animations:pilot": "node scripts/migrate-osmo-pilot.mjs",
+    "migrate:animations:mwg": "node scripts/migrate-mwg-pilot.mjs",
+    "generate:animation-posters": "node scripts/generate-animation-posters.mjs",
+    "media:link": "node scripts/link-animation-media.mjs",
+    "clean:animations:pilot": "node scripts/clean-pilot-webflow-sections.mjs"
   },
   "dependencies": {
     "@barba/core": "^2.10.3",

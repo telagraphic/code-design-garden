@@ -1,14 +1,20 @@
 ---
 import CommandPalette from "@cmd-kit/astro/component";
+import { getPublishedAnimations } from "@/lib/animations";
 import type { DocEntry } from "@/lib/docs";
-import { buildSearchSections } from "@/lib/search";
+import { buildSearchSectionsWithAnimations } from "@/lib/search";
 
 interface Props {
   docs: DocEntry[];
 }
 
 const { docs } = Astro.props;
-const sections = buildSearchSections(docs, Astro.url.pathname);
+const animations = await getPublishedAnimations();
+const sections = buildSearchSectionsWithAnimations(
+  docs,
+  animations,
+  Astro.url.pathname,
+);
 ---
 
 <CommandPalette

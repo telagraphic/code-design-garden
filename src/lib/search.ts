@@ -1,4 +1,6 @@
 import { domains } from "@/config/home";
+import type { AnimationEntry } from "@/lib/animations";
+import { buildAnimationSearchSection } from "@/lib/animation-search";
 import type { DocEntry } from "./docs";
 import {
   getPagePath,
@@ -13,6 +15,7 @@ type CmdItem = {
   id: string;
   title: string;
   subtitle?: string;
+  keywords?: string[];
   href?: string;
 };
 
@@ -152,5 +155,19 @@ export function buildSearchSections(
     });
   }
 
+  return result;
+}
+
+/** Docs sections plus animation library (when entries exist). */
+export function buildSearchSectionsWithAnimations(
+  docs: DocEntry[],
+  animations: AnimationEntry[],
+  pathname: string,
+): CmdSection[] {
+  const result = buildSearchSections(docs, pathname);
+  const animationSection = buildAnimationSearchSection(animations);
+  if (animationSection) {
+    result.unshift(animationSection);
+  }
   return result;
 }

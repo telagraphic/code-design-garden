@@ -1,0 +1,20 @@
+---
+import "@/styles/animation-gallery.css";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { DocEntry } from "@/lib/docs";
+
+interface Props {
+  title: string;
+  docs?: DocEntry[];
+}
+
+const { title, docs } = Astro.props;
+---
+
+<BaseLayout title={title} docs={docs} barbaNamespace="design">
+  <slot />
+</BaseLayout>
+
+<script>
+  import "@/lib/animation-gallery";
+</script>

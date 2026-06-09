@@ -1,0 +1,13 @@
+services:
+  web:
+    image: node:22-bookworm
+    working_dir: /app
+    command: sh -c "corepack enable && pnpm install && pnpm media:link && pnpm dev --host 0.0.0.0"
+    ports:
+      - "4321:4321"
+    environment:
+      PUBLIC_ANIMATION_LIBRARY_ENABLED: "true"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./media/animations/previews:/app/public/animation-previews
