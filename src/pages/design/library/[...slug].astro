@@ -1,0 +1,70 @@
+---
+import AnimationDetailLayout from "@/layouts/AnimationDetailLayout.astro";
+import AnimationSidebar from "@/components/animation/AnimationSidebar.astro";
+import CodeCopy from "@/components/CodeCopy.astro";
+import { getCollection, render } from "astro:content";
+import {
+  getPreviewFit,
+  getPreviewVideoUrl,
+  hasPreviewVideo,
+  isAnimationLibraryEnabled,
+} from "@/lib/animations";
+
+export async function getStaticPaths() {
+  if (!isAnimationLibraryEnabled()) return [];
+
+  const entries = await getCollection("animations", ({ data }) => data.published);
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const videoUrl = getPreviewVideoUrl(entry);
+const showPreviewVideo = hasPreviewVideo(entry);
+const previewFit = getPreviewFit(entry);
+---
+
+<AnimationDetailLayout title={entry.data.title}>
+  <div class="landing-body">
+    <AnimationSidebar entry={entry} headings={headings} />
+
+    <section class="layout-content content-main">
+      <header id="introduction" class="article-header">
+        <h1 class="article-header__title">{entry.data.title}</h1>
+      </header>
+
+      {
+        showPreviewVideo && (
+          <div
+            class:list={[
+              "animation-detail__preview",
+              previewFit === "cover" && "animation-detail__preview--cover",
+            ]}
+          >
+            <video
+              class="animation-detail__video"
+              src={videoUrl}
+              muted
+              loop
+              playsinline
+              autoplay
+              controls
+              aria-label={`Preview: ${entry.data.title}`}
+            />
+          </div>
+        )
+      }
+
+      <article class="article">
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+
+      <CodeCopy />
+    </section>
+  </div>
+</AnimationDetailLayout>

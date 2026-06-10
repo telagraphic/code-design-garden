@@ -5,7 +5,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 export type AnimationEntry = CollectionEntry<"animations">;
 export type PreviewFit = "contain" | "cover";
 
-const LIBRARY_BASE = "/design/animations/library";
+const LIBRARY_BASE = "/design/library";
 const PREVIEW_MEDIA_ROOT = path.join(
   process.cwd(),
   "media/animations/previews",

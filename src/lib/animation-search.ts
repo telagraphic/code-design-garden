@@ -58,7 +58,7 @@ export function buildAnimationSearchSection(
         title: "Browse animation library",
         subtitle: "Grid of motion references",
         keywords: ["animation", "gallery", "collection", "osmo"],
-        href: "/design/animations/library",
+        href: "/design/library",
       },
       ...items,
     ],

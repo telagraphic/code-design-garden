@@ -156,4 +156,7 @@
 
   /* Homepage layout (page-specific; override per template when needed) */
   --size-section-min: 900px;
+
+  /* Code tabs — stable body height when switching tabs (matches cmd+k dialog sizing pattern) */
+  --size-code-tabs-body: min(70vh, 36rem);
 }

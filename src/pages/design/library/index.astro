@@ -1,0 +1,84 @@
+---
+import AnimationGalleryLayout from "@/layouts/AnimationGalleryLayout.astro";
+import AnimationGalleryCard from "@/components/animation/AnimationGalleryCard.astro";
+import {
+  getPublishedAnimations,
+  isAnimationLibraryEnabled,
+} from "@/lib/animations";
+import {
+  animationCategories,
+  animationTriggers,
+  formatCategoryLabel,
+  formatTriggerLabel,
+} from "@/config/animation-taxonomy";
+
+if (!isAnimationLibraryEnabled()) {
+  return Astro.redirect("/design/animations/");
+}
+
+const animations = await getPublishedAnimations();
+const q = Astro.url.searchParams.get("q") ?? "";
+---
+
+<AnimationGalleryLayout title="Animation library">
+  <div class="animation-gallery" data-animation-gallery>
+    <header class="animation-gallery__header">
+      <h1 class="animation-gallery__title">Collection</h1>
+    </header>
+
+    <div class="animation-gallery__search">
+      <input
+        type="search"
+        class="animation-gallery__search-input"
+        value={q}
+        aria-label="Filter collection (⌘S)"
+        spellcheck="false"
+        data-gallery-search
+      />
+    </div>
+
+    <div class="animation-gallery__filters" role="group" aria-label="Filters">
+      <button
+        type="button"
+        class="animation-gallery__chip animation-gallery__chip--active"
+        data-filter
+        data-filter-type="all">All</button
+      >
+      {
+        animationCategories.map((cat) => (
+          <button
+            type="button"
+            class="animation-gallery__chip"
+            data-filter={cat}
+            data-filter-type="category"
+          >
+            {formatCategoryLabel(cat)}
+          </button>
+        ))
+      }
+      {
+        animationTriggers.map((trig) => (
+          <button
+            type="button"
+            class="animation-gallery__chip"
+            data-filter={trig}
+            data-filter-type="trigger"
+          >
+            {formatTriggerLabel(trig)}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="animation-gallery__grid">
+      {
+        animations.map((entry) => (
+          <AnimationGalleryCard entry={entry} />
+        ))
+      }
+      <p class="animation-gallery__empty" data-gallery-empty hidden>
+        No animations match your filters.
+      </p>
+    </div>
+  </div>
+</AnimationGalleryLayout>

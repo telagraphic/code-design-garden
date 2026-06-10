@@ -230,6 +230,7 @@
 
 .code-tabs__body {
   position: relative;
+  min-height: var(--size-code-tabs-body);
   background-color: var(--color-surface-raised);
   border-radius: 0 0 1rem 1rem;
 }
@@ -243,7 +244,7 @@
 }
 
 .code-tabs__panel:not([hidden]) {
-  max-height: min(70vh, 36rem);
+  max-height: var(--size-code-tabs-body);
   overflow: auto;
 }
 

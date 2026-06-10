@@ -1,21 +1,15 @@
 ---
 import type { AnimationEntry } from "@/lib/animations";
-import { getAnimationPath } from "@/lib/animations";
 
 interface Props {
   entry: AnimationEntry;
-  siblings: AnimationEntry[];
   headings: { depth: number; slug: string; text: string }[];
 }
 
-const { entry, siblings, headings } = Astro.props;
-const galleryHref = "/design/animations/library";
-const currentPath = getAnimationPath(entry);
+const { entry, headings } = Astro.props;
+const galleryHref = "/design/library";
 
 const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
-const otherAnimations = siblings.filter(
-  (s) => getAnimationPath(s) !== currentPath,
-);
 ---
 
 <aside
@@ -48,24 +42,6 @@ const otherAnimations = siblings.filter(
                 data-toc-id={h.slug}
               >
                 {h.text}
-              </a>
-            ))
-          }
-        </nav>
-        <div class="sidebar__divider" role="presentation" />
-      </>
-    )
-  }
-
-  {
-    otherAnimations.length > 0 && (
-      <>
-        <p class="sidebar__label sidebar__label--faint">In collection</p>
-        <nav class="sidebar__nav" aria-label="In collection">
-          {
-            otherAnimations.map((item) => (
-              <a href={getAnimationPath(item)} class="sidebar__link sidebar__link--faint">
-                {item.data.title}
               </a>
             ))
           }

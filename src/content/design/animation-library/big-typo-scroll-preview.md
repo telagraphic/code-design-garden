@@ -12,15 +12,16 @@ keywords: ["big", "typo", "scroll", "preview", "infinite"]
 sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
 ---
 ## Setup
+
+
+
 ### HTML
 ```text
 <!-- Lenis CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.css">
 <!-- Lenis JS -->
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
-```
-### HTML
-```text
+...
 <section data-typo-scroll-init="" data-typo-scroll-infinite="true" class="typo-scroll">
   <div class="typo-scroll__collection">
     <div data-typo-scroll-list="" class="typo-scroll__list">
@@ -28,6 +29,7 @@ sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
         <a href="#" class="typo-scroll__link">
           <h3 class="typo-scroll__h">OSMO SUPPLY</h3>
           <div class="typo-scroll__media">
+            <img src="https://cdn.prod.website-files.com/693a7f8f14a0becb25db9e8f/693a879acaa2379a19c9dbc1_image%2026.avif" loading="lazy" alt="" class="typo-scroll__img">
             <p class="typo-scroll__p">[ OPEN CASE ]</p>
           </div>
         </a>
@@ -36,6 +38,7 @@ sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
         <a href="#" class="typo-scroll__link">
           <h3 class="typo-scroll__h">Mara Lynt</h3>
           <div class="typo-scroll__media is--3-2">
+            <img src="https://cdn.prod.website-files.com/693a7f8f14a0becb25db9e8f/693a879a40b0a52832601f51_image%2017.avif" loading="lazy" alt="" class="typo-scroll__img">
             <p class="typo-scroll__p">[ OPEN CASE ]</p>
           </div>
         </a>
@@ -44,6 +47,7 @@ sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
         <a href="#" class="typo-scroll__link">
           <h3 class="typo-scroll__h">Kavirö</h3>
           <div class="typo-scroll__media is--2-3">
+            <img src="https://cdn.prod.website-files.com/693a7f8f14a0becb25db9e8f/693a879a6755543b199a941a_image%2021.avif" loading="lazy" alt="" class="typo-scroll__img">
             <p class="typo-scroll__p">[ OPEN CASE ]</p>
           </div>
         </a>
@@ -52,6 +56,7 @@ sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
         <a href="#" class="typo-scroll__link">
           <h3 class="typo-scroll__h">Solara Works</h3>
           <div class="typo-scroll__media is--1-1">
+            <img src="https://cdn.prod.website-files.com/693a7f8f14a0becb25db9e8f/693a8799fb46f896d7c81f9b_image%2030.avif" loading="lazy" alt="" class="typo-scroll__img">
             <p class="typo-scroll__p">[ OPEN CASE ]</p>
           </div>
         </a>
@@ -61,6 +66,7 @@ sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
   </div>
 </section>
 ```
+
 ### CSS
 ```text
 .typo-scroll {
@@ -185,6 +191,8 @@ sourceUrl: "https://www.osmo.supply/resource/big-typo-scroll-preview-infinite"
   }
 }
 ```
+
+
 ### Javascript
 ```javascript
 /* Lenis */
@@ -297,6 +305,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initTypoScrollPreview();
 });
 ```
+
+
 ### Javascript
 ```text
 :is(.wf-design-mode, .wf-editor) [data-typo-scroll-item]:hover .typo-scroll__h,
@@ -322,9 +332,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 }
 ```
+
 ### Implementation
+
 #### Container
 Use `[data-typo-scroll-init]` to mark the element that manages scroll detection, active state logic, and optional infinite duplication of its list.
+
 ### HTML
 ```text
 <div data-typo-scroll-init data-typo-scroll-infinite="true/false">
@@ -334,13 +347,18 @@ Use `[data-typo-scroll-init]` to mark the element that manages scroll detection,
   </div>
 </div>
 ```
+
 #### Infinite
 Use `[data-typo-scroll-infinite="true"]` to enable Lenis infinite scrolling and list duplication inside the container.  
+
 #### List
 Use `[data-typo-scroll-list]` to wrap all scrollable items, allowing the script to duplicate this group when infinite mode is active.  
+
 #### Item
 Use `[data-typo-scroll-item]` to register each element as a selectable entry, giving the script a target for setting its active state.  
+
 #### Active
 Use `[data-typo-scroll-item="active"]` to indicate which item currently aligns with the viewport center on touch devices or sits under the cursor on non touch devices.  
+
 #### Touch vs Non Touch Devices
 The script behaves differently depending on the device. On touch devices it highlights the item closest to the center of the screen and clears all highlights when the center moves outside the container, while on non touch devices it highlights the item that sits at the screen center instead of relying on hover and removes all highlights when the cursor leaves the container.

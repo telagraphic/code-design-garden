@@ -15,6 +15,7 @@ const docs = defineCollection({
       "tools/**/*.md",
       "references/**/*.md",
       "design/animations/**/*.md",
+      "design/animation-library/1-overview.md",
       "design/design-engineering/**/*.md",
       "design/interface/**/*.md",
       "design/typography/**/*.md",
@@ -37,7 +38,7 @@ const docs = defineCollection({
 const animations = defineCollection({
   loader: glob({
     base: "./src/content/design/animation-library",
-    pattern: "**/*.md",
+    pattern: ["**/*.md", "!1-overview.md"],
     generateId: ({ entry }) => entry.replace(/\.md$/i, ""),
   }),
   schema: z.object({

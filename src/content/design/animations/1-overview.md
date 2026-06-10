@@ -25,9 +25,3 @@ Principles and patterns for purposeful motion in interfaces.
 - Timing and easing
 - Entrance and exit
 - Reduced motion
-
-## Animation library
-
-Browse the pilot collection of motion references with code (HTML, CSS, JavaScript).
-
-- [Open animation library](/design/animations/library)
