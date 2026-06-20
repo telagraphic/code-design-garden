@@ -15,6 +15,5 @@ Structure, hierarchy, and interaction patterns for digital products.
 
 ## Topics
 
-- Layout and navigation
-- Components and states
-- Accessibility
+- [Optical Effects](https://medium.com/design-bridges/optical-effects-9fca82b4cd9a)
+- [LearnUI Design](https://www.learnui.design/)

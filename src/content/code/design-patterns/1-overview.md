@@ -13,13 +13,6 @@ chapterLabel: "Overview"
 
 Reusable solutions for common UI and application structure problems.
 
-## Topics
-
-- Component composition
-- State and data flow
-- Performance patterns
-
-
 ## References
 
 
@@ -35,4 +28,19 @@ Reusable solutions for common UI and application structure problems.
 - [Refactoring — Refactoring.Guru](https://refactoring.guru/refactoring)
 - [JavaScript Design Patterns — Dofactory](https://www.dofactory.com/javascript/design-patterns)
 - [7 Design Patterns Every Developer Should Know — YouTube](https://www.youtube.com/watch?v=BJatgOiiht4&t=979s)
+
+
+
+
+
+
+## System Design
+
+- [Frontend Architecture Patterns You Need to Know in 2025](https://www.youtube.com/watch?v=ixee55xm_d8)
+- [MVC to Clean Architecture](https://www.youtube.com/watch?v=wLHCauXhZYc)
+- [Every Frontend Architecture Pattern Explained in 23 Minutes](https://www.youtube.com/watch?v=9-r0RuX0pqk&t=11s)
+- [Advanced CI/CD with Docker](https://www.youtube.com/watch?v=OziAeEWY514)
+- [Front End Design System](https://www.youtube.com/watch?v=KuClyhvSzXk)
+- [I Code It System Design](https://www.youtube.com/@icodeit.juntao)
+
 

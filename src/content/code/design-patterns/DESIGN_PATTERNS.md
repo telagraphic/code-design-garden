@@ -12,11 +12,13 @@ chapterLabel: "Notes"
 
 
 1. Module
-2. Observer
-3. Factory
+2. Factory
+3. Observer
 4. Singleton
 5. Strategy
 6. Decorator
+
+
 7. Mediator
 8. Command
 9. Adapter

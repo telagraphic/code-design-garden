@@ -39,11 +39,6 @@ const sectionDocs = await getDocsBySection(
     <section class="layout-content content-main">
       <header id="introduction" class="article-header">
         <h1 class="article-header__title">{entry.data.title}</h1>
-        {
-          entry.data.description && (
-            <p class="article-header__lede">{entry.data.description}</p>
-          )
-        }
       </header>
       <article class="article">
         <div class="prose">
