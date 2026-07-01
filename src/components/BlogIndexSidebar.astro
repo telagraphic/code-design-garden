@@ -1,0 +1,35 @@
+---
+import type { BlogEntry } from "@/lib/blog";
+import { getBlogPath } from "@/lib/blog";
+
+interface Props {
+  posts: BlogEntry[];
+}
+
+const { posts } = Astro.props;
+---
+
+<aside
+  class="sidebar sidebar--content"
+  aria-label="Blog navigation"
+  data-lenis-prevent
+>
+  <a href="/" class="sidebar__back">← Blog</a>
+
+  {
+    posts.length > 0 && (
+      <>
+        <p class="sidebar__label">Posts</p>
+        <nav class="sidebar__nav" aria-label="Posts">
+          {
+            posts.map((post) => (
+              <a href={getBlogPath(post)} class="sidebar__link">
+                {post.data.title}
+              </a>
+            ))
+          }
+        </nav>
+      </>
+    )
+  }
+</aside>

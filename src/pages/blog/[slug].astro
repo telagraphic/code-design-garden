@@ -1,0 +1,47 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogSidebar from "@/components/BlogSidebar.astro";
+import CodeCopy from "@/components/CodeCopy.astro";
+import { getCollection, render } from "astro:content";
+import {
+  formatPubDate,
+  getBlogSlug,
+  getLiveBlogPosts,
+  isLivePost,
+} from "@/lib/blog";
+
+export async function getStaticPaths() {
+  const all = await getCollection("blog");
+  return all.filter(isLivePost).map((entry) => ({
+    params: { slug: getBlogSlug(entry) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const livePosts = await getLiveBlogPosts();
+---
+
+<BaseLayout title={entry.data.title} barbaNamespace="blog">
+  <div class="landing-body">
+    <BlogSidebar entry={entry} posts={livePosts} headings={headings} />
+    <section class="layout-content content-main content-main--blog">
+      <div class="blog-column">
+        <header id="introduction" class="article-header">
+          <p class="article-header__date">
+            {formatPubDate(entry.data.pubDate)}
+          </p>
+          <h1 class="article-header__title">{entry.data.title}</h1>
+          <p class="article-header__lede">{entry.data.description}</p>
+        </header>
+        <article class="article">
+          <div class="prose">
+            <Content />
+          </div>
+        </article>
+      </div>
+      <CodeCopy />
+    </section>
+  </div>
+</BaseLayout>

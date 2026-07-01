@@ -116,6 +116,7 @@
   --line-height-code: 1.3846;
   --max-width-lede: 40rem;
   --max-width-prose: 50rem;
+  --max-width-blog: 90ch;
 
   /* ── Spacing (4px grid) ───────────────────────────────────────────────── */
   --space-unit: 0.25rem;

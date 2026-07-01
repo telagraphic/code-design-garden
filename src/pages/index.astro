@@ -1,38 +1,50 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { domains } from "@/config/home";
-import { getAllDocs, getHomepageSectionLinks } from "@/lib/docs";
+import {
+  getLiveBlogPosts,
+  getRecentBlogLinks,
+} from "@/lib/blog";
 
-const allDocs = await getAllDocs();
+const livePosts = await getLiveBlogPosts();
+const recentLinks = getRecentBlogLinks(livePosts, 5);
+const showViewAll = livePosts.length > 5;
 ---
 
-<BaseLayout title="code-design-guide" barbaNamespace="home">
-  {
-    domains.map((domain) => {
-      const links = getHomepageSectionLinks(allDocs, domain.slug);
-      return (
-        <section id={domain.slug} class="topic-section">
-          <div class="topic-section__main">
-            <p class="topic-section__index">{domain.index}</p>
-            <h2 class="topic-section__hero">{domain.label}</h2>
-            {
-              links.length > 0 ? (
-                <ul class="topic-list">
-                  {links.map((link) => (
-                    <li class="topic-list__item">
-                      <a class="topic-list__link" href={link.href}>
-                        <h3 class="topic-list__title">{link.title}</h3>
-                        <p class="topic-list__desc">{link.desc}</p>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : null
-            }
-          </div>
-          <aside class="topic-section__aside" aria-hidden="true" />
-        </section>
-      );
-    })
-  }
+<BaseLayout title="Blog" barbaNamespace="blog">
+  <div class="blog-home">
+    <div class="blog-column blog-column--solo">
+    <p class="blog-home__lede">
+      Notes on code, design, and building things on the web.
+    </p>
+
+    <p class="blog-home__label">Writing</p>
+
+    {
+      recentLinks.length > 0 ? (
+        <>
+          <ul class="topic-list">
+            {recentLinks.map((link) => (
+              <li class="topic-list__item">
+                <a class="topic-list__link" href={link.href}>
+                  <p class="topic-list__date">{link.date}</p>
+                  <h2 class="topic-list__title">{link.title}</h2>
+                  <p class="topic-list__desc">{link.desc}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+          {
+            showViewAll && (
+              <a class="blog-home__view-all" href="/blog">
+                View all posts →
+              </a>
+            )
+          }
+        </>
+      ) : (
+        <p class="landing-content__muted">No posts yet.</p>
+      )
+    }
+    </div>
+  </div>
 </BaseLayout>

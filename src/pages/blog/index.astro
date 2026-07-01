@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogIndexSidebar from "@/components/BlogIndexSidebar.astro";
+import { formatPubDate, getBlogPath, getLiveBlogPosts } from "@/lib/blog";
+
+const livePosts = await getLiveBlogPosts();
+---
+
+<BaseLayout title="Blog" barbaNamespace="blog">
+  <div class="landing-body">
+    <BlogIndexSidebar posts={livePosts} />
+    <section class="layout-content landing-main landing-main--blog">
+      <div class="blog-column">
+        <header class="landing-hero">
+          <h1 class="landing-hero__title">Writing</h1>
+        </header>
+        <div class="landing-content">
+          {
+            livePosts.length > 0 ? (
+              <ul class="topic-list">
+                {livePosts.map((post) => (
+                  <li class="topic-list__item">
+                    <a class="topic-list__link" href={getBlogPath(post)}>
+                      <p class="topic-list__date">
+                        {formatPubDate(post.data.pubDate)}
+                      </p>
+                      <h2 class="topic-list__title">{post.data.title}</h2>
+                      <p class="topic-list__desc">{post.data.description}</p>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="landing-content__muted">No posts yet.</p>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

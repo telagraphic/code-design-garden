@@ -1,6 +1,7 @@
 ---
 import CommandPalette from "@cmd-kit/astro/component";
 import { getPublishedAnimations } from "@/lib/animations";
+import { getLiveBlogPosts } from "@/lib/blog";
 import type { DocEntry } from "@/lib/docs";
 import { buildSearchSectionsWithAnimations } from "@/lib/search";
 
@@ -10,10 +11,12 @@ interface Props {
 
 const { docs } = Astro.props;
 const animations = await getPublishedAnimations();
+const blogPosts = await getLiveBlogPosts();
 const sections = buildSearchSectionsWithAnimations(
   docs,
   animations,
   Astro.url.pathname,
+  blogPosts,
 );
 ---
 
