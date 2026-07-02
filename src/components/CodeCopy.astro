@@ -9,6 +9,7 @@
     upgradeCopyButton,
   } from "@/lib/code-copy";
   import { destroyCodeTabs, initCodeTabs } from "@/lib/code-tabs";
+  import { destroyProseVideo, initProseVideo } from "@/lib/prose-video";
   import { PAGE_ENTER_EVENT, PAGE_LEAVE_EVENT } from "@/lib/page-lifecycle";
 
   function normalizeSnippet(snippet: Element) {
@@ -71,6 +72,7 @@
   function setup(root: ParentNode = document) {
     ensureCodeSnippets(root);
     initCodeCopy(root);
+    initProseVideo(root);
   }
 
   function onPageEnter(event: Event) {
@@ -81,6 +83,7 @@
 
   function onPageLeave() {
     destroyCodeTabs(document);
+    destroyProseVideo(document);
   }
 
   setup();

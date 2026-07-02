@@ -29,11 +29,10 @@ const livePosts = await getLiveBlogPosts();
     <section class="layout-content content-main content-main--blog">
       <div class="blog-column">
         <header id="introduction" class="article-header">
+          <h1 class="article-header__title">{entry.data.title}</h1>
           <p class="article-header__date">
             {formatPubDate(entry.data.pubDate)}
           </p>
-          <h1 class="article-header__title">{entry.data.title}</h1>
-          <p class="article-header__lede">{entry.data.description}</p>
         </header>
         <article class="article">
           <div class="prose">

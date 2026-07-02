@@ -290,3 +290,60 @@
   letter-spacing: var(--tracking-tighter);
   color: var(--color-text-secondary);
 }
+
+/* Prose media — shared frame for video + images */
+.prose .prose-video,
+.prose .prose-image,
+.prose p:has(> img:only-child) {
+  margin: var(--space-8) 0;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.prose .prose-video + *,
+.prose .prose-image + *,
+.prose p:has(> img:only-child) + * {
+  padding-top: var(--space-4);
+}
+
+.prose .prose-video video,
+.prose .prose-image img,
+.prose p:has(> img:only-child) > img {
+  display: block;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 1px 2px -1px rgba(0, 0, 0, 0.06),
+    0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.prose .prose-video video {
+  aspect-ratio: var(--aspect-animation-preview);
+  object-fit: cover;
+  object-position: center;
+  background-color: #000;
+}
+
+.prose .prose-image img,
+.prose p:has(> img:only-child) > img {
+  height: auto;
+}
+
+.prose .prose-video figcaption,
+.prose .prose-image figcaption {
+  padding: var(--space-3) 0 0;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-micro);
+  letter-spacing: var(--tracking-tighter);
+  color: var(--color-text-tertiary);
+  text-wrap: pretty;
+  background: transparent;
+  border: none;
+}
