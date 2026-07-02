@@ -12,7 +12,8 @@
     "migrate:animations:mwg": "node scripts/migrate-mwg-pilot.mjs",
     "generate:animation-posters": "node scripts/generate-animation-posters.mjs",
     "media:link": "node scripts/link-animation-media.mjs",
-    "clean:animations:pilot": "node scripts/clean-pilot-webflow-sections.mjs"
+    "clean:animations:pilot": "node scripts/clean-pilot-webflow-sections.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@barba/core": "^2.10.3",
@@ -29,6 +30,8 @@
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
     "postcss-safe-parser": "^7.0.1",
-    "stylelint": "^16.18.0"
+    "sharp": "^0.35.3",
+    "stylelint": "^16.18.0",
+    "svgo": "^4.0.1"
   }
 }

@@ -149,35 +149,56 @@ Markdown (data-video) → <figure> in HTML
 
 Blog and article markdown can include images with the same rounded frame as video embeds.
 
-**Where to put files**
+**CDN workflow (recommended)**
 
-Store images in [`public/blog/`](public/blog/) (or any path under `public/`). Reference them from the site root:
+Optimized images are hosted on **Bunny.net**. Use the hot-folder pipeline:
 
 ```text
-public/blog/gsap-architecture/grid-sections.png  →  /blog/gsap-architecture/grid-sections.png
+media/images/in/   ← drop raw PNG, JPEG, WebP, etc.
+        ↓
+pnpm images:optimize
+        ↓
+media/images/out/  ← AVIF (opaque) or WebP (alpha) ready to upload
+        ↓
+./scripts/upload-bunny-images.sh
+        ↓
+https://code-design-garden.b-cdn.net/{path}
 ```
+
+1. Drop source files into [`media/images/in/`](media/images/in/) (subdir paths are preserved).
+2. Run `pnpm images:optimize` to compress and convert (`--format webp` or `--format avif` to force a single raster format).
+3. Upload with `./scripts/upload-bunny-images.sh` (or `--dry-run` to preview URLs).
+
+Set credentials in [`.env`](.env.example) (see `BUNNY_STORAGE_*` and `PUBLIC_BUNNY_IMAGE_BASE_URL`). The upload script uses the storage zone **password** as `AccessKey`, not your global Bunny account API key.
+
+| Setting | Role |
+|---------|------|
+| `BUNNY_STORAGE_ZONE` | Storage zone name |
+| `BUNNY_STORAGE_ACCESS_KEY` | Zone password for PUT uploads |
+| `BUNNY_STORAGE_ENDPOINT` | Regional endpoint, e.g. `https://storage.bunnycdn.com` |
+| `PUBLIC_BUNNY_IMAGE_BASE_URL` | Pull zone URL printed after upload |
+
+Opaque photos/screenshots become **AVIF**; images with transparency become **WebP**. Longest edge is capped at 2560px (single file, no responsive variants). Force one format with `pnpm images:optimize -- --format webp` or `--format avif`.
 
 **Markdown usage**
 
-Simple image on its own line (no caption):
-
-```markdown
-![12-column grid with vertical sections](/blog/gsap-architecture/grid-sections.png)
-```
-
-Image with a caption — use an HTML `<figure>`:
+Reference the CDN URL in blog or wiki content:
 
 ```html
 <figure class="prose-image">
-  <img src="/blog/gsap-architecture/grid-sections.png" alt="12-column grid with vertical sections" width="1440" height="900" loading="lazy" decoding="async" />
+  <img src="https://code-design-garden.b-cdn.net/blog/gsap-architecture/grid-sections.avif" alt="12-column grid with vertical sections" width="1440" height="900" loading="lazy" decoding="async" />
   <figcaption>12-column grid with vertical sections</figcaption>
 </figure>
 ```
 
 | Approach | When to use |
 |----------|-------------|
-| `![alt](url)` | Quick inline image, no caption |
+| `![alt](cdn-url)` | Quick inline image, no caption |
 | `<figure class="prose-image">` | Caption, explicit dimensions, or lazy-loading attrs |
+
+**Local-only fallback**
+
+[`public/blog/`](public/blog/) still works for assets served from the Astro build (no Bunny upload). Reference from the site root: `/blog/…`.
 
 Images use their natural aspect ratio. Videos keep a fixed 16:10 frame with `object-fit: cover`.
 

@@ -128,13 +128,14 @@
 }
 
 .topic-list__date {
+  margin-bottom: var(--space-1);
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 600;
+  text-transform: uppercase;
   font-size: var(--font-size-micro);
   line-height: var(--line-height-micro);
-  letter-spacing: var(--tracking-wider);
+  letter-spacing: var(--tracking-tight);
   color: var(--color-muted);
-  margin-bottom: var(--space-1);
 }
 
 /* Blog homepage */
