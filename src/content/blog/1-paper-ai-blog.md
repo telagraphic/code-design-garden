@@ -5,43 +5,39 @@ pubDate: 2026-07-01
 published: true
 ---
 
+I've taken several [Awwwards](https://www.awwwards.com/academy/courses/design) courses and the [Obys course on grids](https://des.obys.agency/grids/), which I highly recommend. It made layout click for me, finally. Picking up tips and approaches from these experts has sharpened my eye. I can't unsee un-aligned content and so much AI design seems to miss this in subtle ways.
+
+My standard design process was putting together a low fidelity mockup/layout in Figma and "code-designing" the rest of it in the IDE/Browser. This left me in a lurch of making too many design decisions in the browser. The context switching between design and code was counter-productive for me. No formal grid layout, no solid use of design tokens and a loose sense of style and aesthetic led to a slow and time consuming process. The problem was no real design at all. This is obvious in hindsight, but the crutch of using a CSS framework or figuring it out once I had some CSS layout avoided the real task of using the right tool for a design.
+
+I had to level up my design process and after taking several courses, I saw a common process:
+
+|                  |                                                                                                                                                                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Moodboard(s)** | Screenshots of inspiration for design elements (layout, color, typography, style), using two or mood boards can open up the possibilities for the look/feel                                                                       |
+| **Explorations** | Page layouts in Figma and design decisions should have many iterations, playing with fonts/colors and spacing is a process that develops the eye. This is the mockup phase with actual design elements and not just black and white boxes. |
+| **Compositions** | Final "rough draft" of an exploration that integrates all the pieces into a page design, this can have variations and should be high fidelity with some strong level of craft and polish                                                                                     |
+| **Final Design** | The final page design after the editing process, time to build it                                                                                                                                                                 |
 
 
 
-I built this blog using Paper and Claude to mock out a design from a couple websites I like and built in Astro. I wanted a basic simple blog and not a fancy portfolio site. Designing my site just didn't have the same hit as the other projects I had in the works.
-
-Here are some patterns that I found helpful from prompt to design and design to code workflows.
-
-
-## Design Process
-
-I've taken several [Awwwards](https://www.awwwards.com/academy/courses/design) courses and the [Obys course on grids](https://des.obys.agency/grids/). I've learned so much about the design process.
-
-Some common patterns to generate an original web design:
-
-1. **moodboard** inspiration for design elements: layout, color, typography, style
-2. **explorations** to iterate many design variations, more than you think you should
-3. **compositions** for a solid rough draft page design
-4. **final** page design for handoff to developer
-
-Each of these section would be a Page in a Figma file. They reflect the design process for crafting a web page (or any graphic design).
+Each of these sections would be a **page** in a Figma file. They reflect the design process for crafting a web page (or any graphic design). The **Mockup** step fits into the **Exploration** step. I noticed that experienced designers either skip this step or lean more heavily in higher fidelity versions. This makes sense to me and the AI design process gets us closer to production ready designs, compressing the traditional process.
 
 ## Trying Paper
 
-I really liked [Not A Number](https://www.nan.fyi/) and his [svg.guide](https://www.svg.guide/) course design. And then I found [jakub.kr](https://jakub.kr/) and read all the posts about UI and Interfaces.
-I learned about [Paper](https://paper.design/) from [Dive Club](https://www.youtube.com/watch?v=Iq87tYS6zjY) and was impressed by Phil Haney's interview and level headed talk about design and AI. 
 
-This project was my introduction to AI design with Paper and Claude. It's kinda weird to start with a prompt but the results were solid enough. Does reality meet the hype? I read the paper docs, watched some youtube videos and found this post [A Guide to Claude Code and Paper for Designers](https://x.com/felixleezd/status/2039731306612060186) by Felix Lee.
+I learned about [Paper](https://paper.design/) from [Dive Club](https://www.youtube.com/watch?v=Iq87tYS6zjY) and was impressed by Phil Haney's interview and level headed talk about design and AI. There was genuine excitement about AI in design and not vibe-designing shortcut talk. Seeing AI generate layout variations on the canvas caught my eye.
 
-I used the the paper snapshot to grab the homepages for each website.
-
-1. Used paper's snapshot to grab the homepages for each website
-2. Added some screenshots from a react guide I had vibe coded previously
-3. Created an art-board with the prompt, copied from my Obsidian markdown project file
-
-I did sign up for Paper and used the desktop app for this project to get the full experience.
+I decided to give the AI hype a shot and signed up for Paper and downloaded the desktop app to get the full experience. I read the docs, watched some youtube videos and found "[A Guide to Claude Code and Paper for Designers](https://x.com/felixleezd/status/2039731306612060186)" by Felix Lee to get me started.
 
 
+## AI Design Process
+
+The whole design process is changing with AI and the results are good.
+The feedback loop between each step I outlined above is much faster using Claude Code with Paper.
+
+I really like the design for [Not A Number](https://www.nan.fyi/) and his [svg.guide](https://www.svg.guide/) course design. And then I found [jakub.kr](https://jakub.kr/) and read all the posts about UI and Interfaces.
+
+I used the the paper snapshot to grab the homepages for each website. Added some additional screenshots from two other websites, and created an art-board with the initial design prompt copied from my Obsidian project file.
 
 ### The first prompt
 
@@ -127,34 +123,26 @@ Please create components for the:
   <figcaption>Paper designer layout and style variations</figcaption>
 </figure>
 
-I went with the last column design and updated the main serif font in the next step.
-
-
+I went with the last column design and used a nice serif font.
 
 ## Design to Code
 
-Once I got a solid design after two prompts, I used the **Paper MCP** to build the skeleton pages. I made sure we used design tokens, css layers and component based rules before telling the 
-
-The first pass created lots of slop code. It worked, but I noticed that making updates just seemed a bit cumbersome. I was missing:
+Once I got a solid design after two prompts, I used the **Paper MCP** to build the skeleton pages. The first pass created lots of slop code. It looked the part, but I couldn't unsee the slop code. I was missing:
 
 - design tokens for spacing, typography, colors
 - css layers, component and utility classes
 - file organization
 
-This AI prompt to design to code to working site taught me that detailed prompts do require domain knowledge and explicit instructions that an experienced developer can word for the AI to follow.
-I know about skills, but this was on of those cowboy projects to see what happens without best practices. This taught me the value of:
+The AI "prompt to design to code to working site" taught me that detailed prompts do require domain knowledge and explicit instructions to steer the AI.
 
-- skills for code quality and best practices
-- seeing how AI has it's own idea of what you ask it
+I was familiar with skills, but this was one of those cowboy projects to see "what happens". This taught me the value of:
+
+- applying skills for code quality and best practices
+- seeing how AI has it's own idea of what you ask it without a plan in place
+- what kind of plans AI generates
 - the reality of "vibe-ish" coding: it works but is it maintainable?
 
-I was not building **React.js** app or using **Tailwind.css** which Paper is built natively on.
-This means the design to code workflow is one to one, which is really cool.
-Another win for the Paper to Code workflow.
 
-But I was using Astro and vanilla JS and my own styles. I should have spent more time thinking about the design to code process.
-A step I would include next time is making sure the AI can visually map the design components to the code.
-A simple table of components that informs the AI would have saved a refactoring round if it was done in the first pass.
 
 
 <figure class="prose-image">
@@ -162,23 +150,42 @@ A simple table of components that informs the AI would have saved a refactoring 
   <figcaption>Final blog design</figcaption>
 </figure>
 
+I spent a couple of hours each day for a week tweaking the design, refactoring the code to use components and adding features like `cmd+k` for search, barba.js and page transitions, and migrating a giant library of learning material from my obsidian vault.
 
+I was not building a **React.js** app or using **Tailwind.css** which Paper is built natively on. I was using Astro and vanilla JS and no CSS framework. More handhelding would be needed for future projects.
 
 ## Enter AI Hero
 
-I spent a couple of hours each day for a week tweaking the design, refactoring the code to use components and adding features like `cmd+k` for search, barba.js and page transitions, a giant library of learning material from my obsidian vault.
+Then I watched [Matt Pococks short clip](https://www.youtube.com/watch?v=v4F1gFy-hqg&t=4s) from this [full presentation](https://www.youtube.com/watch?v=-QFHIoCo-Ko&t=1433s). It was the best talk about AI I had seen that finally made AI development click. His `/grill-me` and now `/grill-with-docs` made so much sense and tapped into the full power of AI. That alone changed my AI coding approach. It's akin to realizing you are only using 5% of your brain when you could be using 50%.
 
-Then I watched [Matt Pococks short clip](https://www.youtube.com/watch?v=v4F1gFy-hqg&t=4s) from this [full presentation](https://www.youtube.com/watch?v=-QFHIoCo-Ko&t=1433s). It was the best talk about AI I have seen that finally clicked. His `/grill-me` and now `/grill-with-docs` made so much sense and tapped into the full power of AI. That alone changed my approach my AI coding.
+I find AI can be a great pairing partner to teach you, but I hadn't discovered the patterns to optimize that.
 
-It's akin to realizing you are only using 5% of your brain when you could be using 50%.
+After cleaning up the codebase, I went through the `/grill-me` process for adding a blog post feature. This is my new standard for starting projects and adding features. The back and forth question process was miles ahead of just asking cursor for a plan. It got that mental flow going that is not present with just "prompting and hoping".
 
-After cleaning up the codebase, I went through the `/grill-me` process for adding blogs. This is my new standard for starting projects and adding features. The questions and suggestions for how to handle edge cases and how the blog should work with the existing code were miles ahead of just asking cursor for a plan.
+The blog post plan generated by the `/grill-me` skill covered more edge cases, went further in-depth with code implementation details and provided a much richer requirements spec. And when I implemented it, I only had to make minor design tweaks. 
 
-The blog post feature plan was covered more edge cases, went further in-depth with code implementation and provided a much richer requirements spec. And when I implemented it, I only had to make minor design tweaks. Adding a video and image component was a smoother process as well.
+## Crafting A Prompt Process
+
+Similar to the design process table above, I've listed out a **design to code** process:
+
+|                         |                                                                                                                                                           |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Design**              | The standard design process now with agents, prompts and manual design before going to code                                                               |
+| **Tokens**              | A design audit for tokens (primitives, semantic, components)                                                                                              |
+| **Components & Styles** | A component inventory using a BEM scheme derived from the layer names in Paper/Figma. <br>Utility classes and other helper classes that might be needed   |
+| **Naming**              | A consistent naming scheme for pages, sections, components for design and code consistency                                                                |
+| **Audit & Document**    | A final review of the design to code plan to identify missed spots and document the design system in another artboard/page or markdown file               |
+| **Plan**                | A phase based plan broken into issues that is generated from a `/to-plan` or `/grill-me` skill to ensure the code to design process is captured correctly |
+
+Creating skills that encode these practices streamlines the overall process and can be tailored to your personal style and work patterns. I often review the [design.md](https://github.com/google-labs-code/design.md) spec to update my process. Yes, you can ask AI to create this artifact for you, but I wanted to go through the process to see how it works.
+
+I've watched [Ridd use Conductor](https://www.youtube.com/watch?v=zmxn4a2g0Ww) with Claude and Paper to generate designs and copy to code. It's next level. Code debt is real and with the reality of token budgets and costs, why not optimize this process by taking the time to ensure code quality? Or will AI get so good it will just "figure it out"? It only takes a thoughtful skill file clean up slop and produce cleaner code.
+
+Setting up your skills for a front end project should be optimized for the context window and **progressive disclosure**. You don't want to be unnecessarily burning tokens by including skill files that don't apply to the prompt at hand. Crafting well structured agent skill files gives the agent the responsibility for using it when needed. This is where the human judgement can make the difference per project and codebase.
 
 ## The BRIEF Framework
 
-I recently just learned about the BRIEF framework, which is a much better structured approach for a design project.
+I recently just learned about the BRIEF framework, which is a much better structured approach for a design project. Taken straight from Google AI:
 
 | step             | description                                                                                                                      |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -191,13 +198,17 @@ I recently just learned about the BRIEF framework, which is a much better struct
 
 Good prompts take into account how LLM's work under the hood and providing a more structured prompt requires redirecting your efforts from doing the work to defining the work. It's a mind shift that takes time.
 
-## The Take Aways
 
-1. Manual research for mood boards and site inspiration
-2. Use Claude Code with Paper for **faster** design explorations and layout variations
-3. Use the **BRIEF** framework or some other design structure for Claude Code prompting
-4. Use Paper MCP with Cursor to code the Paper design and pair with a skill to code the design with best practices instead of cleaning up after the first pass
-5. Use `/grill-me` skill for feature development and starting new projects
+## Take-aways
+
+
+- Solid design process before going to code
+- Use a design prompt framework (BRIEF or other) for layout and style variations
+- Use design.md and custom skills to ensure best code practices for maintainable code
+- Plan and define the work with `/grill-me`, break into phases with issues for queue based workflows
+- Using AI as a back and forth Q&A generates richer plans and feature requirements
+- Use AI to refine existing skills and create new ones for repeated processes
+
 
 
 And some helpful links worth checking out:

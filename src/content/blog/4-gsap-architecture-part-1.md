@@ -1,16 +1,14 @@
 ---
 title: "GSAP Code Architecture - Part 1"
 description: "Refactoring spaghetti code with patterns and components"
-pubDate: 2026-07-03
+pubDate: 2026-07-04
 published: true
 ---
 
 
 
 
-
-
-## Design Patterns: Theme & Variation
+# Design Patterns: Theme & Variation
 
 Design patterns are common solutions for solving a specific problem. Think of a blueprint for building a chair. 4 legs, a seat and and back rest are the core components for the schematics of a standard chair. But even the chair pattern can have variations. A stool might have 3 legs, no back rest and a swivel seat. Indeed each overall design pattern has a sub-set of implementation patterns: eager versus lazy instantiation, inheritance or composition, and so on.
 
@@ -20,7 +18,10 @@ Picking the right pattern is the first step. Implementation details and fitting 
 
 Lot's of tutorial code is "spaghetti" or coupled to a codebase. It would be ideal for a more component based code format.
 
-This can allow for code that is more predictable, re-usable, and easier to maintain.
+
+# Scroll Based Landing Page
+
+After learning GSAP basics like tweens, timelines, SplitText and ScrollTrigger, I wanted to challenge myself to build a landing page and sprinkle in some GSAP text effects to see how it could be refactored.
 
 
 <figure class="prose-image">
@@ -31,7 +32,26 @@ This can allow for code that is more predictable, re-usable, and easier to maint
   <img src="https://code-design-garden.b-cdn.net/gsap-architecture-notes-1.avif" alt="Alt text" loading="lazy" decoding="async" />
 </figure>
 
+This turned into:
 
+<figure class="prose-video" data-prose-video data-hls="https://vz-8dc492cd-3d0.b-cdn.net/7be0ce82-d4c3-4649-85df-b9f74ef126da/playlist.m3u8">
+  <video muted loop playsinline autoplay controls preload="metadata" aria-label="Scrolling page demo"></video>
+  <figcaption>Scrolling page demo</figcaption>
+</figure>
+
+
+After a couple of days, I started the refactoring process.
+The GSAP code came in 3 flavors: classic timeline based animations triggered by scroll, scroll trigger animations for single or multiple elements coming into view, and specific motion effects that is a specific motion effect.
+
+
+The GSAP code came in 3 flavors:
+
+1. classic timeline based animations triggered by scroll
+2. scroll trigger animations for single or multiple elements coming into view
+3. specific motion effects that were more component like
+
+
+Instead of a long file full of code, I wanted to separate each section into it's own file, implement consistent patterns for GSAP setup and animations, and have one single "timeline scroll" orchestrator to manage each section. This would make it easier to make order changes and remove change complexity for each "frame".
 
 
 ## Storyboard and Configuration
