@@ -219,21 +219,28 @@ function pickDefaultTabId(panels) {
   return panels[0]?.id ?? "html";
 }
 
+let codeTabsGroupCount = 0;
+
 /** @param {{ id: string, label: string, pre: import('hast').Element }[]} panels */
 function buildCodeTabsGroup(panels) {
   const defaultId = pickDefaultTabId(panels);
+  const groupId = `code-tabs-${++codeTabsGroupCount}`;
 
   /** @type {import('hast').Element[]} */
   const tabButtons = panels.map((panel) => {
     const active = panel.id === defaultId;
+    const tabDomId = `${groupId}-tab-${panel.id}`;
+    const panelDomId = `${groupId}-panel-${panel.id}`;
     return {
       type: "element",
       tagName: "button",
       properties: {
         type: "button",
+        id: tabDomId,
         class: `code-tabs__tab${active ? " code-tabs__tab--active" : ""}`,
         role: "tab",
         ariaSelected: active ? "true" : "false",
+        ariaControls: panelDomId,
         tabIndex: active ? "0" : "-1",
         dataCodeTab: panel.id,
       },
@@ -244,12 +251,16 @@ function buildCodeTabsGroup(panels) {
   /** @type {import('hast').Element[]} */
   const tabPanels = panels.map((panel) => {
     const active = panel.id === defaultId;
+    const tabDomId = `${groupId}-tab-${panel.id}`;
+    const panelDomId = `${groupId}-panel-${panel.id}`;
     return {
       type: "element",
       tagName: "div",
       properties: {
+        id: panelDomId,
         class: "code-tabs__panel",
         role: "tabpanel",
+        ariaLabelledby: tabDomId,
         dataCodeTabPanel: panel.id,
         hidden: active ? undefined : "hidden",
       },

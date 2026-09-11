@@ -7,6 +7,7 @@ import { destroySidebarScrollSpy } from "@/lib/sidebar-scroll-spy";
 import {
   applyThemeFrom,
   getSiteNavHeight,
+  focusPageHeading,
   initAfterEnterFunctions,
   initBarbaNavUpdate,
   initBeforeEnterFunctions,
@@ -14,6 +15,7 @@ import {
 } from "./shutter/hooks";
 import { noneTransition } from "./noneTransition";
 import { pixelTransition } from "./pixelTransition";
+import { syncLenisWithMotionPreference } from "./shutter/lenis";
 import { setReducedMotion } from "./shutter/state";
 import { shutterTransition } from "./shutterTransition";
 import { slidingColumnsTransition } from "./slidingColumnsTransition";
@@ -36,9 +38,11 @@ function transitionWithCustom<T extends Record<string, unknown>>(
 function initReducedMotionListener(): void {
   const rmMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
   setReducedMotion(rmMQ.matches);
+  syncLenisWithMotionPreference(rmMQ.matches);
 
   const onChange = (e: MediaQueryListEvent) => {
     setReducedMotion(e.matches);
+    syncLenisWithMotionPreference(e.matches);
   };
 
   rmMQ.addEventListener("change", onChange);
@@ -117,6 +121,9 @@ export function initBarba(): void {
   barba.hooks.afterEnter((data) => {
     initAfterEnterFunctions(data.next.container);
     updateDocumentTitle(data.next.html);
+    if (data.current.container) {
+      focusPageHeading(data.next.container);
+    }
     document.documentElement.classList.remove("is-transitioning");
 
     const scrollTrigger = (
@@ -130,7 +137,7 @@ export function initBarba(): void {
   });
 
   barba.init({
-    debug: import.meta.env.DEV,
+    debug: false,
     timeout: 7000,
     preventRunning: true,
     prevent: ({ el }) => shouldPreventBarba(el ?? undefined),

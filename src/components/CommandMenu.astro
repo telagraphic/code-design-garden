@@ -24,6 +24,7 @@ const sections = buildSearchSectionsWithAnimations(
   sections={sections}
   title="Search"
   shortcut="mod+k"
+  messages={{ searchPlaceholder: "Search…" }}
   theme={{
     light: {
       accentColor: "#000000",
@@ -48,8 +49,63 @@ const sections = buildSearchSectionsWithAnimations(
   }}
 />
 
+<script is:inline>
+  for (const node of document.querySelectorAll(
+    'script[type="application/json"][id$="-payload"]:not([data-cmdkit-consumed="true"])',
+  )) {
+    if (!(node instanceof HTMLScriptElement) || !node.textContent) continue;
+    try {
+      const props = JSON.parse(node.textContent);
+      props.reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      node.textContent = JSON.stringify(props);
+    } catch {
+      /* leave payload as authored */
+    }
+  }
+</script>
+
 <script>
   import { PAGE_ENTER_EVENT } from "@/lib/page-lifecycle";
+
+  function setPaletteChrome(open: boolean) {
+    for (const el of document.querySelectorAll(
+      ".skip-link, .site-nav, main.barba-container",
+    )) {
+      if (el instanceof HTMLElement) el.inert = open;
+    }
+  }
+
+  function bindPaletteRoot(root: Element) {
+    if (!(root instanceof HTMLElement)) return;
+    if (root.dataset.cmdkitA11yInit === "true") return;
+    root.dataset.cmdkitA11yInit = "true";
+
+    const overlay = root.querySelector(".cmdkit-astro-overlay");
+    const input = root.querySelector(".cmdkit-astro-input");
+    if (!(overlay instanceof HTMLElement)) return;
+
+    const sync = () => {
+      const open = !overlay.hidden;
+      if (input instanceof HTMLInputElement) {
+        input.setAttribute("aria-label", "Search");
+        input.setAttribute("autocomplete", "off");
+        if (open) input.focus({ preventScroll: true });
+      }
+      setPaletteChrome(open);
+    };
+
+    sync();
+    new MutationObserver(sync).observe(overlay, {
+      attributes: true,
+      attributeFilter: ["hidden"],
+    });
+  }
+
+  function initCmdkitA11y() {
+    document.querySelectorAll(".cmdkit-astro-root").forEach(bindPaletteRoot);
+  }
 
   function initCmdkitListScroll() {
     for (const root of document.querySelectorAll(
@@ -82,6 +138,10 @@ const sections = buildSearchSectionsWithAnimations(
     }
   }
 
+  initCmdkitA11y();
   initCmdkitListScroll();
-  document.addEventListener(PAGE_ENTER_EVENT, initCmdkitListScroll);
+  document.addEventListener(PAGE_ENTER_EVENT, () => {
+    initCmdkitA11y();
+    initCmdkitListScroll();
+  });
 </script>

@@ -2,6 +2,9 @@
   "name": "code-design-guide",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -16,6 +19,7 @@
     "images:optimize": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@barba/core": "^2.10.3",
     "@cmd-kit/astro": "^0.1.4",
     "astro": "^5.7.0",

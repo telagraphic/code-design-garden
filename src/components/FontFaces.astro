@@ -1,0 +1,69 @@
+---
+import { getFontUrl } from "@/config/fonts.mjs";
+
+const faces = [
+  {
+    family: "Basier Circle",
+    path: "basier-circle/Basier Circle Regular.woff2",
+    format: "woff2",
+    weight: "400",
+    style: "normal",
+  },
+  {
+    family: "Basier Circle",
+    path: "basier-circle/Basier Circle Medium.woff2",
+    format: "woff2",
+    weight: "500",
+    style: "normal",
+  },
+  {
+    family: "Basier Circle Bold",
+    path: "basier-circle/BasierCircle Bold.woff2",
+    format: "woff2",
+    weight: "400",
+    style: "normal",
+  },
+  {
+    family: "PP Editorial New",
+    path: "editorial-new/PPEditorialNew-Ultralight.otf",
+    format: "opentype",
+    weight: "200",
+    style: "normal",
+  },
+  {
+    family: "PP Editorial New",
+    path: "editorial-new/PPEditorialNew-Regular.otf",
+    format: "opentype",
+    weight: "400",
+    style: "normal",
+  },
+  {
+    family: "Maple Mono",
+    path: "maple-mono/MapleMono-SemiBold.ttf",
+    format: "truetype",
+    weight: "600",
+    style: "normal",
+  },
+  {
+    family: "Maple Mono",
+    path: "maple-mono/MapleMono-Regular.ttf",
+    format: "truetype",
+    weight: "400",
+    style: "normal",
+  },
+];
+
+const css = faces
+  .map(
+    (face) => `@font-face {
+  font-family: "${face.family}";
+  src: url("${getFontUrl(face.path)}") format("${face.format}");
+  font-weight: ${face.weight};
+  font-style: ${face.style};
+  font-display: swap;
+}`,
+  )
+  .join("\n\n");
+---
+
+<style is:global set:html={css} />

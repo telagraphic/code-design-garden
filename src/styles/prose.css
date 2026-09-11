@@ -220,13 +220,9 @@
   transition: color 0.15s ease-out, text-decoration-color 0.15s ease-out;
 }
 
-.prose a:hover,
 .prose a:focus-visible {
   color: var(--color-muted);
   text-decoration-color: var(--color-muted);
-}
-
-.prose a:focus-visible {
   outline: 2px solid var(--color-text);
   outline-offset: 2px;
 }
@@ -346,4 +342,11 @@
   text-wrap: pretty;
   background: transparent;
   border: none;
+}
+
+@media (hover: hover) {
+  .prose a:hover {
+    color: var(--color-muted);
+    text-decoration-color: var(--color-muted);
+  }
 }

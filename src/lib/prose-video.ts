@@ -63,8 +63,9 @@ function initFigure(figure: HTMLElement) {
   if (!hlsUrl && !mp4Url) return;
 
   const reducedMotion = prefersReducedMotion();
+  video.removeAttribute("autoplay");
   if (reducedMotion) {
-    video.removeAttribute("autoplay");
+    video.pause();
   }
 
   if (hlsUrl && video.canPlayType("application/vnd.apple.mpegurl")) {

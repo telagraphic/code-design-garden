@@ -1,9 +1,29 @@
+---
+import { getNavArea } from "@/lib/nav";
+
+const area = getNavArea(Astro.url.pathname);
+---
+
 <header class="site-nav">
   <div class="site-nav__brand">
     <a href="/" class="site-nav__logo">My Website For This</a>
   </div>
   <nav class="site-nav__links" aria-label="Primary">
-    <a href="/" class="site-nav__link">Blog</a>
-    <a href="/garden" class="site-nav__link">Garden</a>
+    <a
+      href="/"
+      class="site-nav__link"
+      data-barba-update
+      aria-current={area === "blog" ? "page" : undefined}
+    >
+      Blog
+    </a>
+    <a
+      href="/garden"
+      class="site-nav__link"
+      data-barba-update
+      aria-current={area === "garden" ? "page" : undefined}
+    >
+      Garden
+    </a>
   </nav>
 </header>

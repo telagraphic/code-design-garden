@@ -7,6 +7,9 @@ const allDocs = await getAllDocs();
 ---
 
 <BaseLayout title="Garden" barbaNamespace="garden">
+  <header class="garden-home">
+    <h1 id="introduction" class="garden-home__title" tabindex="-1">Garden</h1>
+  </header>
   {
     domains.map((domain) => {
       const links = getHomepageSectionLinks(allDocs, domain.slug);

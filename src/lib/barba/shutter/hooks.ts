@@ -88,6 +88,16 @@ export function initBeforeEnterFunctions(next: HTMLElement): void {
   setNextPage(next);
 }
 
+export function focusPageHeading(root: ParentNode = document): void {
+  const heading =
+    root.querySelector<HTMLElement>("h1[tabindex='-1']") ??
+    root.querySelector<HTMLElement>("#introduction");
+  const fallback =
+    heading ??
+    (root instanceof HTMLElement ? root : document.querySelector("main"));
+  fallback?.focus({ preventScroll: true });
+}
+
 export function initAfterEnterFunctions(next: HTMLElement): void {
   setNextPage(next);
   initSidebarScrollSpy(next);

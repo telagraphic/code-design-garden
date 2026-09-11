@@ -1,3 +1,8 @@
+/**
+ * Static HTML prototype @font-face rules (local /fonts paths).
+ * The Astro site injects faces via FontFaces.astro so Bunny CDN can override.
+ * Keep this file in sync with the faces listed in src/components/FontFaces.astro.
+ */
 @font-face {
   font-family: "Basier Circle";
   src: url("/fonts/basier-circle/Basier Circle Regular.woff2") format("woff2");

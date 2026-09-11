@@ -70,7 +70,7 @@
 
   /* ── Type: display (hero / section titles) ──────────────────────────── */
   /* @link https://utopia.fyi/type/calculator?c=360,64,1.12,1240,276,1.12,1,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-  --font-size-display: clamp(10rem, 2rem + 24vw, 17.25rem);
+  --font-size-display: clamp(3.5rem, 1.5rem + 18vw, 17.25rem);
 
   /* ── Line heights (unitless ratios) ───────────────────────────────────── */
   --line-height-micro: 1.23;

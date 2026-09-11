@@ -28,8 +28,10 @@ const livePosts = await getLiveBlogPosts();
     <BlogSidebar entry={entry} posts={livePosts} headings={headings} />
     <section class="layout-content content-main content-main--blog">
       <div class="blog-column">
-        <header id="introduction" class="article-header">
-          <h1 class="article-header__title">{entry.data.title}</h1>
+        <header class="article-header">
+          <h1 id="introduction" class="article-header__title" tabindex="-1">
+            {entry.data.title}
+          </h1>
           <p class="article-header__date">
             {formatPubDate(entry.data.pubDate)}
           </p>

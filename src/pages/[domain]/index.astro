@@ -29,7 +29,9 @@ const sections = getSectionsInDomain(allDocs, domain);
     <DomainSidebar {domain} sections={sections} docs={allDocs} />
     <section class="layout-content landing-main">
       <header class="landing-hero">
-        <h1 class="landing-hero__title">{titleCase(domain)}</h1>
+        <h1 id="introduction" class="landing-hero__title" tabindex="-1">
+          {titleCase(domain)}
+        </h1>
       </header>
       <div class="landing-content">
         <div class="article-group">

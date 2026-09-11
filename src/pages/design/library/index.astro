@@ -23,7 +23,9 @@ const q = Astro.url.searchParams.get("q") ?? "";
 <AnimationGalleryLayout title="Animation library">
   <div class="animation-gallery" data-animation-gallery>
     <header class="animation-gallery__header">
-      <h1 class="animation-gallery__title">Collection</h1>
+      <h1 id="introduction" class="animation-gallery__title" tabindex="-1">
+        Collection
+      </h1>
     </header>
 
     <div class="animation-gallery__search">
@@ -42,7 +44,8 @@ const q = Astro.url.searchParams.get("q") ?? "";
         type="button"
         class="animation-gallery__chip animation-gallery__chip--active"
         data-filter
-        data-filter-type="all">All</button
+        data-filter-type="all"
+        aria-pressed="true">All</button
       >
       {
         animationCategories.map((cat) => (
@@ -51,6 +54,7 @@ const q = Astro.url.searchParams.get("q") ?? "";
             class="animation-gallery__chip"
             data-filter={cat}
             data-filter-type="category"
+            aria-pressed="false"
           >
             {formatCategoryLabel(cat)}
           </button>
@@ -63,6 +67,7 @@ const q = Astro.url.searchParams.get("q") ?? "";
             class="animation-gallery__chip"
             data-filter={trig}
             data-filter-type="trigger"
+            aria-pressed="false"
           >
             {formatTriggerLabel(trig)}
           </button>
@@ -80,5 +85,6 @@ const q = Astro.url.searchParams.get("q") ?? "";
         No animations match your filters.
       </p>
     </div>
+    <div class="sr-only" role="status" data-gallery-status></div>
   </div>
 </AnimationGalleryLayout>

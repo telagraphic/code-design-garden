@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import FontFaces from "@/components/FontFaces.astro";
 import SiteNav from "@/components/SiteNav.astro";
 import CommandMenu from "@/components/CommandMenu.astro";
 import BarbaTransitions from "@/components/BarbaTransitions.astro";
@@ -9,15 +10,22 @@ import type { DocEntry } from "@/lib/docs";
 
 interface Props {
   title: string;
+  description?: string;
   docs?: DocEntry[];
   barbaNamespace?: string;
   pageTheme?: "light" | "dark";
 }
 
-const { title, pageTheme = "light" } = Astro.props;
+const {
+  title,
+  description = "Notes on code, design, and building things on the web.",
+  pageTheme = "light",
+} = Astro.props;
 const docs = Astro.props.docs ?? (await getAllDocs());
 const barbaNamespace =
   Astro.props.barbaNamespace ?? getNamespace(Astro.url.pathname);
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const siteName = "My Website For This";
 ---
 
 <!doctype html>
@@ -25,7 +33,19 @@ const barbaNamespace =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — code-design-guide</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={`${title} — ${siteName}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} — ${siteName}`} />
+    <meta name="twitter:description" content={description} />
+    <title>{title} — {siteName}</title>
+    <FontFaces />
   </head>
   <body data-barba="wrapper">
     <div data-transition-wrap class="transition" aria-hidden="true">
@@ -43,6 +63,7 @@ const barbaNamespace =
       <div data-transition-panel class="transition__panel"></div>
     </div>
 
+    <a class="skip-link" href="#introduction">Skip to content</a>
     <SiteNav />
 
     <main
@@ -50,6 +71,7 @@ const barbaNamespace =
       data-barba-namespace={barbaNamespace}
       data-page-theme={pageTheme}
       class="barba-container"
+      tabindex="-1"
     >
       <slot />
     </main>

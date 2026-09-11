@@ -2,7 +2,7 @@
 @layer reset, layout, components, prose, blocks, utilities;
 
 @import "./tokens.css";
-@import "./fonts.css";
+/* @font-face rules come from FontFaces.astro (Bunny CDN or local /fonts). */
 @import "./reset.css" layer(reset);
 @import "./layout.css" layer(layout);
 @import "./components.css" layer(components);

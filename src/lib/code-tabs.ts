@@ -32,6 +32,36 @@ function stripLegacyCodeTabsTitle(group: HTMLElement) {
   group.querySelector(".code-tabs__title")?.remove();
 }
 
+let tabGroupSeq = 0;
+
+function wireTabPanelRefs(group: HTMLElement) {
+  const groupId = group.id || `code-tabs-${++tabGroupSeq}`;
+  if (!group.id) group.id = groupId;
+
+  const tabs = [
+    ...group.querySelectorAll<HTMLButtonElement>('[role="tab"][data-code-tab]'),
+  ];
+  const panels = [
+    ...group.querySelectorAll<HTMLElement>("[data-code-tab-panel]"),
+  ];
+
+  for (const tab of tabs) {
+    const tabKey = getTabId(tab);
+    if (!tabKey) continue;
+    const tabDomId = tab.id || `${groupId}-tab-${tabKey}`;
+    const panelDomId = `${groupId}-panel-${tabKey}`;
+    tab.id = tabDomId;
+    tab.setAttribute("aria-controls", panelDomId);
+    const panel = panels.find(
+      (p) => p.getAttribute("data-code-tab-panel") === tabKey,
+    );
+    if (panel) {
+      panel.id = panelDomId;
+      panel.setAttribute("aria-labelledby", tabDomId);
+    }
+  }
+}
+
 function bindCodeTabsGroup(group: HTMLElement) {
   if (group.dataset.codeTabsInit === "true") return;
 
@@ -41,6 +71,8 @@ function bindCodeTabsGroup(group: HTMLElement) {
     ...group.querySelectorAll<HTMLButtonElement>('[role="tab"][data-code-tab]'),
   ];
   if (tabs.length === 0) return;
+
+  wireTabPanelRefs(group);
 
   group.dataset.codeTabsInit = "true";
 

@@ -4,6 +4,14 @@ node_modules
 dist-ssr
 *.local
 
+# Env (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Prefer pnpm — ignore accidental npm lockfile
+package-lock.json
+
 # Editor / system
 .DS_Store
 .idea

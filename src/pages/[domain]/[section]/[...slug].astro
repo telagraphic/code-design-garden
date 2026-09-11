@@ -37,8 +37,10 @@ const sectionDocs = await getDocsBySection(
       headings={headings}
     />
     <section class="layout-content content-main">
-      <header id="introduction" class="article-header">
-        <h1 class="article-header__title">{entry.data.title}</h1>
+      <header class="article-header">
+        <h1 id="introduction" class="article-header__title" tabindex="-1">
+          {entry.data.title}
+        </h1>
       </header>
       <article class="article">
         <div class="prose">

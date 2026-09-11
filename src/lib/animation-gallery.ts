@@ -149,6 +149,7 @@ function initGalleryFilters(gallery: HTMLElement) {
         (type === "trigger" && trigger === value) ||
         (type === "all" && !category && !trigger);
       chip.classList.toggle("animation-gallery__chip--active", active);
+      chip.setAttribute("aria-pressed", active ? "true" : "false");
     }
 
     let visible = 0;
@@ -168,6 +169,14 @@ function initGalleryFilters(gallery: HTMLElement) {
     const empty = gallery.querySelector("[data-gallery-empty]");
     if (empty instanceof HTMLElement) {
       empty.hidden = visible > 0;
+    }
+
+    const status = gallery.querySelector("[data-gallery-status]");
+    if (status instanceof HTMLElement) {
+      status.textContent =
+        visible === 0
+          ? "No animations match your filters."
+          : `${visible} animation${visible === 1 ? "" : "s"}`;
     }
   };
 
@@ -234,13 +243,15 @@ export function initAnimationGallery(root: ParentNode = document): void {
   const detailVideo = root.querySelector(
     "video.animation-detail__video",
   );
-  if (
-    detailVideo instanceof HTMLVideoElement &&
-    !prefersReducedMotion()
-  ) {
-    const playPromise = detailVideo.play();
-    if (playPromise) playPromise.catch(() => {});
+  if (!(detailVideo instanceof HTMLVideoElement)) return;
+
+  detailVideo.removeAttribute("autoplay");
+  if (prefersReducedMotion()) {
+    detailVideo.pause();
+    return;
   }
+  const playPromise = detailVideo.play();
+  if (playPromise) playPromise.catch(() => {});
 }
 
 function onPageEnter(event: Event) {

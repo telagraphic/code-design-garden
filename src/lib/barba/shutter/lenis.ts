@@ -8,7 +8,31 @@ import {
   setLenisInstance,
 } from "./state";
 
+let tickerFn: ((time: number) => void) | null = null;
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+export function destroyLenis(): void {
+  const instance = getLenisInstance();
+  if (!instance) return;
+
+  if (tickerFn) {
+    gsap.ticker.remove(tickerFn);
+    tickerFn = null;
+  }
+
+  instance.destroy();
+  setLenisInstance(null);
+  setLenis(null);
+}
+
 export function initLenis(): void {
+  if (prefersReducedMotion()) {
+    destroyLenis();
+    return;
+  }
   if (getLenisInstance()) return;
 
   const instance = new Lenis({
@@ -17,9 +41,10 @@ export function initLenis(): void {
     allowNestedScroll: true,
   });
 
-  gsap.ticker.add((time) => {
+  tickerFn = (time: number) => {
     instance.raf(time * 1000);
-  });
+  };
+  gsap.ticker.add(tickerFn);
   gsap.ticker.lagSmoothing(0);
 
   instance.on("scroll", () => {
@@ -28,6 +53,11 @@ export function initLenis(): void {
 
   setLenisInstance(instance);
   setLenis(instance);
+}
+
+export function syncLenisWithMotionPreference(reduced: boolean): void {
+  if (reduced) destroyLenis();
+  else initLenis();
 }
 
 export function initOnceFunctions(): void {
