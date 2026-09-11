@@ -7,6 +7,6 @@
   # Leave unset so the gallery stays off without local preview media.
   # PUBLIC_ANIMATION_LIBRARY_ENABLED = "false"
 
-[[plugins]]
-  # Optional: enable when you want Lighthouse reports in the Netlify UI
-  # package = "@netlify/plugin-lighthouse"
+# Optional Lighthouse reports in the Netlify UI:
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
