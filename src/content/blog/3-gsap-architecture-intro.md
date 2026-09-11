@@ -12,6 +12,23 @@ Once you start using these libraries in real sites and codebases, things can sta
 
 You can copy-paste the code and ask AI to make it work, but why not learn some medium level programming concepts like design patterns, component based design and how they fit in an evolving front end codebase? Updating your "mental-ware" on code structure is useful for thinking in more abstract design for building composable code.
 
+This series of posts will cover some ways to apply design patterns to front end code and specifically GSAP code.
+
+
+- [Overview](/blog/3-gsap-architecture-intro)
+- [Configuration & Storyboard Pattern](/blog/4-gsap-architecture-part-1)
+- [Factory & Registry Pattern](/blog/5-gsap-architecture-part-2)
+- [Orchestrator Pattern](/blog/6-gsap-architecture-part-3)
+
+
+The [landing page we will refactor](/demos/scroll-trigger-architecture/dist/index.html) and the before [spaghetti code](https://github.com/telagraphic/scroll-trigger-architecture/blob/before-refactor/js/main.js) and after [refactored code](https://github.com/telagraphic/scroll-trigger-architecture/tree/main/js).
+
+Some other helpful posts directly related:
+
+- [GSAP Component Refactor](/blog/7-gsap-component-refactor)
+- [GSAP Skills](/blog/8-gsap-skills)
+
+
 ## The Design of Code
 
 This walkthrough uses a bunch of text animations that document the GSAP `SplitText` and `ScrollTrigger` API's via the classic landing page scroll based animation flow. It also incorporate GSAP effects from [made with gsap](https://madewithgsap.com/) and [osmo.supply](https://www.osmo.supply/) libraries.

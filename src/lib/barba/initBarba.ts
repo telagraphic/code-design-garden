@@ -57,6 +57,7 @@ function shouldPreventBarba(el: Element | undefined): boolean {
   try {
     const url = new URL(href, window.location.origin);
     if (url.origin !== window.location.origin) return true;
+    if (url.pathname.startsWith("/demos/")) return true;
   } catch {
     return true;
   }

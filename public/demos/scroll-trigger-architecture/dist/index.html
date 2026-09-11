@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScrollTrigger Architecture</title>
+    <script type="module" crossorigin src="./assets/index-CP0jPO1G.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BcZqPXjc.css">
+  </head>
+  <body class="page">
+    <header class="page-header">
+      <div class="page-header__icon anim-prehide" aria-hidden="true"></div>
+      <p class="page-header__tag type-caption anim-prehide">
+        scroll trigger experience
+      </p>
+      <div class="page-header__titles anim-prehide">
+        <h1 class="page-header__title">ScrollTrigger</h1>
+        <h1 class="page-header__title">SplitText</h1>
+        <h1 class="page-header__title">Timeline</h1>
+        <h1 class="page-header__title">Architecture</h1>
+      </div>
+      <p class="page-header__hint type-caption anim-prehide">
+        scroll down for scroll trigger experience
+      </p>
+    </header>
+
+    <main class="page-main">
+      <section class="page-section" data-section="1">
+        <div class="page-section__content">
+          <h1 class="page-section__title">Split Text</h1>
+          <div class="page-section__body">
+            <p class="type-body type-body--spaced">
+              SplitText is a small JavaScript library that splits an HTML
+              element's text into individual characters, words, and/or lines
+              (each in its own, newly-created element), allowing you to create
+              gorgeous staggered animations.
+            </p>
+            <p class="type-body type-body--spaced">
+              It's highly configurable and smarter than other text splitting
+              tools thanks to features like automatic screen reader
+              accessibility, masking for reveal effects, responsive
+              re-splitting, and much more.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="2">
+        <div class="page-section__content">
+          <section class="page-section__group page-section__group--pos-1">
+            <h1 class="page-section__title anim-prehide">WRAPPING</h1>
+            <p class="page-section__paragraph type-body type-body--spaced type-body--section anim-prehide">
+              Wrapping is the process of wrapping an element around each
+              character, word or line. It's how you can target the text to
+              animate.
+            </p>
+          </section>
+          <section class="page-section__group page-section__group--pos-2">
+            <h1 class="page-section__title anim-prehide">CLASSES</h1>
+            <p class="page-section__paragraph type-body type-body--spaced type-body--section anim-prehide">
+              You can add a class to each "wrapper" element to target it with
+              CSS. Custom classes allow you to target specific text elements for
+              your needs.
+            </p>
+          </section>
+          <section class="page-section__group page-section__group--pos-3">
+            <h1 class="page-section__title anim-prehide">MASKING</h1>
+            <p class="page-section__paragraph type-body type-body--spaced type-body--section anim-prehide">
+              Masking is the process of masking an element to reveal the text
+              behind it. This really cool slide up effect from below using a the
+              wrapper element with overflow: none; to achieve a smooth reveal
+              effect.
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="3">
+        <div class="page-section__content">
+          <div class="page-section__body">
+            <div class="animation-wide-slide">
+              <p class="animation-wide-slide__label">
+                Screen reader Accessibility
+              </p>
+              <p class="type-body type-body--panel">
+                Adds aria-label to the split element(s) and aria-hidden to the
+                freshly-created line/word/character elements.
+              </p>
+              <p class="animation-wide-slide__label">Responsive re-splitting</p>
+              <p class="type-body type-body--panel">
+                Avoid funky line breaks when resizing or when fonts load with
+                autoSplit and onSplit(). Offers automatic cleanup and resuming
+                of animations too!
+              </p>
+              <p class="animation-wide-slide__label">
+                Slice right through nested elements
+              </p>
+              <p class="type-body type-body--panel">
+                Elements like span, strong, and a that span multiple lines are
+                handled effortlessly with deepSlice so they don't stretch lines
+                vertically.
+              </p>
+              <p class="animation-wide-slide__label">Masking</p>
+              <p class="type-body type-body--panel">
+                Wrap characters, words or lines with an extra clipping element
+                for easy mask/reveal effects.
+              </p>
+              <p class="animation-wide-slide__label">Flexible targeting</p>
+              <p class="type-body type-body--panel">
+                Apply your own class names to characters, words, or lines.
+                Append "++" to auto-increment them (e.g. word1, word2, etc.).
+                Enable propIndex* to apply CSS variables like --word: 3.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="4">
+        <div class="page-section__content">
+          <div class="animation-slot-machine-roll">
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">CHARS</span>
+                <span class="anim-char-visible">CHARS</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">WORDS</span>
+                <span class="anim-char-visible">WORDS</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">LINES</span>
+                <span class="anim-char-visible">LINES</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">AUTOSPLIT</span>
+                <span class="anim-char-visible">AUTOSPLIT</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">SMARTWRAP</span>
+                <span class="anim-char-visible">SMARTWRAP</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">ONSPLIT</span>
+                <span class="anim-char-visible">ONSPLIT</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">ONREVERT</span>
+                <span class="anim-char-visible">ONREVERT</span>
+              </div>
+            </div>
+            <!-- 
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">DEEPSLICE</span>
+                <span class="anim-char-visible">DEEPSLICE</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">CHARSCLASS</span>
+                <span class="anim-char-visible">CHARSCLASS</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">WORDSCLASS</span>
+                <span class="anim-char-visible">WORDSCLASS</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">LINESCLASS</span>
+                <span class="anim-char-visible">LINESCLASS</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">MASK</span>
+                <span class="anim-char-visible">MASK</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">TAG</span>
+                <span class="anim-char-visible">TAG</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">TYPE</span>
+                <span class="anim-char-visible">TYPE</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">PROPINDEX</span>
+                <span class="anim-char-visible">PROPINDEX</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">PREPARETEXT</span>
+                <span class="anim-char-visible">PREPARETEXT</span>
+              </div>
+            </div>
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">WORDDELIMITER</span>
+                <span class="anim-char-visible">WORDDELIMITER</span>
+              </div>
+            </div>
+
+            <div class="animation-slot-machine-roll__row">
+              <div
+                class="animation-slot-machine-roll__track type-heading anim-clip-slot"
+              >
+                <span class="anim-char-hidden">reduceWhiteSpace</span>
+                <span class="anim-char-visible">reduceWhiteSpace</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="5">
+        <div class="page-section__content">
+          <header
+            class="page-section__title type-display anim-prehide anim-mask"
+          >
+            SCROLL<br />TRIGGER
+          </header>
+          <p class="type-body type-body--spaced">
+            ScrollTrigger enables anyone to create jaw-dropping scroll-based
+            animations with minimal code. Infinitely flexible. Scrub, pin, snap,
+            or just trigger anything scroll-related, even if it has nothing to
+            do with animation.
+          </p>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="6">
+        <div class="page-section__track">
+          <section class="page-section__slide">
+            <h1 class="page-section__title">ON ENTER</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback for when the scroll position moves forward
+              past the "start" (typically when the trigger is scrolled into
+              view). It receives one parameter - the ScrollTrigger instance
+              itself which has properties/methods like progress, direction,
+              isActive, and getVelocity().
+            </p>
+          </section>
+          <!-- <section class="page-section__slide">
+            <h1 class="page-section__title">ON ENTER BACK</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback for when the scroll position moves backward
+              past the "end" (typically when the trigger is scrolled back into
+              view). It receives one parameter - the ScrollTrigger instance
+              itself which has properties/methods like progress, direction,
+              isActive, and getVelocity().
+            </p>
+          </section> -->
+          <section class="page-section__slide">
+            <h1 class="page-section__title">ON LEAVE</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback for when the scroll position moves forward
+              past the "start" (typically when the trigger is scrolled into
+              view). It receives one parameter - the ScrollTrigger instance
+              itself which has properties/methods like progress, direction,
+              isActive, and getVelocity().
+            </p>
+          </section>
+          <!-- <section class="page-section__slide">
+            <h1 class="page-section__title">ON GET VELOCITY</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback for when the scroll position moves forward
+              past the "start" (typically when the trigger is scrolled into
+              view). It receives one parameter - the ScrollTrigger instance
+              itself which has properties/methods like progress, direction,
+              isActive, and getVelocity().
+            </p>
+          </section> -->
+          <!-- <section class="page-section__slide">
+            <h1 class="page-section__title">ON DIRECTION</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback for when the scroll position moves forward
+              past the "start" (typically when the trigger is scrolled into
+              view). It receives one parameter - the ScrollTrigger instance
+              itself which has properties/methods like progress, direction,
+              isActive, and getVelocity().
+            </p>
+          </section> -->
+          <!-- <section class="page-section__slide">
+            <h1 class="page-section__title">ON LEAVE</h1>
+            <p class="type-body type-body--measure">
+              A callback for when the scroll position moves forward past the
+              "end" (typically when the trigger is scrolled out of view). It
+              receives one parameter - the ScrollTrigger instance itself which
+              has properties/methods like progress, direction, isActive, and
+              getVelocity().
+            </p>
+          </section>
+          <section class="page-section__slide">
+            <h1 class="page-section__title">ON LEAVE BACK</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback for when the scroll position moves backward
+              past the "start" (typically when the trigger is scrolled all the
+              way backward past the start). It receives one parameter - the
+              ScrollTrigger instance itself which has properties/methods like
+              progress, direction, isActive, and getVelocity()
+            </p>
+          </section> -->
+          <section class="page-section__slide">
+            <h1 class="page-section__title">ON UPDATE</h1>
+            <p class="type-body type-body--measure">
+              Function - A callback that gets called every time the progress of
+              the ScrollTrigger changes (meaning the scroll position changed).
+              If you have a numeric scrub applied, keep in mind that the
+              associated animation will keep scrubbing for a little while after
+              the scroll position stops, so if your goal is to update something
+              whenever the animation updates, it's best to apply an onUpdate to
+              the animation itself rather than the ScrollTrigger.
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="7">
+        <div class="page-section__content">
+          <div class="animation-character-waterdrop">
+            <ul class="animation-character-waterdrop__list list-column-center">
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                anticipatePin
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                containerAnimation
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                end
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                endTrigger
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                fastScrollEnd
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                horizontal
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                id
+              </li>
+              <!-- <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                immediateRender
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                invalidateOnRefresh
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                markers
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                once
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onEnter
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onEnterBack
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onKill
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onLeave
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onLeaveBack
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onRefresh
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onRefreshInit
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onSnapComplete
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onScrubComplete
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onUpdate
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                onToggle
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                pin
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                pinnedContainer
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                pinReparent
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                pinSpacing
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                pinSpacer
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                pinType
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                preventOverlaps
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                refreshPriority
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                scroller
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                scrub
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                snap
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                start
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                toggleActions
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                toggleClass
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                trigger
+              </li>
+              <li
+                class="animation-character-waterdrop__item type-display anim-prehide anim-mask"
+              >
+                animation
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-section="8">
+        <div class="page-section__content">
+          <div class="animation-character-ripple">
+            <!-- <h1 class="animation-character-ripple__title">Methods</h1> -->
+            <ul class="animation-character-ripple__list list-column-center">
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Disable
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Enable
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                getTwen
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                getVelocity
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Kill
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                LabelToScroll
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Next
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Previous
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Refresh
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Scroll
+              </li>
+              <!-- <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                AddEventListener
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Batch
+              </li> -->
+              <!-- 
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                clearMatchMedia
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                clearScrollMemory
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Config
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Create
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                Defaults
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                getAll
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                getById
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                IsInViewPort
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                IsScrolling
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                killAll
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                matchMedia
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                maxScroll
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                normalizeScroll
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                observe
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                positionInViewport
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                refresh
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                removeEventListener
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                saveStyles
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                scrollerProxy
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                snapDirectional
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                sort
+              </li>
+              <li
+                class="animation-character-ripple__item type-display type-display--tracked anim-prehide anim-mask"
+              >
+                update
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <p class="page-footer__tag type-caption">Thank you for scrolling</p>
+      <div class="page-footer__title">
+        <h1>SCROLL END</h1>
+      </div>
+      <p class="page-footer__hint type-caption">
+        Thank you for scrolling
+      </p>
+    </footer>
+  </body>
+</html>
