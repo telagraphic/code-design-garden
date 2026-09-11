@@ -57,4 +57,18 @@ const animations = defineCollection({
   }),
 });
 
-export const collections = { docs, animations };
+const blog = defineCollection({
+  loader: glob({
+    base: "./src/content/blog",
+    pattern: "**/*.md",
+    generateId: ({ entry }) => entry.replace(/\.md$/i, ""),
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    published: z.coerce.boolean().default(true),
+  }),
+});
+
+export const collections = { docs, animations, blog };

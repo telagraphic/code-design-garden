@@ -1,6 +1,8 @@
 import { domains } from "@/config/home";
 import type { AnimationEntry } from "@/lib/animations";
 import { buildAnimationSearchSection } from "@/lib/animation-search";
+import type { BlogEntry } from "@/lib/blog";
+import { formatPubDate, getBlogPath } from "@/lib/blog";
 import type { DocEntry } from "./docs";
 import {
   getPagePath,
@@ -158,16 +160,36 @@ export function buildSearchSections(
   return result;
 }
 
-/** Docs sections plus animation library (when entries exist). */
+/** Live blog posts for Cmd+K. */
+export function buildBlogSearchSection(posts: BlogEntry[]): CmdSection | null {
+  if (!posts.length) return null;
+  return {
+    id: "blog",
+    title: "Blog",
+    items: posts.map((post) => ({
+      id: post.id,
+      title: post.data.title,
+      subtitle: formatPubDate(post.data.pubDate),
+      href: getBlogPath(post),
+    })),
+  };
+}
+
+/** Docs sections plus animation library and blog (when entries exist). */
 export function buildSearchSectionsWithAnimations(
   docs: DocEntry[],
   animations: AnimationEntry[],
   pathname: string,
+  blogPosts: BlogEntry[] = [],
 ): CmdSection[] {
   const result = buildSearchSections(docs, pathname);
   const animationSection = buildAnimationSearchSection(animations);
   if (animationSection) {
     result.unshift(animationSection);
+  }
+  const blogSection = buildBlogSearchSection(blogPosts);
+  if (blogSection) {
+    result.unshift(blogSection);
   }
   return result;
 }

@@ -1,0 +1,81 @@
+---
+import type { BlogEntry } from "@/lib/blog";
+import { getBlogPath, getBlogSlug } from "@/lib/blog";
+
+interface Props {
+  entry: BlogEntry;
+  posts: BlogEntry[];
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { entry, posts, headings } = Astro.props;
+const { title } = entry.data;
+const currentSlug = getBlogSlug(entry);
+const morePosts = posts
+  .filter((post) => getBlogSlug(post) !== currentSlug)
+  .slice(0, 8);
+
+const markdownH1Slug = headings.find((h) => h.depth === 1)?.slug;
+const tocHeadings = headings.filter(
+  (h) => h.depth >= 2 && h.depth <= 4 && h.slug !== markdownH1Slug,
+);
+---
+
+<aside
+  class="sidebar sidebar--content"
+  aria-label="Page navigation"
+  data-lenis-prevent
+>
+  <a href="/" class="sidebar__back">← Blog</a>
+
+  <>
+    <p class="sidebar__label">On this page</p>
+    <nav class="sidebar__nav sidebar__nav--toc" aria-label="On this page">
+      <a
+        href="#introduction"
+        class="sidebar__link sidebar__link--depth-1"
+        data-toc-id="introduction"
+      >
+        {title}
+      </a>
+      {
+        tocHeadings.map((h) => (
+          <a
+            href={`#${h.slug}`}
+            class:list={[
+              "sidebar__link",
+              `sidebar__link--depth-${h.depth}`,
+            ]}
+            data-toc-id={h.slug}
+          >
+            {h.text}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="sidebar__divider" role="presentation" />
+  </>
+
+  {
+    morePosts.length > 0 && (
+      <>
+        <p class="sidebar__label">More posts</p>
+        <nav class="sidebar__nav" aria-label="More posts">
+          {
+            morePosts.map((post) => (
+              <a
+                href={getBlogPath(post)}
+                class:list={[
+                  "sidebar__link",
+                  getBlogSlug(post) === currentSlug && "sidebar__link--active",
+                ]}
+              >
+                {post.data.title}
+              </a>
+            ))
+          }
+        </nav>
+      </>
+    )
+  }
+</aside>
