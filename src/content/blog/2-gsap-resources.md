@@ -36,7 +36,7 @@ This is the best all around resource for taking your designs to the next level a
 
 ## Codegrid
 
-One of the longest running [youtube channels](https://www.youtube.com/@codegrid) and OG's of reverse-engineering top **AWWWARD** winning motion effects. Codegrid has an
+One of the longest running [youtube channels](https://www.youtube.com/@codegrid) and OG's of reverse-engineering top **awwward** winning motion effects. Codegrid has an
 extensive youtube library for anything and everything with GSAP.
 
 Becoming a member get's you a monthly full website template along with working code repos for all the demos on the youtube page.

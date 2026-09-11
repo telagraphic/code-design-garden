@@ -1,6 +1,6 @@
 ---
 title: "GSAP Code Architecture - Part 1"
-description: "Refactoring spaghetti code with patterns and components"
+description: "The storyboard and configuration patterns"
 pubDate: 2026-07-04
 published: true
 ---
@@ -12,14 +12,14 @@ published: true
 
 Design patterns are common solutions for solving a specific problem. Think of a blueprint for building a chair. 4 legs, a seat and and back rest are the core components for the schematics of a standard chair. But even the chair pattern can have variations. A stool might have 3 legs, no back rest and a swivel seat. Indeed each overall design pattern has a sub-set of implementation patterns: eager versus lazy instantiation, inheritance or composition, and so on.
 
-Making rice follows a basic recipe but imagine how a modern high end restaurant make an elaborate complex rich dish versus a takeout restaurant with a rice steamer? Using a rich chicken stock adds body to the rice versus unsalted water and clumpy rice.
+Making rice follows a basic recipe but imagine how a modern high end restaurant would make an elaborate complex rich dish versus a takeout restaurant with a rice steamer? Using a rich chicken stock adds body to the rice versus unsalted water and clumpy rice.
 
 Picking the right pattern is the first step. Implementation details and fitting it into the codebase is the second step. That's the fun creative part to the technical first part.
 
-Lot's of tutorial code is "spaghetti" or coupled to a codebase. It would be ideal for a more component based code format.
+A lot of the code for GSAP animations is one-off example code.
 
 
-# Scroll Based Landing Page
+## Scroll Based Landing Page
 
 After learning GSAP basics like tweens, timelines, SplitText and ScrollTrigger, I wanted to challenge myself to build a landing page and sprinkle in some GSAP text effects to see how it could be refactored.
 
@@ -40,18 +40,13 @@ This turned into:
 </figure>
 
 
-After a couple of days, I started the refactoring process.
-The GSAP code came in 3 flavors: classic timeline based animations triggered by scroll, scroll trigger animations for single or multiple elements coming into view, and specific motion effects that is a specific motion effect.
+After a couple of days, I started the refactoring process and noticed that GSAP code has 3 flavors:
 
-
-The GSAP code came in 3 flavors:
-
-1. classic timeline based animations triggered by scroll
+1. timeline based animations triggered by scroll
 2. scroll trigger animations for single or multiple elements coming into view
-3. specific motion effects that were more component like
+3. specific motion effects for text and images that were more self-contained components
 
-
-Instead of a long file full of code, I wanted to separate each section into it's own file, implement consistent patterns for GSAP setup and animations, and have one single "timeline scroll" orchestrator to manage each section. This would make it easier to make order changes and remove change complexity for each "frame".
+Instead of a long file full of code, I wanted to separate each section into it's own file, implement consistent patterns for GSAP setup and animations, and have one single "timeline scroll" orchestrator for all the sections. This would make it easier to make order changes and remove change complexity for each "frame".
 
 
 ## Storyboard and Configuration
@@ -102,7 +97,7 @@ This gives us a solid overview of what the animation does. The same can work for
 
 
 
-The **configuration** pattern moves our DOM selectors and css properties to animate in an object that gives us one control panel:
+The **configuration** pattern moves our DOM selectors and CSS properties to an object that gives us one control panel:
 
 
 ```javascript
@@ -162,7 +157,9 @@ const HEADER_CONFIG = {
 
 We could further remove inline values to another object for repeated values for opacity, duration and so forth. But this reads just fine and avoids getting too abstract. 
 
-This is similar to defining a set of tokens in css for controlling the design system except now for the animations instead. 
+This is similar to defining a set of tokens in css for controlling the design system except now for the animations instead.
+
+The code below is for the opening animation on page load.
 
 
 **Before**
@@ -386,26 +383,24 @@ export function createHeader() {
 ```
 
 
-## Process Pattern
+Yes, there is more code here, but we have improved documentation and a pattern we can apply to the other frames for consistency.
 
+
+## Fine Tuning Animations
 
 The idea of emergent design occurs as we are writing the code and making connections between the different parts of the javascript and the layers (html, css, js). These two patterns are super helpful for maintaining animation code.
 
-[Emil Kowalski](https://emilkowal.ski/) notes how important recording our animations can be for improving those subtle timings. The configuration pattern can simplify and speed up that fine-tuning process. It sure does make it easier.
+[Emil Kowalski](https://emilkowal.ski/) notes how important recording our animations can be for improving those subtle timings. The configuration pattern can simplify and speed up that fine-tuning process.
 
-**Example for header**
+Once you get the animation code written and start reviewing it, the configuration pattern can reduce the feedback loop between IDE and the Browser. Searching through a long spaghetti code file is tedious and can break the flow. Each section in the mono-file might have it's own setup and animation code that is different from the others.
 
-Once you get the animation code written and start reviewing it, the configuration pattern can reduce the feedback loop between IDE and Browser. Searching through a long spaghetti code file is tedious and can break the flow. Each section in the mono-file might have it's own setup and animation code that is different from the others.
-
-A configuration object gives us an animation control panel for easier edits in one place. When we apply this pattern to all the animation sections, it gives easier code to maintain.
-
+A configuration object gives us an animation control panel for easier edits in one place. When we apply this pattern to all the animation sections, it gives provides a reliable pattern for all the frame animation code.
 
 
 ## Main Points
 
-
 - storyboard pattern for documenting time/scroll based code flows, provides an animation vocabulary
-- configuration pattern for easier animation configuration, similar to css tokens for theming
-- reduce the feedback between ide and browser
-- add structure and form to the code for maintenance
+- configuration pattern for easier animation changes, similar to css tokens for theming
+- reduce the feedback between IDE and the Browser
+- add structure and form to the code for future maintenance
 

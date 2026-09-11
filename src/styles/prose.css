@@ -59,7 +59,7 @@
 
 .prose h2 + p {
   padding-top: 0;
-  margin-top: var(--space-4);
+  /* margin-top: var(--space-4); */
 }
 
 .prose h2 {

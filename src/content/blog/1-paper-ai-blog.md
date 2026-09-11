@@ -5,11 +5,24 @@ pubDate: 2026-07-01
 published: true
 ---
 
-I've taken several [Awwwards](https://www.awwwards.com/academy/courses/design) courses and the [Obys course on grids](https://des.obys.agency/grids/), which I highly recommend. It made layout click for me, finally. Picking up tips and approaches from these experts has sharpened my eye. I can't unsee un-aligned content and so much AI design seems to miss this in subtle ways.
 
-My standard design process was putting together a low fidelity mockup/layout in Figma and "code-designing" the rest of it in the IDE/Browser. This left me in a lurch of making too many design decisions in the browser. The context switching between design and code was counter-productive for me. No formal grid layout, no solid use of design tokens and a loose sense of style and aesthetic led to a slow and time consuming process. The problem was no real design at all. This is obvious in hindsight, but the crutch of using a CSS framework or figuring it out once I had some CSS layout avoided the real task of using the right tool for a design.
+Working in a print shop really sharpened my eye for mis-aligned typography through the subtleties of kerning, spacing, sizing and font-pairings. I'm always checking posters, signs and designs for these imbalances. I really developed that sense for balance and visual harmony with text.
 
-I had to level up my design process and after taking several courses, I saw a common process:
+But I always struggled with composition and layout. Not a trained artist, I never really got grid layout, visual relationship or proportion. 
+I would see tons of great designs and many bad layouts at the print shop. I could identify the good and great designs, but not verbalize the principles at play or how to really recreate it for my own projects.
+
+ and the [Obys course on grids](https://des.obys.agency/grids/), which I highly recommend. [@olianishyn](https://x.com/olianishyn), the founder of [obys.agency](https://obys.agency) is an excellent teacher and the idea of using grids for layouts to create compositions made it all click in an intuitive and simply way. 
+ 
+
+## Design Process
+
+My standard design process was putting together a low fidelity mockup/layout in Figma and "code-designing" the rest of it in the IDE/Browser. This left me in a lurch of making too many design decisions in the browser while trying to code the layout. The context switching between design and code was counter-productive. No formal grid layout, no solid use of design tokens and a loose sense of style and aesthetic led to a slow and time consuming process. I would often get stuck in the [middle of "going up the hill" chart](https://basecamp.com/hill-charts).
+
+
+The problem was no real design at all. This is obvious in hindsight, but the crutch of using a CSS framework or figuring it out once I had some CSS layout avoided the real task of using the right tool for a design.
+
+
+After taking several [Awwwards](https://www.awwwards.com/academy/courses/design) courses, I systematized a common design process:
 
 |                  |                                                                                                                                                                                                                                   |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -25,7 +38,7 @@ Each of these sections would be a **page** in a Figma file. They reflect the des
 ## Trying Paper
 
 
-I learned about [Paper](https://paper.design/) from [Dive Club](https://www.youtube.com/watch?v=Iq87tYS6zjY) and was impressed by Phil Haney's interview and level headed talk about design and AI. There was genuine excitement about AI in design and not vibe-designing shortcut talk. Seeing AI generate layout variations on the canvas caught my eye.
+I learned about [Paper](https://paper.design/) from [Dive Club](https://www.youtube.com/watch?v=Iq87tYS6zjY) and was impressed by Phil Haney's interview and level headed talk about design and AI. There was genuine excitement about AI in design and it was not a vibe-designing shortcut talk. Seeing AI generate layout variations on the canvas caught my eye.
 
 I decided to give the AI hype a shot and signed up for Paper and downloaded the desktop app to get the full experience. I read the docs, watched some youtube videos and found "[A Guide to Claude Code and Paper for Designers](https://x.com/felixleezd/status/2039731306612060186)" by Felix Lee to get me started.
 
@@ -38,6 +51,13 @@ The feedback loop between each step I outlined above is much faster using Claude
 I really like the design for [Not A Number](https://www.nan.fyi/) and his [svg.guide](https://www.svg.guide/) course design. And then I found [jakub.kr](https://jakub.kr/) and read all the posts about UI and Interfaces.
 
 I used the the paper snapshot to grab the homepages for each website. Added some additional screenshots from two other websites, and created an art-board with the initial design prompt copied from my Obsidian project file.
+
+The process goes like this:
+
+1. **Paper** snapshot for moodboarding and exploration
+2. Iterate via **Claude** and **Paper** for variations
+3. **Paper** to **Cursor** to code the final composition
+4. **Cursor** to fine tune the details and edge cases
 
 ### The first prompt
 
@@ -127,7 +147,7 @@ I went with the last column design and used a nice serif font.
 
 ## Design to Code
 
-Once I got a solid design after two prompts, I used the **Paper MCP** to build the skeleton pages. The first pass created lots of slop code. It looked the part, but I couldn't unsee the slop code. I was missing:
+Once I got a solid design after two prompts, I used the **Paper MCP** with **Cursor** to build the skeleton pages. The first pass created lots of slop code. It looked the part, but I couldn't unsee the slop code. I was missing:
 
 - design tokens for spacing, typography, colors
 - css layers, component and utility classes
@@ -150,9 +170,9 @@ I was familiar with skills, but this was one of those cowboy projects to see "wh
   <figcaption>Final blog design</figcaption>
 </figure>
 
-I spent a couple of hours each day for a week tweaking the design, refactoring the code to use components and adding features like `cmd+k` for search, barba.js and page transitions, and migrating a giant library of learning material from my obsidian vault.
+I spent a couple of hours each day for a week tweaking the design, refactoring the code to use components and adding features like `cmd+k` for search, adding `barba.js` and page transitions, and migrating a giant library of learning material from my obsidian vault.
 
-I was not building a **React.js** app or using **Tailwind.css** which Paper is built natively on. I was using Astro and vanilla JS and no CSS framework. More handhelding would be needed for future projects.
+I was not building a **React.js** app or using **Tailwind.css** which Paper is built natively on. I was using Astro and vanilla JS and no CSS framework.
 
 ## Enter AI Hero
 
@@ -179,7 +199,7 @@ Similar to the design process table above, I've listed out a **design to code** 
 
 Creating skills that encode these practices streamlines the overall process and can be tailored to your personal style and work patterns. I often review the [design.md](https://github.com/google-labs-code/design.md) spec to update my process. Yes, you can ask AI to create this artifact for you, but I wanted to go through the process to see how it works.
 
-I've watched [Ridd use Conductor](https://www.youtube.com/watch?v=zmxn4a2g0Ww) with Claude and Paper to generate designs and copy to code. It's next level. Code debt is real and with the reality of token budgets and costs, why not optimize this process by taking the time to ensure code quality? Or will AI get so good it will just "figure it out"? It only takes a thoughtful skill file clean up slop and produce cleaner code.
+I've watched [Ridd use Conductor](https://www.youtube.com/watch?v=zmxn4a2g0Ww) with Claude and Paper to generate designs and copy to code. It's next level. Code debt is real and with the reality of token budgets and costs, why not optimize this process by taking the time to ensure code quality? Or will AI get so good it will just "figure it out"? It only takes a thoughtful skill file to clean up slop and produce cleaner code.
 
 Setting up your skills for a front end project should be optimized for the context window and **progressive disclosure**. You don't want to be unnecessarily burning tokens by including skill files that don't apply to the prompt at hand. Crafting well structured agent skill files gives the agent the responsibility for using it when needed. This is where the human judgement can make the difference per project and codebase.
 
