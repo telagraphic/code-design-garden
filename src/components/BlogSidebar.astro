@@ -63,13 +63,7 @@ const tocHeadings = headings.filter(
         <nav class="sidebar__nav" aria-label="More posts">
           {
             morePosts.map((post) => (
-              <a
-                href={getBlogPath(post)}
-                class:list={[
-                  "sidebar__link",
-                  getBlogSlug(post) === currentSlug && "sidebar__link--active",
-                ]}
-              >
+              <a href={getBlogPath(post)} class="sidebar__link">
                 {post.data.title}
               </a>
             ))
