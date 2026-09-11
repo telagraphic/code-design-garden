@@ -4,5 +4,4 @@ export const domains = [
   { slug: "design", label: "Design", index: "02" },
   { slug: "ai", label: "AI", index: "03" },
   { slug: "tools", label: "Tools", index: "04" },
-  { slug: "references", label: "References", index: "05" },
 ] as const;

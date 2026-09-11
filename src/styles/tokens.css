@@ -2,11 +2,11 @@
   /* ── Colors ───────────────────────────────────────────────────────────── */
   /* --color-bg: #f9f9f9;
   --color-text: #000000;
-  --color-muted: #888888;
+  --color-muted: #6b6b6b;
   --color-border: #ebebeb;
   --color-border-subtle: #e0e0e0;
   --color-border-strong: #000000;
-  --color-sidebar-faint: #bdbdbd;
+  --color-sidebar-faint: #6b6b6b;
   --color-sidebar-active-bg: #ebebeb;
   --color-text-secondary: #444444;
   --color-text-tertiary: #555555;
@@ -15,11 +15,12 @@
 
   --color-bg: oklch(0.982 0 0);
   --color-text: oklch(0 0 0);
-  --color-muted: oklch(0.627 0 0);
+  /* ~#6b6b6b — ≥4.5:1 on --color-bg */
+  --color-muted: oklch(0.525 0 0);
   --color-border: oklch(0.94 0 0);
   --color-border-subtle: oklch(0.907 0 0);
   --color-border-strong: oklch(0 0 0);
-  --color-sidebar-faint: oklch(0.798 0 0);
+  --color-sidebar-faint: oklch(0.525 0 0);
   --color-sidebar-hover-bg: oklch(0.955 0 0);
   --color-sidebar-active-bg: oklch(0.92 0 0);
   --color-text-secondary: oklch(0.387 0 0);
@@ -76,8 +77,8 @@
   --line-height-micro: 1.23;
   --line-height-sm: 1.57;
   --line-height-md: 1.15;
-  --line-height-display: 0.435;
-  --line-height-display-tools: 0.464;
+  --line-height-display: 0.9;
+  --line-height-display-tools: 0.9;
 
   /* ── Letter spacing ───────────────────────────────────────────────────── */
   --tracking-tight: -0.03em;
@@ -153,7 +154,6 @@
   /* ── Layout ───────────────────────────────────────────────────────────── */
   --layout-max: 90rem;
   --layout-main: 55rem;
-  --layout-aside: 35rem;
 
   /* Homepage layout (page-specific; override per template when needed) */
   --size-section-min: 900px;

@@ -1,6 +1,6 @@
 ---
 title: "GSAP Code Architecture - Part 3"
-description: "Fitting the peices together"
+description: "Fitting the pieces together"
 pubDate: 2026-07-08
 published: true
 ---

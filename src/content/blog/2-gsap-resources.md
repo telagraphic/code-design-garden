@@ -1,6 +1,6 @@
 ---
 title: "GSAP Resources"
-description: "Modern GSAP libraries and effecs"
+description: "Modern GSAP libraries and effects"
 pubDate: 2026-07-02
 published: true
 ---

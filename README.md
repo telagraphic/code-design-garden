@@ -58,7 +58,7 @@ Primitives in `tokens.css` are reusable across pages. Compose them in layout/com
 | **Line height** | `--line-height-micro`, `--line-height-display`, … | Unitless ratios paired with font-size |
 | **Tracking** | `--tracking-tight` … `--tracking-widest` | Letter-spacing |
 | **Spacing** | `--space-1` … `--space-24` | 4px grid (`--space-unit` = 4px) |
-| **Layout** | `--layout-max`, `--layout-main`, `--layout-aside` | Page shell widths |
+| **Layout** | `--layout-max`, `--layout-main` | Page shell widths |
 | **Homepage only** | `--size-section-min` | Topic section min-height; override per template as needed |
 
 Homepage mapping (1440px targets): nav/index → `--font-size-micro`; list desc → `--font-size-sm`; list title → `--font-size-md`; hero → `--font-size-display`; gutters → `--space-20`; nav height → `--size-nav-height`.

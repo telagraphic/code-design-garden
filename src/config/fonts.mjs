@@ -4,10 +4,10 @@
  *    basier-circle/Basier Circle Regular.woff2
  *    basier-circle/Basier Circle Medium.woff2
  *    basier-circle/BasierCircle Bold.woff2
- *    editorial-new/PPEditorialNew-Ultralight.otf
- *    editorial-new/PPEditorialNew-Regular.otf
- *    maple-mono/MapleMono-Regular.ttf
- *    maple-mono/MapleMono-SemiBold.ttf
+ *    editorial-new/PPEditorialNew-Ultralight.woff2
+ *    editorial-new/PPEditorialNew-Regular.woff2
+ *    maple-mono/MapleMono-Regular.woff2
+ *    maple-mono/MapleMono-SemiBold.woff2
  */
 export function getBunnyFontBaseUrl() {
   return String(
