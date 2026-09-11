@@ -20,6 +20,8 @@ Preview mp4 and jpg files for the animation gallery live here. This directory is
    pnpm media:link
    ```
 
+   The repo ships an empty `public/animation-previews/` (`.gitkeep` only) so CI/Netlify builds succeed without media. Locally, `media:link` replaces that folder with a symlink to `media/animations/previews/`.
+
 3. Or use Docker Compose (mounts this folder automatically):
 
    ```bash
