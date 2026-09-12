@@ -1,0 +1,61 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { resumeJobs } from "@/config/resume";
+---
+
+<BaseLayout
+  title="About"
+  description="What this site is for — notes on code, design, and building things on the web."
+  barbaNamespace="about"
+>
+  <div class="blog-home">
+    <div class="blog-column blog-column--solo">
+      <h1 id="introduction" class="about-home__title" tabindex="-1">About</h1>
+
+      <div class="prose about-home__lede">
+        <p>
+          My Website For This is a digital garden of notes on code, design, and
+          building things on the web.
+        </p>
+        <p>
+          The blog is for longer writing. The garden is for growing references,
+          patterns, and tools over time.
+        </p>
+      </div>
+
+      <section class="resume" aria-labelledby="resume-heading">
+        <h2 id="resume-heading" class="blog-home__label">Experience</h2>
+        <ul class="topic-list">
+          {
+            resumeJobs.map((job) => (
+              <li class="topic-list__item">
+                <div class="resume__job">
+                  <div class="topic-list__body">
+                    <h3 class="topic-list__title">{job.role}</h3>
+                    <p class="topic-list__desc">{job.company}</p>
+                    <ul class="resume__highlights">
+                      {job.highlights.map((item) => (
+                        <li class="resume__highlight">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <p class="topic-list__date">
+                    {job.dates}
+                    {job.location ? (
+                      <>
+                        <span class="resume__date-sep" aria-hidden="true">
+                          ·
+                        </span>
+                        <span class="resume__location">{job.location}</span>
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

@@ -25,5 +25,13 @@ const area = getNavArea(Astro.url.pathname);
     >
       Garden
     </a>
+    <a
+      href="/about"
+      class="site-nav__link"
+      data-barba-update
+      aria-current={area === "about" ? "page" : undefined}
+    >
+      About
+    </a>
   </nav>
 </header>

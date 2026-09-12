@@ -1,6 +1,6 @@
 import { domains } from "@/config/home";
 
-export type NavArea = "blog" | "garden";
+export type NavArea = "blog" | "garden" | "about";
 
 const gardenRoots = new Set([
   "garden",
@@ -12,6 +12,7 @@ export function getNavArea(pathname: string): NavArea {
   const segment = pathname.split("/").filter(Boolean)[0];
   if (!segment) return "blog";
   if (segment === "blog") return "blog";
+  if (segment === "about") return "about";
   if (gardenRoots.has(segment)) return "garden";
   return "blog";
 }
