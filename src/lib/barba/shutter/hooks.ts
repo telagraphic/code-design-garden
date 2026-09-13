@@ -3,6 +3,7 @@ import { getLenis, LENIS_SCROLL_EVENT } from "@/lib/lenis-bridge";
 import { dispatchPageEnter } from "@/lib/page-lifecycle";
 import { initAnimationGallery } from "@/lib/animation-gallery";
 import { initSidebarScrollSpy } from "@/lib/sidebar-scroll-spy";
+import { initSplitReveal } from "@/lib/split-reveal";
 import { getLenisInstance, setNextPage } from "./state";
 
 const themeConfig = {
@@ -102,5 +103,6 @@ export function initAfterEnterFunctions(next: HTMLElement): void {
   setNextPage(next);
   initSidebarScrollSpy(next);
   initAnimationGallery(next);
+  void initSplitReveal(next);
   dispatchPageEnter(next);
 }

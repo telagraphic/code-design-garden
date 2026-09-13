@@ -26,6 +26,9 @@ importers:
       hls.js:
         specifier: ^1.6.16
         version: 1.6.16
+      kugiri:
+        specifier: ^0.5.2
+        version: 0.5.2
       lenis:
         specifier: ^1.3.23
         version: 1.3.23
@@ -1544,6 +1547,10 @@ packages:
 
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
+
+  kugiri@0.5.2:
+    resolution: {integrity: sha512-b6sT+++lHAMUhstvelSqGk7LL/U/fqzaL/u5sPxGLDrv9nbvNl+k5a58ZjwOmfVG2+uy8x3zIfO24YQLc/Cn1g==}
+    engines: {node: '>=20'}
 
   lenis@1.3.23:
     resolution: {integrity: sha512-YxYq3TJqj9sJNv0V9SkyQHejt14xwyIwgDaaMK89Uf9SxQfIszu+gTQSSphh6BWlLTNVKvvXAGkg+Zf+oFIevg==}
@@ -3700,6 +3707,8 @@ snapshots:
   kleur@3.0.3: {}
 
   known-css-properties@0.37.0: {}
+
+  kugiri@0.5.2: {}
 
   lenis@1.3.23: {}
 

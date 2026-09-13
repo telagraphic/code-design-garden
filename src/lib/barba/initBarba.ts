@@ -4,6 +4,7 @@ import { getLenis } from "@/lib/lenis-bridge";
 import { dispatchPageLeave } from "@/lib/page-lifecycle";
 import { destroyAnimationGallery } from "@/lib/animation-gallery";
 import { destroySidebarScrollSpy } from "@/lib/sidebar-scroll-spy";
+import { destroySplitReveal } from "@/lib/split-reveal";
 import {
   applyThemeFrom,
   getSiteNavHeight,
@@ -81,6 +82,7 @@ export function initBarba(): void {
     document.documentElement.classList.add("is-transitioning");
     destroySidebarScrollSpy();
     destroyAnimationGallery();
+    destroySplitReveal();
     dispatchPageLeave();
     return data;
   });

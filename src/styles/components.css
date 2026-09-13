@@ -97,13 +97,23 @@
   flex-direction: column;
   align-items: stretch;
   gap: var(--space-2);
-  padding: var(--space-8) 0;
+  padding-block: var(--space-5);
   color: inherit;
   text-decoration: none;
   box-shadow: 0 1px 0 var(--color-border);
   transition:
     color 0.25s ease-out,
     box-shadow 0.25s ease-out;
+}
+
+.topic-list--compact .topic-list__link,
+.topic-list--compact .resume__job {
+  padding-block: var(--space-5);
+}
+
+.topic-list--spacious .topic-list__link,
+.topic-list--spacious .resume__job {
+  padding-block: var(--space-8);
 }
 
 .topic-list__link:focus-visible {
@@ -150,6 +160,18 @@
   margin-top: var(--space-1);
 }
 
+@supports (text-box-trim: trim-end) {
+  .topic-list__title {
+    text-box-trim: trim-start;
+    text-box-edge: cap alphabetic;
+  }
+
+  .topic-list__desc {
+    text-box-trim: trim-end;
+    text-box-edge: cap alphabetic;
+  }
+}
+
 .topic-list__date {
   flex-shrink: 0;
   margin: 0;
@@ -164,6 +186,18 @@
   white-space: nowrap;
 }
 
+.resume__job .topic-list__date {
+  white-space: normal;
+}
+
+.resume__job .topic-list__date--inline {
+  margin-top: var(--space-1);
+}
+
+.resume__job .topic-list__date--aside {
+  display: none;
+}
+
 .resume__highlights {
   margin: var(--space-4) 0 0;
   padding: 0;
@@ -174,9 +208,10 @@
 }
 
 .resume__highlight {
+  --highlight-mark: 0.875em;
   position: relative;
   margin: 0;
-  padding-left: 0.875em;
+  padding-left: var(--highlight-mark);
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 1rem;
@@ -186,11 +221,15 @@
   list-style: none;
 }
 
-.resume__highlight::before {
-  content: "–";
+.resume__highlight-mark {
   position: absolute;
   left: 0;
+  overflow: hidden;
   color: var(--color-muted);
+}
+
+.resume__highlight-mark > span {
+  display: block;
 }
 
 .resume__date-sep {
@@ -220,6 +259,36 @@
   max-width: none;
 }
 
+[data-split-reveal] {
+  --reveal-y: 150;
+  --reveal-duration: 0.8;
+  --reveal-stagger: 0.06;
+  --reveal-start: 85%;
+}
+
+[data-split-reveal]:not([data-split-ready]) {
+  visibility: hidden;
+}
+
+[data-split-reveal][data-split-ready] [data-mask] {
+  overflow: visible;
+  clip-path: inset(-0.35em 0 0 0);
+}
+
+[data-split-clip="hero"][data-split-ready] [data-mask] {
+  clip-path: inset(-0.7em 0 0 0);
+}
+
+[data-split-reveal][data-split-complete] [data-mask] {
+  clip-path: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-split-reveal]:not([data-split-ready]) {
+    visibility: visible;
+  }
+}
+
 @media (min-width: 37.5rem) {
   .topic-list__link,
   .resume__job {
@@ -233,8 +302,12 @@
     text-align: right;
   }
 
-  .resume__job .topic-list__date {
-    white-space: normal;
+  .resume__job .topic-list__date--inline {
+    display: none;
+  }
+
+  .resume__job .topic-list__date--aside {
+    display: block;
     max-width: 12rem;
   }
 }
