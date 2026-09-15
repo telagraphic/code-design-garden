@@ -1,5 +1,5 @@
 ---
-import { getNavArea } from "@/lib/nav";
+import { getNavArea, navItems } from "@/lib/nav";
 
 const area = getNavArea(Astro.url.pathname);
 ---
@@ -8,30 +8,134 @@ const area = getNavArea(Astro.url.pathname);
   <div class="site-nav__brand">
     <a href="/" class="site-nav__logo">My Website For This</a>
   </div>
-  <nav class="site-nav__links" aria-label="Primary">
-    <a
-      href="/"
-      class="site-nav__link"
-      data-barba-update
-      aria-current={area === "blog" ? "page" : undefined}
+  <button
+    type="button"
+    class="site-nav__toggle"
+    aria-expanded="false"
+    aria-controls="primary-nav"
+    aria-label="Menu"
+  >
+    <svg
+      class="site-nav__icon"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      aria-hidden="true"
+      focusable="false"
     >
-      Blog
-    </a>
-    <a
-      href="/garden"
-      class="site-nav__link"
-      data-barba-update
-      aria-current={area === "garden" ? "page" : undefined}
-    >
-      Garden
-    </a>
-    <a
-      href="/about"
-      class="site-nav__link"
-      data-barba-update
-      aria-current={area === "about" ? "page" : undefined}
-    >
-      About
-    </a>
+      <path
+        d="M4 7h16M4 12h16M4 17h16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  </button>
+  <nav id="primary-nav" class="site-nav__links" aria-label="Primary">
+    {
+      navItems.map((item) => (
+        <a
+          href={item.href}
+          class="site-nav__link"
+          data-barba-update
+          aria-current={area === item.area ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
   </nav>
 </header>
+
+<script>
+  import { PAGE_LEAVE_EVENT } from "@/lib/page-lifecycle";
+  import { getLenis } from "@/lib/lenis-bridge";
+
+  const DESKTOP_MQ = "(min-width: 48rem)";
+
+  function initSiteNav() {
+    const header = document.querySelector(".site-nav");
+    const toggle = document.querySelector(".site-nav__toggle");
+    const links = document.querySelector("#primary-nav");
+    const main = document.querySelector("main.barba-container");
+
+    if (
+      !(header instanceof HTMLElement) ||
+      !(toggle instanceof HTMLButtonElement) ||
+      !(links instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const nav = header;
+    const menuButton = toggle;
+    const menu = links;
+    const pageMain = main instanceof HTMLElement ? main : null;
+
+    if (nav.dataset.navInit === "true") return;
+    nav.dataset.navInit = "true";
+    document.documentElement.dataset.navReady = "";
+
+    const desktopMq = window.matchMedia(DESKTOP_MQ);
+
+    function isOpen() {
+      return nav.hasAttribute("data-nav-open");
+    }
+
+    function setOpen(open: boolean, restoreFocus = true) {
+      if (open === isOpen()) return;
+
+      if (open) {
+        nav.setAttribute("data-nav-open", "");
+        menuButton.setAttribute("aria-expanded", "true");
+        menuButton.setAttribute("aria-label", "Close");
+        if (pageMain) pageMain.inert = true;
+        menu.setAttribute("data-lenis-prevent", "");
+        getLenis()?.stop();
+        const firstLink = menu.querySelector(".site-nav__link");
+        if (firstLink instanceof HTMLElement) {
+          firstLink.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      nav.removeAttribute("data-nav-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Menu");
+      if (pageMain) pageMain.inert = false;
+      menu.removeAttribute("data-lenis-prevent");
+      getLenis()?.start();
+      if (restoreFocus) menuButton.focus({ preventScroll: true });
+    }
+
+    menuButton.addEventListener("click", () => setOpen(!isOpen()));
+
+    menu.addEventListener("click", (event) => {
+      const target = event.target;
+      if (
+        target instanceof Element &&
+        target.closest(".site-nav__link")
+      ) {
+        setOpen(false, false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isOpen()) {
+        event.preventDefault();
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener(PAGE_LEAVE_EVENT, () => setOpen(false, false));
+
+    const onDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false, false);
+    };
+    desktopMq.addEventListener("change", onDesktop);
+    desktopMq.addListener?.(onDesktop);
+  }
+
+  initSiteNav();
+</script>

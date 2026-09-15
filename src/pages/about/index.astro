@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import AboutIntro from "@/components/about/AboutIntro.astro";
-import ResumeJob from "@/components/about/ResumeJob.astro";
-import { resumeJobs } from "@/config/resume";
 ---
 
 <BaseLayout
@@ -21,6 +19,106 @@ import { resumeJobs } from "@/config/resume";
     <div class="blog-column blog-column--solo">
       <AboutIntro />
 
+      <section class="resume" aria-labelledby="projects-heading">
+        <h2
+          id="projects-heading"
+          class="blog-home__label"
+          data-split-group
+          data-split-reveal
+        >
+          Projects
+        </h2>
+        <ul class="topic-list topic-list--spacious">
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://digital.gov/">Digital.gov</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2022—2025</p>
+              <p class="topic-list__desc" data-split-reveal>
+                First front end job focused on enhancing a Hugo site  <a
+                  href="https://designsystem.digital.gov/">USWDS design systems</a
+                >, a11y, and community building for government websites.
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://theydead.com/">They Dead</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2026</p>
+              <p class="topic-list__desc" data-split-reveal>
+                A daily updated celebrity/musician/famous person death
+                directory built with agents and runs on supabase
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://sheamemo.com/">Shea Memo</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2025</p>
+              <p class="topic-list__desc" data-split-reveal>
+                Web version of the relatively unknown <a
+                  href="https://www.yale64.org/news/shea.pdf"
+                  >Shea Memorandum</a
+                > built with vanilla js and GSAP motion effects
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://killtonycomedians.com/">Kill Tony Comedians</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2025</p>
+              <p class="topic-list__desc" data-split-reveal>
+                A comedian tour date directory website with modern GSAP
+                animations
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://flexulator.com/">Flexulator</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2020</p>
+              <p class="topic-list__desc" data-split-reveal>
+                A visual flexbox space distribution calculator
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://github.com/telagraphic/R2Fart2">R2Fart2</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2020</p>
+              <p class="topic-list__desc" data-split-reveal>
+                A pandemic project for laughter
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a
+                  href="https://github.com/telagraphic/nist-uncertainty-machine"
+                  >NIST: Uncertainty Machine</a
+                >
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2018</p>
+              <p class="topic-list__desc" data-split-reveal>
+                UX/UI upgrades for a statistical calculator tool
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
       <section class="resume" aria-labelledby="resume-heading">
         <h2
           id="resume-heading"
@@ -31,7 +129,91 @@ import { resumeJobs } from "@/config/resume";
           Experience
         </h2>
         <ul class="topic-list topic-list--spacious">
-          {resumeJobs.map((job) => <ResumeJob job={job} />)}
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                Front End Developer
+              </h3>
+              <p class="topic-list__date" data-split-reveal>
+                2022—2025
+                <span class="resume__date-sep" aria-hidden="true">•</span>
+                <span class="resume__location">3 years</span>
+              </p>
+              <p class="topic-list__desc" data-split-reveal>
+                <a href="https://www.bixal.com/">Bixal</a>
+              </p>
+              <ul class="resume__highlights">
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Refactored codebase into <a href="https://designsystem.digital.gov/">USWDS</a>-based components for a Digital.gov Hugo site, cutting code 50%</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Automated data cleanup and formatting with shell scripts for a Hugo-to-Drupal migration</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Formalized Trello workflows and sprint reviews to cut lag and improve team communication</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Documented code, engineering, design, and team processes for cross-team consistency</li
+                >
+              </ul>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                Print Pre-Press & Online Projects Coordinator
+              </h3>
+              <p class="topic-list__date" data-split-reveal>
+                2018—2021
+                <span class="resume__date-sep" aria-hidden="true">•</span>
+                <span class="resume__location">3 years</span>
+              </p>
+              <p class="topic-list__desc" data-split-reveal>
+                <a href="https://gsbdigital.com/">GSB Printers</a>
+              </p>
+              <ul class="resume__highlights">
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>
+                  Aggregated 3 ordering systems into a single <a href="https://github.com/telagraphic/order-dashboard">Node.js app</a> for real-time order tracking on production floor monitors, improving visibility and establishing a single source of truth</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Expanded client base and sales to West Coast law firms by building and launching <a href="https://legaltabs.com/">LegalTabs.com</a>,  a WooCommerce store in collaboration with leadership</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Managed 2 web-to-print platforms for 40+ client sites and automated bulk file uploads for 70% faster product updates</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true">
+                    <span>—</span>
+                  </span>Reduced print proof turnaround times 45% for high-volume clients
+                  by creating custom <a href="https://github.com/telagraphic/pre-press-scripts">InDesign and Illustrator scripts</a></li
+                >
+              </ul>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                Software Test Analyst
+              </h3>
+              <p class="topic-list__date" data-split-reveal>
+                2014—2018
+                <span class="resume__date-sep" aria-hidden="true">•</span>
+                <span class="resume__location">4 years</span>
+              </p>
+              <p class="topic-list__desc" data-split-reveal>
+                <a href="https://www.nationwide.com/">Nationwide Insurance</a>
+              </p>
+              <ul class="resume__highlights">
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Reduced testing time 33% by mentoring analysts and developing processes for a new test case management system</li
+                >
+                <li class="resume__highlight" data-split-reveal
+                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Reduced onboarding training time from 3 months to 1 by building a consolidated, cross-team documentation and best-practices website</li
+                >
+              </ul>
+            </div>
+          </li>
         </ul>
       </section>
     </div>

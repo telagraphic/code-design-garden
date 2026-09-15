@@ -3,6 +3,7 @@ import type { AnimationEntry } from "@/lib/animations";
 import { buildAnimationSearchSection } from "@/lib/animation-search";
 import type { BlogEntry } from "@/lib/blog";
 import { formatPubDate, getBlogPath } from "@/lib/blog";
+import { postsLabel } from "@/lib/nav";
 import type { DocEntry } from "./docs";
 import {
   getPagePath,
@@ -165,7 +166,7 @@ export function buildBlogSearchSection(posts: BlogEntry[]): CmdSection | null {
   if (!posts.length) return null;
   return {
     id: "blog",
-    title: "Blog",
+    title: postsLabel,
     items: posts.map((post) => ({
       id: post.id,
       title: post.data.title,

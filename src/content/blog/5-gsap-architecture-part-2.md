@@ -69,10 +69,6 @@ export function createSection() {
 }
 ```
 
-
-`TODO: refactor effect type to call a method in the create() return object`
-
-
 But what does `destroy` and `revert` do?
 
 Frameworks do a lot of the tedious work of cleaning up animations, maintaining state consistency, and many other things that we should be aware of but is abstracted away for developer experience and productivity.

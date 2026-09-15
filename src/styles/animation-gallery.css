@@ -3,7 +3,7 @@
 .animation-gallery {
   width: 100%;
   max-width: none;
-  padding: var(--space-10) var(--space-8) var(--space-16);
+  padding: var(--space-10) var(--layout-gutter) var(--space-16);
 }
 
 .animation-gallery__header {
@@ -237,11 +237,11 @@
 
 @media (max-width: 40rem) {
   .animation-gallery {
-    padding: var(--space-8) var(--space-6) var(--space-12);
+    padding: var(--space-8) var(--layout-gutter) var(--space-12);
   }
 
   .content-main .animation-detail__preview {
-    margin: 0 var(--space-6) var(--space-8);
+    margin: 0 var(--layout-gutter) var(--space-8);
   }
 }
 
@@ -256,7 +256,7 @@
 .content-main .animation-detail__preview {
   width: 100%;
   max-width: min(100%, 40rem);
-  margin: 0 var(--space-20) var(--space-10) var(--space-18);
+  margin: 0 var(--layout-gutter) var(--space-10);
   aspect-ratio: var(--aspect-animation-preview);
   overflow: hidden;
   border-radius: 0.75rem;

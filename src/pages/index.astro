@@ -3,17 +3,19 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
   getLiveBlogPosts,
   getRecentBlogLinks,
+  postsPath,
 } from "@/lib/blog";
+import { postsLabel } from "@/lib/nav";
 
 const livePosts = await getLiveBlogPosts();
 const recentLinks = getRecentBlogLinks(livePosts, 5);
 const showViewAll = livePosts.length > 5;
 ---
 
-<BaseLayout title="Blog" barbaNamespace="blog">
+<BaseLayout title={postsLabel} barbaNamespace="blog">
   <div class="blog-home">
     <div class="blog-column blog-column--solo">
-    <h1 id="introduction" class="blog-home__label" tabindex="-1">Blog</h1>
+    <h1 id="introduction" class="blog-home__label" tabindex="-1">{postsLabel}</h1>
 
     {
       recentLinks.length > 0 ? (
@@ -33,7 +35,7 @@ const showViewAll = livePosts.length > 5;
           </ul>
           {
             showViewAll && (
-              <a class="blog-home__view-all" href="/blog">
+              <a class="blog-home__view-all" href={postsPath}>
                 View all posts →
               </a>
             )

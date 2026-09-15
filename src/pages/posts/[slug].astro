@@ -24,7 +24,7 @@ const livePosts = await getLiveBlogPosts();
 ---
 
 <BaseLayout title={entry.data.title} barbaNamespace="blog">
-  <div class="landing-body">
+  <div class="landing-body landing-body--blog">
     <BlogSidebar entry={entry} posts={livePosts} headings={headings} />
     <section class="layout-content content-main content-main--blog">
       <div class="blog-column">

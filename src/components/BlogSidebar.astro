@@ -1,6 +1,7 @@
 ---
 import type { BlogEntry } from "@/lib/blog";
 import { getBlogPath, getBlogSlug } from "@/lib/blog";
+import { postsLabel } from "@/lib/nav";
 
 interface Props {
   entry: BlogEntry;
@@ -22,11 +23,11 @@ const tocHeadings = headings.filter(
 ---
 
 <aside
-  class="sidebar sidebar--content"
+  class="sidebar sidebar--content sidebar--blog"
   aria-label="Page navigation"
   data-lenis-prevent
 >
-  <a href="/" class="sidebar__back">← Blog</a>
+  <a href="/" class="sidebar__back">← {postsLabel}</a>
 
   <>
     <p class="sidebar__label">On this page</p>

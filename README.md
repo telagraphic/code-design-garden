@@ -89,7 +89,7 @@ pnpm preview
 
 Content lives in `src/content/{domain}/{section}/{slug}.md`. Each section should include `1-overview.md` at the section root with `sectionTitle` (display name, e.g. `CSS`) and `description` for the homepage card (nested `…/1-overview.md` works as a fallback, e.g. `react/01-react/1-overview.md`). Run `pnpm sync:css` when updating styles used by root HTML prototypes. Fonts are in `public/fonts/`.
 
-Blog posts live in `src/content/blog/*.md` and render at `/blog/{slug}`.
+Blog posts live in `src/content/blog/*.md` and render at `/posts/{slug}`.
 
 ### Prose video player (Bunny.net HLS)
 

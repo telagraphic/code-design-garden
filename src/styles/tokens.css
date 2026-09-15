@@ -78,7 +78,6 @@
   --line-height-sm: 1.57;
   --line-height-md: 1.15;
   --line-height-display: 0.9;
-  --line-height-display-tools: 0.9;
 
   /* ── Letter spacing ───────────────────────────────────────────────────── */
   --tracking-tight: -0.03em;
@@ -91,6 +90,7 @@
   --tracking-tighter: -0.04em;
   --tracking-lede: -0.05em;
   --tracking-table: 0.08em;
+  --text-decoration-thickness: 1.5px;
 
   /* Landing page type */
   --font-size-label: 0.625rem;
@@ -154,10 +154,17 @@
   /* ── Layout ───────────────────────────────────────────────────────────── */
   --layout-max: 90rem;
   --layout-main: 55rem;
+  --layout-gutter: var(--space-20);
 
   /* Homepage layout (page-specific; override per template when needed) */
   --size-section-min: 900px;
 
   /* Code tabs — stable body height when switching tabs (matches cmd+k dialog sizing pattern) */
   --size-code-tabs-body: min(70vh, 36rem);
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --layout-gutter: var(--space-6);
+  }
 }

@@ -7,7 +7,7 @@ published: true
 
  
 
-In the [last post](/blog/2-gsap-resources), I listed resources for GSAP motion effects.
+In the [last post](/posts/2-gsap-resources), I listed resources for GSAP motion effects.
 Once you start using these libraries in real sites and codebases, things can start to get complicated with lifecycle hooks, duplicating event listeners, managing tween and triggers, lifecycle management for page changes, and long messy code for those scroll based landing pages.
 
 You can copy-paste the code and ask AI to make it work, but why not learn some medium level programming concepts like design patterns, component based design and how they fit in an evolving front end codebase? Updating your "mental-ware" on code structure is useful for thinking in more abstract design for building composable code.
@@ -15,18 +15,18 @@ You can copy-paste the code and ask AI to make it work, but why not learn some m
 This series of posts will cover some ways to apply design patterns to front end code and specifically GSAP code.
 
 
-- [Overview](/blog/3-gsap-architecture-intro)
-- [Configuration & Storyboard Pattern](/blog/4-gsap-architecture-part-1)
-- [Factory & Registry Pattern](/blog/5-gsap-architecture-part-2)
-- [Orchestrator Pattern](/blog/6-gsap-architecture-part-3)
+- [Overview](/posts/3-gsap-architecture-intro)
+- [Configuration & Storyboard Pattern](/posts/4-gsap-architecture-part-1)
+- [Factory & Registry Pattern](/posts/5-gsap-architecture-part-2)
+- [Orchestrator Pattern](/posts/6-gsap-architecture-part-3)
 
 
 The [landing page we will refactor](/demos/scroll-trigger-architecture/dist/index.html) and the before [spaghetti code](https://github.com/telagraphic/scroll-trigger-architecture/blob/before-refactor/js/main.js) and after [refactored code](https://github.com/telagraphic/scroll-trigger-architecture/tree/main/js).
 
 Some other helpful posts directly related:
 
-- [GSAP Component Refactor](/blog/7-gsap-component-refactor)
-- [GSAP Skills](/blog/8-gsap-skills)
+- [GSAP Component Refactor](/posts/7-gsap-component-refactor)
+- [GSAP Skills](/posts/8-gsap-skills)
 
 
 ## The Design of Code
@@ -124,4 +124,4 @@ We can improve this spaghetti and avoid AI slop by:
 1. Implementing **design patterns**
 2. Implementing GSAP components
 
-In the [next post](/blog/4-gsap-architecture-part-1), we'll get right to the core of the problem by implementing design patterns.
+In the [next post](/posts/4-gsap-architecture-part-1), we'll get right to the core of the problem by implementing design patterns.

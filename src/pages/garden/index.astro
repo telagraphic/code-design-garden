@@ -4,37 +4,43 @@ import { domains } from "@/config/home";
 import { getAllDocs, getHomepageSectionLinks } from "@/lib/docs";
 
 const allDocs = await getAllDocs();
+
+function gardenDesc(desc: string) {
+  return desc.replace(/\.+$/, "");
+}
 ---
 
 <BaseLayout title="Garden" barbaNamespace="garden">
-  <header class="garden-home">
-    <h1 id="introduction" class="garden-home__title" tabindex="-1">Garden</h1>
-  </header>
-  {
-    domains.map((domain) => {
-      const links = getHomepageSectionLinks(allDocs, domain.slug);
-      return (
-        <section id={domain.slug} class="topic-section">
-          <div class="topic-section__main">
-            <p class="topic-section__index">{domain.index}</p>
-            <h2 class="topic-section__hero">{domain.label}</h2>
-            {
-              links.length > 0 ? (
-                <ul class="topic-list topic-list--compact">
-                  {links.map((link) => (
-                    <li class="topic-list__item">
-                      <a class="topic-list__link" href={link.href}>
-                        <h3 class="topic-list__title">{link.title}</h3>
-                        <p class="topic-list__desc">{link.desc}</p>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : null
-            }
-          </div>
-        </section>
-      );
-    })
-  }
+  <div class="blog-home">
+    <div class="blog-column blog-column--solo">
+      <h1 id="introduction" class="blog-home__label" tabindex="-1">Garden</h1>
+      {
+        domains.map((domain) => {
+          const links = getHomepageSectionLinks(allDocs, domain.slug);
+          return (
+            <section id={domain.slug} class="topic-section">
+              <div class="topic-section__main">
+                <p class="topic-section__index">{domain.index}</p>
+                <h2 class="topic-section__hero">{domain.label}</h2>
+                {
+                  links.length > 0 ? (
+                    <ul class="topic-list topic-list--compact">
+                      {links.map((link) => (
+                        <li class="topic-list__item">
+                          <a class="topic-list__link" href={link.href}>
+                            <h3 class="topic-list__title">{link.title}</h3>
+                            <p class="topic-list__desc">{gardenDesc(link.desc)}</p>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null
+                }
+              </div>
+            </section>
+          );
+        })
+      }
+    </div>
+  </div>
 </BaseLayout>

@@ -16,8 +16,10 @@ export function getBlogSlug(entry: BlogEntry): string {
   return filename.replace(/\.md$/i, "");
 }
 
+export const postsPath = "/posts";
+
 export function getBlogPath(entry: BlogEntry): string {
-  return `/blog/${getBlogSlug(entry)}`;
+  return `${postsPath}/${getBlogSlug(entry)}`;
 }
 
 function toDate(value: Date | string): Date {
@@ -25,11 +27,17 @@ function toDate(value: Date | string): Date {
 }
 
 export function formatPubDate(date: Date | string): string {
-  return toDate(date).toLocaleDateString("en-US", {
+  const value = toDate(date);
+  const parts = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "UTC",
+  }).formatToParts(value);
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+  const year = parts.find((part) => part.type === "year")?.value;
+  return `${month}-${day}-${year}`;
 }
 
 /** Visible on the site unless explicitly unpublished. */
