@@ -3,9 +3,9 @@ import { domains } from "@/config/home";
 export type NavArea = "blog" | "garden" | "about";
 
 export const navItems = [
-  { href: "/", label: "Posts", area: "blog" },
+  { href: "/", label: "About", area: "about" },
+  { href: "/posts", label: "Posts", area: "blog" },
   { href: "/garden", label: "Garden", area: "garden" },
-  { href: "/about", label: "About", area: "about" },
 ] as const satisfies readonly { href: string; label: string; area: NavArea }[];
 
 export const postsLabel =
@@ -19,9 +19,8 @@ const gardenRoots = new Set([
 /** Which top-level nav item is active for the current path. */
 export function getNavArea(pathname: string): NavArea {
   const segment = pathname.split("/").filter(Boolean)[0];
-  if (!segment) return "blog";
+  if (!segment || segment === "about") return "about";
   if (segment === "blog" || segment === "posts") return "blog";
-  if (segment === "about") return "about";
   if (gardenRoots.has(segment)) return "garden";
   return "blog";
 }

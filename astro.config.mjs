@@ -16,6 +16,7 @@ export default defineConfig({
   trailingSlash: "ignore",
   integrations: [sitemap()],
   redirects: {
+    "/about": "/",
     "/blog": "/posts",
     "/blog/[slug]": "/posts/[slug]",
     "/demos/scroll-trigger-architecture":
