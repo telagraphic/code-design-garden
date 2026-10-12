@@ -36,9 +36,32 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
               </h3>
               <p class="topic-list__date" data-split-reveal>2022—2025</p>
               <p class="topic-list__desc" data-split-reveal>
-                First front end job focused on enhancing a Hugo site  <a
-                  href="https://designsystem.digital.gov/">USWDS design systems</a
+                Refactored Hugo CMS site using<a
+                  href="https://designsystem.digital.gov/"
+                  >USWDS design systems</a
                 >, a11y, and community building for government websites.
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://flexulator.com/">Flexulator</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2025</p>
+              <p class="topic-list__desc" data-split-reveal>
+                A visual flexbox space distribution calculator explainer tool
+              </p>
+            </div>
+          </li>
+          <li class="topic-list__item">
+            <div class="resume__job" data-split-group>
+              <h3 class="topic-list__title" data-split-reveal>
+                <a href="https://analytics.usa.gov/">Analytics.usa.gov</a>
+              </h3>
+              <p class="topic-list__date" data-split-reveal>2023</p>
+              <p class="topic-list__desc" data-split-reveal>
+                Improved UX/UI and accessibility using USWDS for refresh of a legacy site.
               </p>
             </div>
           </li>
@@ -53,7 +76,8 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
               </p>
             </div>
           </li>
-          <li class="topic-list__item">
+          
+          <!-- <li class="topic-list__item">
             <div class="resume__job" data-split-group>
               <h3 class="topic-list__title" data-split-reveal>
                 <a href="https://theydead.com/">They Dead</a>
@@ -64,7 +88,7 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
                 directory built with agents and runs on supabase
               </p>
             </div>
-          </li>
+          </li> -->
           <li class="topic-list__item">
             <div class="resume__job" data-split-group>
               <h3 class="topic-list__title" data-split-reveal>
@@ -73,8 +97,7 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
               <p class="topic-list__date" data-split-reveal>2025</p>
               <p class="topic-list__desc" data-split-reveal>
                 Web version of the relatively unknown <a
-                  href="https://www.yale64.org/news/shea.pdf"
-                  >Shea Memorandum</a
+                  href="https://www.yale64.org/news/shea.pdf">Shea Memorandum</a
                 > built with vanilla js and GSAP motion effects
               </p>
             </div>
@@ -94,18 +117,7 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
           <li class="topic-list__item">
             <div class="resume__job" data-split-group>
               <h3 class="topic-list__title" data-split-reveal>
-                <a href="https://flexulator.com/">Flexulator</a>
-              </h3>
-              <p class="topic-list__date" data-split-reveal>2020</p>
-              <p class="topic-list__desc" data-split-reveal>
-                A visual flexbox space distribution calculator
-              </p>
-            </div>
-          </li>
-          <li class="topic-list__item">
-            <div class="resume__job" data-split-group>
-              <h3 class="topic-list__title" data-split-reveal>
-                <a href="https://github.com/telagraphic/R2Fart2">R2Fart2</a>
+                <a href="https://www.r2fart2.com/">R2Fart2</a>
               </h3>
               <p class="topic-list__date" data-split-reveal>2020</p>
               <p class="topic-list__desc" data-split-reveal>
@@ -154,18 +166,40 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
                 <a href="https://www.bixal.com/">Bixal</a>
               </p>
               <ul class="resume__highlights">
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Refactored codebase into <a href="https://designsystem.digital.gov/">USWDS</a>-based components for a Digital.gov Hugo site, cutting code 50%</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Automated data cleanup and formatting with shell scripts for a Hugo-to-Drupal migration</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Formalized Trello workflows and sprint reviews to cut lag and improve team communication</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Documented code, engineering, design, and team processes for cross-team consistency</li
-                >
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Refactored codebase into <a
+                    href="https://designsystem.digital.gov/">USWDS</a
+                  >-based components for a Digital.gov Hugo site, cutting code
+                  50%
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Automated data cleanup and formatting with shell scripts for
+                  a Hugo-to-Drupal migration
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Formalized Trello workflows and sprint reviews to cut lag and
+                  improve team communication
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Documented code, engineering, design, and team processes for
+                  cross-team consistency
+                </li>
               </ul>
             </div>
           </li>
@@ -183,22 +217,48 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
                 <a href="https://gsbdigital.com/">GSB Printers</a>
               </p>
               <ul class="resume__highlights">
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>
-                  Aggregated 3 ordering systems into a single <a href="https://github.com/telagraphic/order-dashboard">Node.js app</a> for real-time order tracking on production floor monitors, improving visibility and establishing a single source of truth</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Expanded client base and sales to West Coast law firms by building and launching <a href="https://legaltabs.com/">LegalTabs.com</a>,  a WooCommerce store in collaboration with leadership</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Managed 2 web-to-print platforms for 40+ client sites and automated bulk file uploads for 70% faster product updates</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true">
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >
+                  Aggregated 3 ordering systems into a single <a
+                    href="https://github.com/telagraphic/order-dashboard"
+                    >Node.js app</a
+                  > for real-time order tracking on production floor monitors, improving
+                  visibility and establishing a single source of truth
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Expanded client base and sales to West Coast law firms by
+                  building and launching <a href="https://legaltabs.com/"
+                    >LegalTabs.com</a
+                  >, a WooCommerce store in collaboration with leadership
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Managed 2 web-to-print platforms for 40+ client sites and
+                  automated bulk file uploads for 70% faster product updates
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"
+                  >
                     <span>—</span>
-                  </span>Reduced print proof turnaround times 45% for high-volume clients
-                  by creating custom <a href="https://github.com/telagraphic/pre-press-scripts">InDesign and Illustrator scripts</a></li
-                >
+                  </span>Reduced print proof turnaround times 45% for
+                  high-volume clients by creating custom <a
+                    href="https://github.com/telagraphic/pre-press-scripts"
+                    >InDesign and Illustrator scripts</a>
+                </li>
               </ul>
             </div>
           </li>
@@ -216,12 +276,23 @@ import AboutIntro from "@/components/about/AboutIntro.astro";
                 <a href="https://www.nationwide.com/">Nationwide Insurance</a>
               </p>
               <ul class="resume__highlights">
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Reduced testing time 33% by mentoring analysts and developing processes for a new test case management system</li
-                >
-                <li class="resume__highlight" data-split-reveal
-                  ><span class="resume__highlight-mark" data-reveal-with aria-hidden="true"><span>—</span></span>Reduced onboarding training time from 3 months to 1 by building a consolidated, cross-team documentation and best-practices website</li
-                >
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Reduced testing time 33% by mentoring analysts and developing
+                  processes for a new test case management system
+                </li>
+                <li class="resume__highlight" data-split-reveal>
+                  <span
+                    class="resume__highlight-mark"
+                    data-reveal-with
+                    aria-hidden="true"><span>—</span></span
+                  >Reduced onboarding training time from 3 months to 1 by
+                  building a consolidated, cross-team documentation and
+                  best-practices website
+                </li>
               </ul>
             </div>
           </li>
